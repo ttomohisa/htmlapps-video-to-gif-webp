@@ -1,100 +1,202 @@
 # Video to GIF / WebP
 
-動画の好きな範囲を、**Animated GIF** または **Animated WebP** に変換するブラウザーアプリです。
+[![GitHub Pages](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/actions/workflows/deploy-pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Single HTML](https://img.shields.io/badge/distribution-single%20HTML-0ea5e9)](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/)
 
-動画はサーバーへアップロードせず、FFmpeg 9の用途専用WebAssemblyを使って端末内だけで処理します。配布物は単一HTMLで、ローカルファイルとして直接開くこともGitHub Pagesへ配置することもできます。
+[日本語版 README](README.ja.md)
 
-## 特徴
+A privacy-focused, single-HTML app for turning a selected range of a local video into an animated GIF or WebP without uploading the source file to a server.
 
-- 動画の開始・終了位置をプレビューしながら指定
-- Animated GIF / Animated WebPを切替
-- 320 / 480 / 720px / 元サイズ
-- 10 / 15 / 20 / 30 FPS
-- 軽量 / 標準 / 高品質プリセット
-- GIF: 色数・Ditherを詳細設定
-- WebP: Quality・Compression level・Losslessを詳細設定
-- 変換結果のプレビュー、ファイル名指定、保存、対応端末で共有
-- 日本語 / English
-- ライトUIのみ
-- 実行時ネットワーク通信なし
-- スマホ向け固定アクションバー
+## 🚀 Live demo
 
-## FFmpeg WASM
+### [Open Video to GIF / WebP on GitHub Pages](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/)
 
-このアプリは [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) **v1.5.0** の次のprofileを使用します。
+GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding, cropping, resizing, frame-rate conversion, GIF/WebP encoding, preview, and export are processed locally on your device. The video you select is not uploaded by the app.
+
+## Features
+
+- Convert a selected video range to animated GIF or animated WebP
+- Thumbnail timeline with draggable start/end points and a separate playhead
+- Play only the selected range to confirm the animation before conversion
+- Fine-tune start/end by either 0.1 second or one output frame
+- Click or tap the video preview to play/pause; seeking stays in the trim timeline
+- Crop to 1:1, 4:3, 16:9, or 9:16 and drag the crop area to reposition it
+- Enable infinite looping or export an animation that plays once
+- Width presets for 320 / 480 / 720 px / original size
+- Custom integer width from 16 to 4096 px
+- FPS presets for 10 / 15 / 20 / 30 fps
+- Custom integer FPS from 1 to 60 fps
+- Light / Standard / High quality presets
+- GIF advanced settings for color count and dithering
+- WebP advanced settings for quality, compression level, and lossless mode
+- Editable output filename with automatic `.gif` / `.webp` extension handling
+- Output preview, file size, Save, and Web Share when supported
+- Japanese and English UI in the same HTML
+- Mobile-first responsive layout with a fixed bottom action bar
+- Embedded SVG favicon
+- No runtime CDN or external JavaScript dependency
+- Two compact FFmpeg WASM cores embedded in compressed form; only the selected format is inflated and loaded
+
+## Quick start
+
+### Use the web demo
+
+Just [open the demo](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/). No installation or account is required.
+
+### Build a standalone HTML file
+
+1. Download or clone this repository.
+2. Double-click `build-standalone.bat` on Windows.
+3. On the first build, the exact FFmpeg WASM Builder release pinned in `ffmpeg.config.json` is downloaded and verified.
+4. Open the generated `dist/index.html`.
+5. Copy that single file wherever you need it and open it later directly with `file://`.
+
+The build also creates `dist/index.self-extract.html`, which stores the app HTML itself in gzip-compressed form and expands it when opened.
+
+Python, Node.js, and a local web server are not required. The build uses Windows PowerShell and the built-in `tar.exe`.
+
+## Usage
+
+1. Choose or drop a video.
+2. Use the thumbnail timeline to set the start (`S`) and end (`E`) of the animation.
+3. Drag the white playhead to seek, or click/tap the video preview to play and pause.
+4. Use **Play selected range** to review exactly what will be converted.
+5. If needed, fine-tune the start/end by one output frame or 0.1 second.
+6. Choose GIF or WebP, quality, width, FPS, crop, and looping.
+7. Enter the output filename and press **Create**.
+8. Review the result, then save or share it.
+
+If the browser cannot preview the source codec, FFmpeg WASM may still be able to convert it. In that case, enter the start/end times manually and try the conversion.
+
+## GIF or WebP?
+
+| | GIF | WebP |
+| --- | --- | --- |
+| Color | Up to 256 colors | Full color |
+| Compatibility | Very broad | Recommended when the destination supports animated WebP |
+| Typical file size | Often larger | Often smaller for a similar appearance |
+| Advanced controls | Color count, dithering | Quality, compression, lossless mode |
+| Looping | Infinite or play once | Infinite or play once |
+
+The default output is WebP at 480 px, 15 fps, Standard quality. GIF is useful when compatibility matters more than color depth or file size.
+
+## Publish with GitHub Pages
+
+The repository includes a workflow that builds the fully embedded standalone HTML and deploys it to GitHub Pages automatically.
+
+1. Push the repository to GitHub as `htmlapps-video-to-gif-webp`.
+2. Open **Settings → Pages → Build and deployment → Source** and select **GitHub Actions**.
+3. Push to `main`, or manually run **Deploy standalone app to GitHub Pages** from the Actions tab.
+4. After a successful deployment, the app is available at `https://ttomohisa.github.io/htmlapps-video-to-gif-webp/`.
+
+Each push to `main` rebuilds the standalone HTML from the pinned FFmpeg WASM assets, verifies the repository, and publishes the generated `dist` directory. If GitHub Pages has not been enabled yet, the workflow builds successfully and explains the one-time setup instead of failing at `configure-pages`.
+
+## Development and build layout
+
+```text
+.
+├─ src/index.template.html          # Application template
+├─ app.config.json                  # App metadata and version
+├─ ffmpeg.config.json               # Pinned FFmpeg WASM Builder release/profiles
+├─ build-standalone.bat             # Windows build entry point
+├─ build-standalone-local.bat       # Build against a local Builder dist
+├─ build-standalone.ps1             # Standalone HTML builder
+├─ components/                      # Reusable dialog / mobile bar components
+├─ scripts/                         # Verification and self-extract build scripts
+├─ dist/
+│  ├─ index.html                    # Generated standalone app
+│  └─ index.self-extract.html       # Generated self-extracting variant
+└─ .github/workflows/
+   ├─ build-standalone.yml          # Pull request build validation
+   └─ deploy-pages.yml              # Automatic GitHub Pages deployment
+```
+
+### FFmpeg WASM profiles
+
+This app pins [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) in `ffmpeg.config.json` and embeds two purpose-built profiles:
 
 - `video-to-gif`
 - `video-to-webp`
 
-ビルド時にGitHub Releaseからprofile ZIPと`SHA256SUMS.txt`を取得し、SHA-256を検証してからgzip済みの`ffmpeg.js` / `ffmpeg.wasm`をHTMLへ埋め込みます。
+The normal build downloads the pinned release archives plus `SHA256SUMS.txt`, verifies each archive, and embeds the gzip-compressed `ffmpeg.js` / `ffmpeg.wasm` assets into the HTML. The browser does not download FFmpeg from GitHub at runtime.
 
-ブラウザーでアプリを使うときにGitHubへアクセスすることはありません。GIF/WebPの両coreは圧縮されたままHTMLに入り、変換時には選択した形式のcoreだけを展開します。
+The input `File` / `Blob` is mounted through WORKERFS, so the complete source video is not copied into MEMFS before conversion. The generated animation is currently returned through MEMFS, so very large outputs are still limited by available browser/device memory.
 
-入力動画はWORKERFSで扱うため、変換前に元動画全体をWASMのMEMFSへコピーしません。生成結果は現在MEMFSから返すため、非常に長い・高解像度・高FPSのアニメーションは端末メモリの影響を受けます。
-
-## ビルド
-
-Windows 10/11で実行します。
+To develop against a locally built FFmpeg WASM Builder instead of a GitHub Release:
 
 ```bat
-build-standalone.bat
+build-standalone-local.bat ..\htmlapps-ffmpeg-wasm-builder-main\dist
 ```
 
-初回はFFmpeg WASM Builder v1.5.0のRelease資産を`.cache/`へ取得します。2回目以降はキャッシュを利用します。
-
-再取得する場合:
+### Force a clean dependency download
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -ForceDownload
 ```
 
-生成物:
-
-```text
-dist/
-├─ index.html
-├─ index.self-extract.html
-├─ dependency-manifest.json
-├─ self-extract-manifest.json
-└─ .nojekyll
-```
-
-`dist/index.html`は読みやすい単一HTML、`dist/index.self-extract.html`はgzipしたHTML本体を内包する自己解凍版です。
-
-## 使い方
-
-1. 動画を選択またはドロップします。
-2. 再生ボタンとサムネイル付きタイムラインを使って、開始・終了位置を指定します。
-3. GIF / WebP、横幅、FPS、品質を選びます。
-4. 「作成」を押します。
-5. 完成したアニメーションを確認し、ファイル名を指定して保存します。
-
-ブラウザーが元動画のcodecを再生できない場合でも、FFmpeg WASMでは変換できる場合があります。その場合はプレビューなしで開始・終了秒を入力してください。
-
-## 開発時の確認
+### Repository verification
 
 ```powershell
 .\scripts\check-repository.ps1
 ```
 
-最低限、次を確認してください。
+The verification/build pipeline checks, among other things:
 
-- `dist/index.html`を`file://`で直接開く
-- GIF / WebPをそれぞれ生成
-- H.264 MP4、HEVCスマホ動画、縦動画を確認
-- 360px幅のスマホUI
-- 日本語 / English
-- 変換中にNetwork通信が発生しない
-- `dist/index.self-extract.html`でも同じ操作ができる
+- Required repository files and reusable components
+- Pinned FFmpeg WASM Builder version and required profiles
+- SHA-256 integrity of downloaded Builder release archives
+- No unresolved build placeholders
+- No runtime external script/style/module references
+- Runtime CSP contains `connect-src 'none'`
+- WebAssembly execution is allowed with `wasm-unsafe-eval` without enabling general JavaScript `unsafe-eval`
+- GIF and WebP runner APIs are present
+- Source video is passed through WORKERFS
+- Source preview does not expose native seek controls
+- Both standard and self-extracting HTML variants are generated and verified
 
-## プライバシー
+## Privacy and runtime network protection
 
-動画・変換結果・設定はこのアプリから外部へ送信されません。Runtime CSPには`connect-src 'none'`を指定しています。
+The generated standalone HTML is designed to run without sending the selected media outside the browser session.
 
-## ライセンス
+- Video decoding and animation encoding run locally through FFmpeg WebAssembly.
+- Runtime CSP contains `connect-src 'none'`.
+- FFmpeg assets are downloaded only at build time, then embedded into the generated HTML.
+- Only the selected GIF or WebP core is decompressed and instantiated during a conversion.
+- No analytics, telemetry, login, cloud storage, or server-side conversion is included.
 
-アプリ本体のライセンスは [LICENSE](LICENSE) を参照してください。FFmpeg WASM coreとlibwebp等の第三者ライセンスについては [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) およびFFmpeg WASM Builder v1.5.0 Releaseを参照してください。
+The GitHub Pages version requires the initial HTML request, but the selected video content is not transmitted by the app. For fully disconnected use, open the generated `dist/index.html` locally.
 
-### UI
+## Limitations
 
-Output settings keep format and quality prominent while width, FPS, crop, and looping are grouped into compact setting rows. Custom width/FPS fields only appear when Custom is selected, with a small allowed-range hint beside the field. On mobile, the trim timeline sits directly below the video preview and source metadata moves below the timeline. Start/end fine tuning uses one shared step selector (1 output frame or 0.1 second) with simple minus/plus controls for each endpoint.
+- The app converts one continuous range at a time; it is not a general-purpose video editor.
+- Animated GIF and WebP do not preserve the source video's audio.
+- GIF is limited to a 256-color palette.
+- Long duration, high resolution, high FPS, lossless WebP, or large GIF palettes can significantly increase processing time and memory usage.
+- The source video may be convertible by FFmpeg even when the browser cannot preview its codec.
+- Output is currently created in browser memory before download, so very large animations can fail on memory-constrained devices.
+- The compact embedded cores require a current browser with WebAssembly, Blob Worker, and `DecompressionStream('gzip')` support.
+
+For large 4K sources, start with a short selected range, 480 px width, and 15 fps, then increase quality only if needed.
+
+## Dependencies
+
+| Component | Pinned by | License | Purpose |
+| --- | --- | --- | --- |
+| FFmpeg 9 compact WASM (`video-to-gif`) | FFmpeg WASM Builder release in `ffmpeg.config.json` | LGPL-2.1-or-later | Decode, trim, crop, scale, palette generation, GIF encoding |
+| FFmpeg 9 compact WASM (`video-to-webp`) | FFmpeg WASM Builder release in `ffmpeg.config.json` | LGPL-2.1-or-later | Decode, trim, crop, scale, animated WebP encoding |
+| libwebp | Included only in the WebP Builder profile | Upstream license | Animated WebP encoder used by the WebP profile |
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details and the pinned Builder release for the complete corresponding notices and build information.
+
+## Contributing
+
+Bug reports and feature proposals are welcome through GitHub Issues. See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidance.
+
+## License
+
+Copyright © 2026 ttomohisa
+
+The application source in this repository is licensed under the [MIT License](LICENSE).
+
+The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
