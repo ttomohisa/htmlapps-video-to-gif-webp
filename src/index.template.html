@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#f5f5f2">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data: blob:; media-src 'self' data: blob:; worker-src 'self' blob:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'">
   <title>動画をGIF / WebPに変換</title>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2316624f'/%3E%3Crect x='14' y='18' width='36' height='28' rx='5' fill='none' stroke='white' stroke-width='4'/%3E%3Cpath d='M23 14v8M41 14v8M23 42v8M41 42v8' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='m29 27 10 5-10 5z' fill='white'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%0A%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2216%22%20fill%3D%22%2316624f%22%2F%3E%0A%20%20%3Crect%20x%3D%227.5%22%20y%3D%2217%22%20width%3D%2227%22%20height%3D%2230%22%20rx%3D%225%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12%2013.5v7M21%2013.5v7M12%2043.5v7M21%2043.5v7%22%20stroke%3D%22%23fff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M17%2025.5%2027%2032l-10%206.5z%22%20fill%3D%22%23fff%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M32.5%2032h8.5m-3.5-3.5L41%2032l-3.5%203.5%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-width%3D%222.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%20%20%3Crect%20x%3D%2239%22%20y%3D%2211%22%20width%3D%2220%22%20height%3D%2218%22%20rx%3D%224%22%20fill%3D%22%23fff%22%2F%3E%0A%20%20%3Crect%20x%3D%2239%22%20y%3D%2235%22%20width%3D%2220%22%20height%3D%2218%22%20rx%3D%224%22%20fill%3D%22%23fff%22%2F%3E%0A%20%20%3Ctext%20x%3D%2249%22%20y%3D%2222.5%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%227.3%22%20font-weight%3D%22800%22%20fill%3D%22%2316624f%22%3EGIF%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%2249%22%20y%3D%2246.2%22%20text-anchor%3D%22middle%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-size%3D%225.7%22%20font-weight%3D%22800%22%20fill%3D%22%2316624f%22%3EWebP%3C%2Ftext%3E%0A%3C%2Fsvg%3E">
   <style>
     :root {
       color-scheme: light;
@@ -61,7 +61,7 @@
     }
     .brand { display:flex; align-items:center; gap:10px; min-width:0; }
     .brand-mark { display:grid; place-items:center; width:38px; height:38px; flex:0 0 auto; border-radius:11px; background:var(--accent); color:#fff; box-shadow:var(--shadow-sm); }
-    .brand-mark svg { width:21px; height:21px; display:block; }
+    .brand-mark svg { width:29px; height:29px; display:block; }
     .brand-copy { min-width:0; }
     .brand-name { margin:0; font-size:17px; line-height:1.2; letter-spacing:.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
     .version-badge { display:inline-flex; align-items:center; margin-left:7px; padding:1px 6px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:var(--surface-muted); font-size:10px; font-weight:650; vertical-align:2px; }
@@ -441,7 +441,17 @@
     <div class="header-inner">
       <div class="brand">
         <div class="brand-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="17" height="12" rx="2.5"/><path d="M7 3.5v5M17 3.5v5M7 15.5v5M17 15.5v5"/><path d="m10 9 5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="16" fill="#16624f"/>
+            <rect x="7.5" y="17" width="27" height="30" rx="5" fill="none" stroke="#fff" stroke-width="3"/>
+            <path d="M12 13.5v7M21 13.5v7M12 43.5v7M21 43.5v7" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <path d="M17 25.5 27 32l-10 6.5z" fill="#fff"/>
+            <path d="M32.5 32h8.5m-3.5-3.5L41 32l-3.5 3.5" fill="none" stroke="#fff" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="39" y="11" width="20" height="18" rx="4" fill="#fff"/>
+            <rect x="39" y="35" width="20" height="18" rx="4" fill="#fff"/>
+            <text x="49" y="22.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="7.3" font-weight="800" fill="#16624f">GIF</text>
+            <text x="49" y="46.2" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="5.7" font-weight="800" fill="#16624f">WebP</text>
+          </svg>
         </div>
         <div class="brand-copy">
           <p class="brand-name"><span id="brandName">動画をGIF / WebPに変換</span><span class="version-badge" id="versionBadge">v1.0.0</span></p>
