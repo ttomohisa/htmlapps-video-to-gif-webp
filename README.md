@@ -14,6 +14,19 @@ A privacy-focused, single-HTML app for turning a selected range of a local video
 
 GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding, cropping, resizing, frame-rate conversion, GIF/WebP encoding, preview, and export are processed locally on your device. The video you select is not uploaded by the app.
 
+
+## Screenshots
+
+### UI
+
+![English screenshot](assets/screenshot-en.png)
+
+The screenshots use **Big Buck Bunny** media as the sample video content. The screenshot-capture sample itself is not included in this repository.
+
+**Big Buck Bunny attribution:** © 2008 Blender Foundation / www.bigbuckbunny.org — licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
+
 ## Features
 
 - Convert a selected video range to animated GIF or animated WebP

@@ -14,6 +14,20 @@
 
 GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デコード・クロップ・リサイズ・FPS変換・GIF/WebP生成・プレビュー・保存は端末内で処理されます。選択した動画がアプリからサーバーへアップロードされることはありません。
 
+
+## スクリーンショット
+
+### UI
+
+![日本語スクリーンショット](assets/screenshot.png)
+
+
+スクリーンショットでは、サンプル動画の内容として **Big Buck Bunny** の素材を使用しています。スクリーンショット取得用のサンプル動画自体は、このリポジトリには同梱していません。
+
+**Big Buck Bunny 帰属表示:** © 2008 Blender Foundation / www.bigbuckbunny.org — [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) で提供されています。
+
+詳細は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を参照してください。
+
 ## 主な機能
 
 - 動画の好きな範囲をAnimated GIF / Animated WebPへ変換
