@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Added bilingual Use full video / 動画全体を選択 to select the known duration and pause at the beginning, preserving the first-five-seconds default and output settings; availability follows later duration changes without resetting manual trim.
+- Locked trim mutations while loading or converting and kept GIF/WebP arguments, result duration, and saved signature on one captured range, including late metadata arrival.
+- Added synthetic trim and artifact regressions to repository verification; default builds now synchronize the tracked catalog HTML without affecting custom-output builds.
+
 ## 1.0.0 - 2026-08-20
 
 - 横幅 / FPS のスマホ表示を縦型レイアウトへ変更し、自由入力時の崩れを修正。

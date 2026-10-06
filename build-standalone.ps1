@@ -301,6 +301,12 @@ if (-not $SkipSelfExtract -and ($appConfig.build.PSObject.Properties.Name -conta
   }
 }
 
+# The catalog consumes this tracked filename; custom-output builds must not overwrite it.
+if (-not $OutputPathWasSpecified) {
+  $catalogPath = Join-Path $Root "video-to-gif-webp.html"
+  Copy-Item -LiteralPath $OutputPath -Destination $catalogPath -Force
+}
+
 $outputHash = Get-Sha256FileHex $OutputPath
 $outputSizeMb = [Math]::Round((Get-Item $OutputPath).Length / 1MB, 2)
 Write-Host ""

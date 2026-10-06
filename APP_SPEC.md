@@ -14,7 +14,7 @@
 1. Open the page locally or through GitHub Pages.
 2. Select or drop a video.
 3. Preview the video when the browser can play it.
-4. Choose the start and end of the animation with the trim controls or current playback position.
+4. Choose the start and end with the trim controls or current playback position, or select **Use full video** when its duration is known.
 5. Choose GIF or WebP, output width, FPS, and a simple quality preset.
 6. Optionally open advanced settings for GIF colors/dithering or WebP quality/compression/lossless mode.
 7. Create the animation locally with the pinned FFmpeg 9 WASM profile.
@@ -28,6 +28,8 @@
 - Vendor/embed release assets at build time. Do not fetch FFmpeg assets during app runtime.
 - Keep the source `File` as WORKERFS input; do not copy the full input video to MEMFS before conversion.
 - Inflate/load only the selected output format's gzip core.
+- Offer **Use full video** / **動画全体を選択** to select 0 through a finite positive known duration, rounded to the existing millisecond precision, and pause/seek the preview to the beginning without starting conversion. Keep the initial first-five-seconds default. Disable and guard the shortcut without a source/usable duration and during conversion.
+- Lock all trim-mutating controls during core loading and encoding. Use one captured validated range for encoder arguments, duplicate signature, and output duration; late preview metadata must not reset that in-flight range. Restore controls after success or failure.
 - Support trim start/end and current-position-to-start/end. The preview exposes only play/pause; seeking belongs to the thumbnail timeline.
 - Support width presets 320/480/720/original plus custom integer width 16–4096px, and FPS presets 10/15/20/30 plus custom integer FPS 1–60.
 - Support light/standard/high quality presets.
@@ -83,6 +85,10 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 - Changing between GIF and WebP changes the advanced settings and output extension.
 - A generated result can be previewed and downloaded.
 - Japanese and English copy fit on a 360px-wide screen.
+- Full-video selection is idempotent, preserves format/quality/crop/loop preferences, and updates availability on source replacement/removal, metadata arrival, and duration changes without resetting a manual selection. Unknown-duration sources still allow manual trim input.
+- Nudge, Use current, sliders, numeric edits and late metadata cannot change a processing job’s selected range; GIF and WebP arguments, signature and result duration agree.
+- Whole-video jobs retain the existing heavy-job confirmation; cancellation does not run the encoder or clear an existing result.
+- The canonical repository check runs the synthetic Node trim regressions and builds both variants. Default builds also synchronize `video-to-gif-webp.html`; custom `-OutputPath` builds leave it unchanged.
 
 ## 9. Non-goals for v1.0.0
 
