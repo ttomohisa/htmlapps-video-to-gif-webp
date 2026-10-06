@@ -156,9 +156,16 @@ if ([string]::IsNullOrWhiteSpace([string]$app.name)) { throw "app.config.json: n
 if ([string]::IsNullOrWhiteSpace([string]$app.slug)) { throw "app.config.json: slug is required" }
 if ([string]::IsNullOrWhiteSpace([string]$app.version)) { throw "app.config.json: version is required" }
 
+if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw "Node.js 22+ is required for repository regression tests." }
+& node (Join-Path $Root "scripts\test-trim.cjs")
+if ($LASTEXITCODE -ne 0) { throw "Trim regression tests failed." }
+
 $buildArguments = @{}
 if ($ForceDownload) { $buildArguments.ForceDownload = $true }
 if (-not [string]::IsNullOrWhiteSpace($LocalFfmpegDist)) { $buildArguments.LocalFfmpegDist = $LocalFfmpegDist }
 & (Join-Path $Root "build-standalone.ps1") @buildArguments
+
+& node (Join-Path $Root "scripts\test-artifacts.cjs")
+if ($LASTEXITCODE -ne 0) { throw "Artifact regression tests failed." }
 
 Write-Host "[OK] Repository check passed." -ForegroundColor Green

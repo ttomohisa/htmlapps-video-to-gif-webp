@@ -32,6 +32,7 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
 - Convert a selected video range to animated GIF or animated WebP
 - Thumbnail timeline with draggable start/end points and a separate playhead
 - Play only the selected range to confirm the animation before conversion
+- Select **Use full video** to restore the whole known duration without changing your output settings
 - Fine-tune start/end by either 0.1 second or one output frame
 - Click or tap the video preview to play/pause; seeking stays in the trim timeline
 - Crop to 1:1, 4:3, 16:9, or 9:16 and drag the crop area to reposition it
@@ -72,13 +73,15 @@ Python, Node.js, and a local web server are not required. The build uses Windows
 ## Usage
 
 1. Choose or drop a video.
-2. Use the thumbnail timeline to set the start (`S`) and end (`E`) of the animation.
+2. Use the thumbnail timeline to set the start (`S`) and end (`E`) of the animation, or choose **Use full video** to select the whole clip and pause at its beginning.
 3. Drag the white playhead to seek, or click/tap the video preview to play and pause.
 4. Use **Play selected range** to review exactly what will be converted.
 5. If needed, fine-tune the start/end by one output frame or 0.1 second.
 6. Choose GIF or WebP, quality, width, FPS, crop, and looping.
 7. Enter the output filename and press **Create**.
 8. Review the result, then save or share it.
+
+The initial selection stays at the first five seconds (or the whole clip if shorter). **Use full video** is available only when the duration is known. Trim controls are locked while the FFmpeg core loads and conversion runs, then restored on success or failure. Long whole-video conversions still show the heavy-job confirmation.
 
 If the browser cannot preview the source codec, FFmpeg WASM may still be able to convert it. In that case, enter the start/end times manually and try the conversion.
 
@@ -154,6 +157,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 .\scripts\check-repository.ps1
 ```
 
+Repository verification requires Node.js 22+ for the dependency-free synthetic trim tests. The standalone builder itself still needs only PowerShell and `tar.exe`. These tests do not replace browser, real encoding, keyboard/touch, or runtime network-panel checks.
+
+Default builds also update the tracked catalog file `video-to-gif-webp.html`. An explicit `-OutputPath` generates only the requested artifacts and leaves that catalog file unchanged.
+
 The verification/build pipeline checks, among other things:
 
 - Required repository files and reusable components
@@ -167,6 +174,8 @@ The verification/build pipeline checks, among other things:
 - Source video is passed through WORKERFS
 - Source preview does not expose native seek controls
 - Both standard and self-extracting HTML variants are generated and verified
+- Full-range selection, bilingual copy, conversion-range stability, cancellation, and error recovery in synthetic DOM/runner tests
+- Catalog/readable/restored payload equality and embedded asset hashes
 
 ## Privacy and runtime network protection
 
