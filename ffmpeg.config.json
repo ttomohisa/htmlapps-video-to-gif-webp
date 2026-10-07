@@ -1,18 +1,18 @@
 {
   "repository": "ttomohisa/htmlapps-ffmpeg-wasm-builder",
-  "version": "1.5.0",
-  "releaseBaseUrl": "https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/download/v1.5.0",
+  "version": "1.10.1",
+  "releaseBaseUrl": "https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/download/v1.10.1",
   "checksumAsset": "SHA256SUMS.txt",
   "profiles": [
     {
       "id": "video-to-gif",
-      "archive": "ffmpeg-wasm-video-to-gif-v1.5.0.zip",
+      "archive": "ffmpeg-wasm-video-to-gif-v1.10.1.zip",
       "outputMime": "image/gif",
       "license": "LGPL-2.1-or-later"
     },
     {
       "id": "video-to-webp",
-      "archive": "ffmpeg-wasm-video-to-webp-v1.5.0.zip",
+      "archive": "ffmpeg-wasm-video-to-webp-v1.10.1.zip",
       "outputMime": "image/webp",
       "license": "LGPL-2.1-or-later"
     }

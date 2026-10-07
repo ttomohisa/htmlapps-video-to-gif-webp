@@ -55,7 +55,7 @@ function ConvertTo-SafeJson([object]$Value, [int]$Depth = 30) {
 function Download-File([string]$Url, [string]$Destination) {
   $partial = "$Destination.part"
   Remove-Item -Force -ErrorAction SilentlyContinue $partial
-  Invoke-WebRequest -Uri $Url -OutFile $partial -UseBasicParsing -Headers @{ "User-Agent" = "htmlapps-video-to-gif-webp/1.0.1" }
+  Invoke-WebRequest -Uri $Url -OutFile $partial -UseBasicParsing -Headers @{ "User-Agent" = "htmlapps-video-to-gif-webp/1.0.2" }
   Move-Item -Force $partial $Destination
 }
 

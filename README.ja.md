@@ -131,7 +131,7 @@ Python、Node.js、ローカルWebサーバーは不要です。Windows標準の
 
 ### FFmpeg WASM profile
 
-このアプリは [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) を `ffmpeg.config.json` で固定し、次の用途専用profileを内包します。
+このアプリは [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) のv1.10.1を `ffmpeg.config.json` で固定し、次の用途専用profileを内包します。
 
 - `video-to-gif`
 - `video-to-webp`
@@ -139,6 +139,8 @@ Python、Node.js、ローカルWebサーバーは不要です。Windows標準の
 通常ビルドでは、固定Releaseのprofile ZIPと `SHA256SUMS.txt` を取得し、SHA-256を検証してからgzip済みの `ffmpeg.js` / `ffmpeg.wasm` をHTMLへ埋め込みます。アプリを使うブラウザが、実行時にGitHubからFFmpegをダウンロードすることはありません。
 
 入力動画はWORKERFSへ `File` / `Blob` のままマウントするため、変換開始前に元動画全体をMEMFSへコピーしません。一方、生成結果は現在MEMFS経由で返すため、非常に大きな出力はブラウザ・端末の利用可能メモリに依存します。
+
+v1.0.2ではGIFの最終フレームに記録される表示時間を修正しました。GIFの時間は1/100秒単位のため、指定FPSによる丸めや再生アプリごとの違いは残ります。リポジトリ検証は、両HTML形式に内包された実WASMで合成動画を変換し、ループON/OFFとWebPの時間を確認します。詳しくは[検証内容と出所](docs/RUNTIME_TIMING.md)をご覧ください。
 
 GitHub Releaseではなく、ローカルでビルドしたFFmpeg WASM Builderを使って開発する場合：
 

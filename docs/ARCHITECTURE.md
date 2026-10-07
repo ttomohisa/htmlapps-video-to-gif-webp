@@ -34,6 +34,8 @@ The pinned Builder profile performs the same preprocessing and uses FFmpeg's `li
 
 ## Build-time supply chain
 
-`ffmpeg.config.json` pins Builder v1.5.0 and exact release archive names. `build-standalone.ps1` downloads `SHA256SUMS.txt`, verifies each profile ZIP, extracts the profile bundle, checks that the runtime matches between the two profiles, then embeds the gzip assets.
+`ffmpeg.config.json` pins Builder v1.10.1 and exact release archive names. `build-standalone.ps1` downloads `SHA256SUMS.txt`, verifies each profile ZIP against the release checksum, extracts the profile bundle, checks that the runtime matches between the two profiles, then embeds the gzip assets.
+
+The GIF runner in this release preserves normalized frame duration through encoding, including the final frame. The app does not rewrite frame delays. Loop preference handling is unchanged. See [runtime timing verification](RUNTIME_TIMING.md).
 
 No FFmpeg release download occurs during normal app runtime.
