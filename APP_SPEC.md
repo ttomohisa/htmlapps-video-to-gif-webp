@@ -4,7 +4,7 @@
 
 - **Name:** Video to GIF / WebP / 動画をGIF / WebPに変換
 - **Repository:** `ttomohisa/htmlapps-video-to-gif-webp`
-- **Version:** `1.0.1`
+- **Version:** `1.0.2`
 - **Purpose:** Convert a chosen range of a local video into an animated GIF or animated WebP without uploading the source file.
 - **Primary users:** Smartphone and desktop users who need a short animation for chat, documentation, social posts, issue reports, or web pages.
 - **Release artifacts:** `dist/index.html` and `dist/index.self-extract.html`
@@ -24,7 +24,7 @@
 
 - Accept local video files via file picker and drag/drop.
 - Never upload the input or output.
-- Use `video-to-gif` and `video-to-webp` from FFmpeg WASM Builder v1.5.0.
+- Use `video-to-gif` and `video-to-webp` from FFmpeg WASM Builder v1.10.1.
 - Vendor/embed release assets at build time. Do not fetch FFmpeg assets during app runtime.
 - Keep the source `File` as WORKERFS input; do not copy the full input video to MEMFS before conversion.
 - Inflate/load only the selected output format's gzip core.
@@ -46,7 +46,7 @@
 - Source video remains on the user's device.
 - FFmpeg WASM runs in a Blob Worker.
 - Runtime CSP blocks network connections with `connect-src 'none'`.
-- Build time may download the pinned FFmpeg WASM Builder v1.5.0 release assets and checksum file.
+- Build time may download the pinned FFmpeg WASM Builder v1.10.1 release assets and checksum file.
 - No analytics, telemetry, login, cloud storage, or server conversion.
 
 ## 5. UX and accessibility
@@ -74,7 +74,7 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 
 ## 8. Acceptance criteria
 
-- `build-standalone.bat` downloads/verifies v1.5.0 assets and generates the two standalone HTML variants.
+- `build-standalone.bat` downloads/verifies v1.10.1 assets and generates the two standalone HTML variants.
 - `scripts/verify-standalone.ps1` passes.
 - No unresolved app/FFmpeg build placeholders remain.
 - No runtime external script, stylesheet, frame, module import, or CSS asset URL remains.
@@ -84,13 +84,15 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 - Input is mounted through WORKERFS.
 - Changing between GIF and WebP changes the advanced settings and output extension.
 - A generated result can be previewed and downloaded.
+- GIF output preserves the final frame duration at the requested FPS, quantized to centiseconds. Verify 10/15/30 FPS, a trimmed range, single-frame output, and loop ON/OFF; WebP timing must remain unchanged.
+- The canonical check executes real WASM from both emitted HTML variants using synthetic fixtures and the app argument builder; this Node/MEMFS check supplements browser/WORKERFS validation.
 - Japanese and English copy fit on a 360px-wide screen.
 - Full-video selection is idempotent, preserves format/quality/crop/loop preferences, and updates availability on source replacement/removal, metadata arrival, and duration changes without resetting a manual selection. Unknown-duration sources still allow manual trim input.
 - Nudge, Use current, sliders, numeric edits and late metadata cannot change a processing job’s selected range; GIF and WebP arguments, signature and result duration agree.
 - Whole-video jobs retain the existing heavy-job confirmation; cancellation does not run the encoder or clear an existing result.
 - The canonical repository check runs the synthetic Node trim regressions and builds both variants. Default builds also synchronize `video-to-gif-webp.html`; custom `-OutputPath` builds leave it unchanged.
 
-## 9. Non-goals for v1.0.1
+## 9. Non-goals for v1.0.2
 
 - Video editing beyond selecting one continuous range.
 - Audio preservation; GIF/WebP outputs are visual animations only.

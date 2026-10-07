@@ -130,7 +130,7 @@ Each push to `main` rebuilds the standalone HTML from the pinned FFmpeg WASM ass
 
 ### FFmpeg WASM profiles
 
-This app pins [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) in `ffmpeg.config.json` and embeds two purpose-built profiles:
+This app pins v1.10.1 of [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder) in `ffmpeg.config.json` and embeds two purpose-built profiles:
 
 - `video-to-gif`
 - `video-to-webp`
@@ -138,6 +138,8 @@ This app pins [htmlapps-ffmpeg-wasm-builder](https://github.com/ttomohisa/htmlap
 The normal build downloads the pinned release archives plus `SHA256SUMS.txt`, verifies each archive, and embeds the gzip-compressed `ffmpeg.js` / `ffmpeg.wasm` assets into the HTML. The browser does not download FFmpeg from GitHub at runtime.
 
 The input `File` / `Blob` is mounted through WORKERFS, so the complete source video is not copied into MEMFS before conversion. The generated animation is currently returned through MEMFS, so very large outputs are still limited by available browser/device memory.
+
+v1.0.2 fixes the encoded GIF final-frame duration. GIF delays remain quantized to centiseconds, so some FPS values round and playback apps may treat short delays differently. The repository check executes the actual embedded WASM from both HTML variants with synthetic inputs, including loop ON/OFF and a WebP timing control. See [runtime timing and provenance](docs/RUNTIME_TIMING.md) for details and verification limits.
 
 To develop against a locally built FFmpeg WASM Builder instead of a GitHub Release:
 

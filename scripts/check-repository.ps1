@@ -105,7 +105,7 @@ try {
 
 $ffmpegConfigPath = Join-Path $Root "ffmpeg.config.json"
 $ffmpegConfig = Get-Content -Raw -Encoding UTF8 $ffmpegConfigPath | ConvertFrom-Json
-if ([string]$ffmpegConfig.version -ne "1.5.0") { throw "ffmpeg.config.json must pin FFmpeg WASM Builder v1.5.0 for app v1.0.1." }
+if ([string]$ffmpegConfig.version -ne "1.10.1") { throw "ffmpeg.config.json must pin FFmpeg WASM Builder v1.10.1 for app v1.0.2." }
 $profileIds = @($ffmpegConfig.profiles | ForEach-Object { [string]$_.id })
 foreach ($requiredProfile in @("video-to-gif", "video-to-webp")) {
   if ($profileIds -notcontains $requiredProfile) { throw "ffmpeg.config.json is missing required profile: $requiredProfile" }
@@ -157,6 +157,8 @@ if ([string]::IsNullOrWhiteSpace([string]$app.slug)) { throw "app.config.json: s
 if ([string]::IsNullOrWhiteSpace([string]$app.version)) { throw "app.config.json: version is required" }
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw "Node.js 22+ is required for repository regression tests." }
+& node (Join-Path $Root "scripts\test-support\timing-readers.test.cjs")
+if ($LASTEXITCODE -ne 0) { throw "Timing reader regression tests failed." }
 & node (Join-Path $Root "scripts\test-trim.cjs")
 if ($LASTEXITCODE -ne 0) { throw "Trim regression tests failed." }
 
@@ -167,5 +169,8 @@ if (-not [string]::IsNullOrWhiteSpace($LocalFfmpegDist)) { $buildArguments.Local
 
 & node (Join-Path $Root "scripts\test-artifacts.cjs")
 if ($LASTEXITCODE -ne 0) { throw "Artifact regression tests failed." }
+
+& node (Join-Path $Root "scripts\test-runtime-timing.cjs")
+if ($LASTEXITCODE -ne 0) { throw "Embedded runtime timing regressions failed." }
 
 Write-Host "[OK] Repository check passed." -ForegroundColor Green

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 - 2026-10-07
+
+- Pin the verified FFmpeg WASM Builder v1.10.1 GIF/WebP release and assert its archive SHA-256 values in artifact tests.
+- Fix the encoded GIF final-frame duration, including single-frame output; keep existing trim, crop, quality and looping behavior. GIF centisecond rounding and viewer-specific timing limits still apply.
+- Add actual embedded-WASM regressions for 10/15/30 FPS, trimmed/single-frame GIFs, loop ON/OFF and unchanged WebP duration in both generated HTML forms.
+- Verify emitted core hashes against upstream manifests and document the release/source/license provenance.
+
 ## 1.0.1 - 2026-10-07
 
 - Standardize the header language action to `EN` / `JA` and add a localized target-language tooltip.
