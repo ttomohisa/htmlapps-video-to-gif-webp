@@ -105,7 +105,7 @@ try {
 
 $ffmpegConfigPath = Join-Path $Root "ffmpeg.config.json"
 $ffmpegConfig = Get-Content -Raw -Encoding UTF8 $ffmpegConfigPath | ConvertFrom-Json
-if ([string]$ffmpegConfig.version -ne "1.5.0") { throw "ffmpeg.config.json must pin FFmpeg WASM Builder v1.5.0 for app v1.0.0." }
+if ([string]$ffmpegConfig.version -ne "1.5.0") { throw "ffmpeg.config.json must pin FFmpeg WASM Builder v1.5.0 for app v1.0.1." }
 $profileIds = @($ffmpegConfig.profiles | ForEach-Object { [string]$_.id })
 foreach ($requiredProfile in @("video-to-gif", "video-to-webp")) {
   if ($profileIds -notcontains $requiredProfile) { throw "ffmpeg.config.json is missing required profile: $requiredProfile" }

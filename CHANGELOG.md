@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 1.0.1 - 2026-10-07
+
+- Standardize the header language action to `EN` / `JA` and add a localized target-language tooltip.
+- Set the Japanese privacy badge to `完全ローカル処理`, preserving English privacy copy, localized Help text, and layout.
+- Add regressions for repeated language switching and fallback header metadata.
 
 - Added bilingual Use full video / 動画全体を選択 to select the known duration and pause at the beginning, preserving the first-five-seconds default and output settings; availability follows later duration changes without resetting manual trim.
 - Locked trim mutations while loading or converting and kept GIF/WebP arguments, result duration, and saved signature on one captured range, including late metadata arrival.
