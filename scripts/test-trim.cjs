@@ -208,3 +208,32 @@ for(const format of ['gif','webp']) test(`${format}: durationchange during proce
   const video=h.byId.get('videoPreview');video.duration=2;video.dispatch('durationchange');assert.equal(h.app.state.previewDuration,2);assert.equal(h.byId.get('useFullVideo').disabled,true);assert.deepEqual(range(h),{start:1,end:5});
   await finish(h,done);assertJob(h,1,5);assert.equal(h.byId.get('useFullVideo').disabled,false);h.byId.get('useFullVideo').click();assert.deepEqual(range(h),{start:0,end:2});
 });
+
+// Header regressions use real translations, markup, and the language click handler.
+test('header target labels, Help metadata and privacy copy survive round trips', () => {
+  const h = makeHarness(); selectRange(h, 2, 8);
+  const before = JSON.stringify(h.app.settingsObject());
+  const file = h.app.state.file;
+  for (const language of ['en', 'ja', 'en', 'ja', 'en']) {
+    const ja = language === 'ja';
+    const languageButton = h.byId.get('languageButton');
+    const helpButton = h.byId.get('helpButton');
+    assert.equal(h.app.state.language, language);
+    assert.equal(languageButton.textContent, ja ? 'EN' : 'JA');
+    assert.equal(languageButton['aria-label'], ja ? '英語に切り替え' : 'Switch to Japanese');
+    assert.equal(languageButton.title, ja ? '英語に切り替え' : 'Switch to Japanese');
+    assert.equal(helpButton['aria-label'], ja ? '使い方と注意事項' : 'How to use & notes');
+    assert.equal(helpButton.title, ja ? '使い方と注意事項' : 'How to use & notes');
+    assert.equal(h.nodes.find(n => n.dataset.i18n === 'localBadge').textContent, ja ? '完全ローカル処理' : 'Local processing');
+    assert.deepEqual(range(h), {start:2, end:8});
+    assert.equal(JSON.stringify(h.app.settingsObject()), before);
+    assert.equal(h.app.state.file, file);
+    languageButton.click();
+  }
+});
+test('Japanese fallback header exposes its target and exact local-processing badge', () => {
+  const button = html.match(/<button\b[^>]*id="languageButton"[^>]*>/)[0];
+  assert.match(button, /aria-label="英語に切り替え"/);
+  assert.match(button, /title="英語に切り替え"/);
+  assert.match(html, /data-i18n="localBadge">完全ローカル処理<\/span>/);
+});

@@ -4,7 +4,7 @@
 
 - **Name:** Video to GIF / WebP / 動画をGIF / WebPに変換
 - **Repository:** `ttomohisa/htmlapps-video-to-gif-webp`
-- **Version:** `1.0.0`
+- **Version:** `1.0.1`
 - **Purpose:** Convert a chosen range of a local video into an animated GIF or animated WebP without uploading the source file.
 - **Primary users:** Smartphone and desktop users who need a short animation for chat, documentation, social posts, issue reports, or web pages.
 - **Release artifacts:** `dist/index.html` and `dist/index.self-extract.html`
@@ -36,7 +36,7 @@
 - GIF advanced settings: 16-256 colors and supported dither modes.
 - WebP advanced settings: quality 0-100, compression 0-6, and lossless mode.
 - Show output preview, byte size, duration/settings summary, editable filename, Save, and Web Share when supported.
-- Preserve Japanese/English switching without reload.
+- Preserve Japanese/English switching without reload. The header action shows `EN` in Japanese and `JA` in English, with a target-language accessible name and tooltip localized to the current UI language. Keep the Japanese privacy badge exactly `完全ローカル処理`, the existing English privacy copy, and localized Help labels.
 - Light-only UI.
 - Provide help as “使い方と注意事項” from the upper-right `?` button.
 - Use an in-app confirmation for unusually heavy settings and for repeating an identical conversion when a result already exists.
@@ -90,7 +90,7 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 - Whole-video jobs retain the existing heavy-job confirmation; cancellation does not run the encoder or clear an existing result.
 - The canonical repository check runs the synthetic Node trim regressions and builds both variants. Default builds also synchronize `video-to-gif-webp.html`; custom `-OutputPath` builds leave it unchanged.
 
-## 9. Non-goals for v1.0.0
+## 9. Non-goals for v1.0.1
 
 - Video editing beyond selecting one continuous range.
 - Audio preservation; GIF/WebP outputs are visual animations only.

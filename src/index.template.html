@@ -455,12 +455,12 @@
           </svg>
         </div>
         <div class="brand-copy">
-          <p class="brand-name"><span id="brandName">動画をGIF / WebPに変換</span><span class="version-badge" id="versionBadge">v1.0.0</span></p>
+          <p class="brand-name"><span id="brandName">動画をGIF / WebPに変換</span><span class="version-badge" id="versionBadge">v1.0.1</span></p>
           <p class="brand-meta" data-i18n="brandMeta">端末内で変換 · アップロードなし</p>
         </div>
       </div>
       <div class="header-actions">
-        <button class="language-button" id="languageButton" type="button" aria-label="Switch language">EN</button>
+        <button class="language-button" id="languageButton" type="button" aria-label="英語に切り替え" title="英語に切り替え">EN</button>
         <button class="icon-button" id="helpButton" type="button" data-i18n-title="helpTitle" data-i18n-aria-label="helpTitle" title="使い方と注意事項" aria-label="使い方と注意事項">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.8 9a2.35 2.35 0 1 1 3.72 1.9c-.92.67-1.52 1.12-1.52 2.1"/><path d="M12 17h.01"/></svg>
         </button>
@@ -474,7 +474,7 @@
         <h1 id="pageTitle" data-i18n="pageTitle">動画からアニメーション画像を作成</h1>
         <p data-i18n="pageIntro">動画の好きな範囲を選んで、GIFまたはWebPとして保存します。変換はブラウザー内で完結します。</p>
       </div>
-      <span class="local-badge" data-i18n="localBadge">ローカル処理</span>
+      <span class="local-badge" data-i18n="localBadge">完全ローカル処理</span>
     </section>
 
     <div class="stack">
@@ -671,7 +671,7 @@
     </div>
   </main>
 
-  <footer class="footer"><div class="footer-inner"><span><span id="footerName">動画をGIF / WebPに変換</span> · v<span id="footerVersion">1.0.0</span></span><span>FFmpeg WASM Builder v<span id="builderVersion">1.5.0</span> · <span data-i18n="footerLocal">runtime network disabled</span></span></div></footer>
+  <footer class="footer"><div class="footer-inner"><span><span id="footerName">動画をGIF / WebPに変換</span> · v<span id="footerVersion">1.0.1</span></span><span>FFmpeg WASM Builder v<span id="builderVersion">1.5.0</span> · <span data-i18n="footerLocal">runtime network disabled</span></span></div></footer>
 
   <nav class="app-mobile-bottom-bar" id="mobileBar" aria-label="Mobile actions">
     <button class="mobile-item is-active" type="button" data-target="sourceSection" data-key="source" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg><span data-i18n="mobileVideo">動画</span></button>
@@ -720,7 +720,7 @@
 
       const translations = {
         ja: {
-          brandMeta:'端末内で変換 · アップロードなし', pageTitle:'動画からアニメーション画像を作成', pageIntro:'動画の好きな範囲を選んで、GIFまたはWebPとして保存します。変換はブラウザー内で完結します。', localBadge:'ローカル処理',
+          brandMeta:'端末内で変換 · アップロードなし', pageTitle:'動画からアニメーション画像を作成', pageIntro:'動画の好きな範囲を選んで、GIFまたはWebPとして保存します。変換はブラウザー内で完結します。', localBadge:'完全ローカル処理',
           sourceTitle:'動画', sourceNote:'端末から動画を選択してください。', dropTitle:'動画をここにドロップ', dropNote:'または端末から選択', chooseVideo:'動画を選択', fileSize:'ファイルサイズ', duration:'長さ', resolution:'解像度', replaceVideo:'別の動画', clearVideo:'解除', previewWarning:'この動画はブラウザーでプレビューできません。FFmpegで変換できる場合があります。開始・終了は時刻で指定してください。',
           trimRange:'切り出す範囲', start:'開始', end:'終了', startPosition:'開始位置', endPosition:'終了位置', currentPosition:'現在位置', play:'再生', pause:'一時停止', setHere:'現在位置', playSelection:'選択範囲を再生', useFullVideo:'動画全体を選択', jumpStart:'開始位置を再生', jumpEnd:'終了位置へ移動', jumpStartShort:'Sへ移動', jumpEndShort:'Eへ移動', fineTuneStep:'微調整幅', oneFrame:'1フレーム', fineTune:'微調整', nudgeEarlier:'選択した幅だけ前へ', nudgeLater:'選択した幅だけ後ろへ', timelineScrubHint:'白い縦線をドラッグして再生位置を移動できます。', thumbPreparing:'サムネイルを準備中…', thumbReady:'サムネイル表示', thumbUnavailable:'サムネイルを表示できません', seconds:'秒',
           settingsTitle:'出力設定', settingsNote:'形式と品質を選び、サイズなどは必要なところだけ調整します。', filename:'出力ファイル名', filenameHint:'拡張子は形式に合わせて自動変更します', format:'形式', formatWebpHint:'WebP: 高画質・小容量', formatGifHint:'GIF: 互換性重視', gifDescription:'互換性重視。256色まで。', webpDescription:'フルカラーで小さくしやすい。', crop:'クロップ', cropHint:'必要な部分だけ切り抜き', cropNone:'なし', cropNote:'比率を選ぶとプレビューに枠が表示されます。枠上部の「移動」をドラッグして位置を調整できます。', moveCrop:'移動', playback:'再生', loopAnimation:'ループする', loopAnimationHint:'OFFにすると1回再生で停止するアニメーションとして保存します。', width:'横幅', widthHint:'縦横比は維持します', originalSize:'元サイズ', customValue:'自由入力', customWidthLabel:'横幅を自由入力', widthCustomHint:'16〜4096', customFpsLabel:'FPSを自由入力', fpsCustomHint:'1〜60', fpsHint:'高いほど滑らか・大容量', quality:'品質', qualityHint:'サイズとのバランス', qualityLight:'軽量', qualityLightNote:'小さめ', qualityStandard:'標準', qualityStandardNote:'おすすめ', qualityHigh:'高品質', qualityHighNote:'大きめ', advanced:'詳細設定', advancedNote:'必要なときだけ', gifColors:'GIF色数', losslessWebp:'Lossless WebP',
@@ -804,8 +804,10 @@
         $$('[data-i18n]').forEach(el=>el.textContent=t(el.dataset.i18n));
         $$('[data-i18n-title]').forEach(el=>el.title=t(el.dataset.i18nTitle));
         $$('[data-i18n-aria-label]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.i18nAriaLabel)));
-        $('#languageButton').textContent=state.language==='ja'?'EN':'日本語';
-        $('#languageButton').setAttribute('aria-label',state.language==='ja'?'英語に切り替え':'Switch to Japanese');
+        $('#languageButton').textContent=state.language==='ja'?'EN':'JA';
+        const languageAction=state.language==='ja'?'英語に切り替え':'Switch to Japanese';
+        $('#languageButton').setAttribute('aria-label',languageAction);
+        $('#languageButton').title=languageAction;
         document.title=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;
         $('#brandName').textContent=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;
         $('#footerName').textContent=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;

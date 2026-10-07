@@ -3,7 +3,7 @@
   "name": "Video to GIF / WebP",
   "nameJa": "動画をGIF / WebPに変換",
   "slug": "video-to-gif-webp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create animated GIF or WebP files from a selected range of a video entirely in your browser.",
   "descriptionJa": "動画の好きな範囲を、ブラウザー内だけでアニメーションGIFまたはWebPに変換します。",
   "defaultLanguage": "auto",
