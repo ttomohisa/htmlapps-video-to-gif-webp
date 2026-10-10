@@ -224,3 +224,5 @@ Copyright © 2026 ttomohisa
 The application source in this repository is licensed under the [MIT License](LICENSE).
 
 The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+Help and confirmation dialogs support short and zoomed screens: scroll inside the content, then use Close, Esc, or the backdrop to dismiss. The background page stays still while a dialog is open.

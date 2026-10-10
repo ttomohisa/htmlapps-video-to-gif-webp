@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 - 2026-10-10
+
+- Keep help and confirmation dialogs inside short or zoomed viewports, with scrollable content and reachable close controls.
+- Prevent background-page scrolling while a modal is open; restore normal scrolling on dismissal.
+- Add source-level layout and dismissal regressions to the canonical repository check.
+
 ## 1.0.2 - 2026-10-07
 
 - Pin the verified FFmpeg WASM Builder v1.10.1 GIF/WebP release and assert its archive SHA-256 values in artifact tests.

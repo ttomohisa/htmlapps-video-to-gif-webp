@@ -4,7 +4,7 @@
 
 - **Name:** Video to GIF / WebP / 動画をGIF / WebPに変換
 - **Repository:** `ttomohisa/htmlapps-video-to-gif-webp`
-- **Version:** `1.0.2`
+- **Version:** `1.0.3`
 - **Purpose:** Convert a chosen range of a local video into an animated GIF or animated WebP without uploading the source file.
 - **Primary users:** Smartphone and desktop users who need a short animation for chat, documentation, social posts, issue reports, or web pages.
 - **Release artifacts:** `dist/index.html` and `dist/index.self-extract.html`
@@ -92,7 +92,7 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 - Whole-video jobs retain the existing heavy-job confirmation; cancellation does not run the encoder or clear an existing result.
 - The canonical repository check runs the synthetic Node trim regressions and builds both variants. Default builds also synchronize `video-to-gif-webp.html`; custom `-OutputPath` builds leave it unchanged.
 
-## 9. Non-goals for v1.0.2
+## 9. Non-goals for v1.0.3
 
 - Video editing beyond selecting one continuous range.
 - Audio preservation; GIF/WebP outputs are visual animations only.
@@ -110,3 +110,7 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 - Fine tuning uses one shared step selector (1 output frame or 0.1 second) and simple minus/plus controls for Start and End.
 - Keep the output filename next to the Create action rather than in the main settings cluster.
 - Use progressive disclosure for codec-specific advanced settings.
+
+## Dialog viewport behavior
+
+Help and confirmation dialogs remain within the current viewport at narrow widths and browser zoom. Their content scrolls without moving the header or background page. Close, Esc and backdrop dismissal preserve native modal focus restoration; normal page scrolling resumes after dismissal.
