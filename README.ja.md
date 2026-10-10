@@ -225,3 +225,5 @@ Copyright © 2026 ttomohisa
 このリポジトリのアプリ本体ソースは [MIT License](LICENSE) で公開されています。
 
 生成された単一HTMLにはFFmpeg / libwebp由来のバイナリも、それぞれのライセンスに従って内包されます。リポジトリのMIT Licenseで第三者バイナリを再ライセンスするものではありません。詳細は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を確認してください。
+
+ヘルプと確認画面は、縦に短い画面やブラウザー拡大表示でも内部をスクロールできます。閉じるボタン、Escキー、外側のクリックで閉じられ、表示中は背景ページがスクロールしません。
