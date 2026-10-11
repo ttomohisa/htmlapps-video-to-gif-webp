@@ -14,7 +14,6 @@ A privacy-focused, single-HTML app for turning a selected range of a local video
 
 GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding, cropping, resizing, frame-rate conversion, GIF/WebP encoding, preview, and export are processed locally on your device. The video you select is not uploaded by the app.
 
-
 ## Screenshots
 
 ### UI
@@ -225,4 +224,4 @@ The application source in this repository is licensed under the [MIT License](LI
 
 The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Help and confirmation dialogs support short and zoomed screens: scroll inside the content, then use Close, Esc, or the backdrop to dismiss. The background page stays still while a dialog is open.
+Dismiss Help and confirmations with Close, Esc, or a click outside the dialog.
