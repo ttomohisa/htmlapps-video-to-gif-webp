@@ -224,7 +224,7 @@ test('header target labels, Help metadata and privacy copy survive round trips',
     assert.equal(languageButton.title, ja ? '英語に切り替え' : 'Switch to Japanese');
     assert.equal(helpButton['aria-label'], ja ? '使い方と注意事項' : 'How to use & notes');
     assert.equal(helpButton.title, ja ? '使い方と注意事項' : 'How to use & notes');
-    assert.equal(h.nodes.find(n => n.dataset.i18n === 'localBadge').textContent, ja ? '完全ローカル処理' : 'Local processing');
+    assert.equal(h.nodes.find(n => n.dataset.i18n === 'localBadge').textContent, ja ? '完全ローカル処理' : 'Fully local processing');
     assert.deepEqual(range(h), {start:2, end:8});
     assert.equal(JSON.stringify(h.app.settingsObject()), before);
     assert.equal(h.app.state.file, file);

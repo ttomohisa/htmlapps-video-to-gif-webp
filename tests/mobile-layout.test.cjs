@@ -1,0 +1,5 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const html=fs.readFileSync(path.join(__dirname,'../src/index.template.html'),'utf8');
+test('hide only informational footer at existing phone breakpoint',()=>assert.ok(html.includes('@media (max-width: 760px) { body > footer { display: none; } }')));
+test('standard equivalent English local-processing badge',()=>assert.ok(html.includes("localBadge:'Fully local processing'")));
+test('populated lower versions are unique final Help content, not header metadata',()=>{const h=html.match(/<dialog class="help-dialog" id="helpDialog"[^]*?<\/dialog>/)[0]; for(const id of ['footerVersion','builderVersion']){assert.equal((html.match(new RegExp('id="'+id+'"','g'))||[]).length,1);assert.ok(h.includes('id="'+id+'"'));} assert.match(h,/<p class="help-build">[^]*?<\/p>\s*<\/div>\s*<\/dialog>$/);assert.ok(html.includes("$('#footerVersion').textContent=APP_CONFIG.version"));assert.ok(html.includes("$('#builderVersion').textContent=BUILD_MANIFEST.ffmpeg?.version"));});

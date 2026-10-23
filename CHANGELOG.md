@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Hide only the informational page footer at the existing 760px phone breakpoint. Preserve functional controls, header version, privacy distinctions, and all other responsive boundaries. The equivalent English local-processing badge reads `Fully local processing`. Existing populated app/builder footer versions appear as quiet final Help content, preserving their IDs and update logic; the runtime-network footer explanation stays in place.
+
 ## 1.0.3 - 2026-10-10
 
 - Keep help and confirmation dialogs inside short or zoomed viewports, with scrollable content and reachable close controls.
