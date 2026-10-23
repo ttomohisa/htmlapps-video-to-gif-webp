@@ -36,7 +36,7 @@
 - GIF advanced settings: 16-256 colors and supported dither modes.
 - WebP advanced settings: quality 0-100, compression 0-6, and lossless mode.
 - Show output preview, byte size, duration/settings summary, editable filename, Save, and Web Share when supported.
-- Preserve Japanese/English switching without reload. The header action shows `EN` in Japanese and `JA` in English, with a target-language accessible name and tooltip localized to the current UI language. Keep the Japanese privacy badge exactly `完全ローカル処理`, the existing English privacy copy, and localized Help labels.
+- Preserve Japanese/English switching without reload. The header action shows `EN` in Japanese and `JA` in English, with a target-language accessible name and tooltip localized to the current UI language. Keep the Japanese privacy badge exactly `完全ローカル処理`, the equivalent English privacy badge `Fully local processing`, and localized Help labels.
 - Light-only UI.
 - Provide help as “使い方と注意事項” from the upper-right `?` button.
 - Use an in-app confirmation for unusually heavy settings and for repeating an identical conversion when a result already exists.
@@ -114,3 +114,7 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 ## Dialog viewport behavior
 
 Help and confirmation dialogs remain within the current viewport at narrow widths and browser zoom. Their content scrolls without moving the header or background page. Close, Esc and backdrop dismissal preserve native modal focus restoration; normal page scrolling resumes after dismissal.
+
+## Shared phone layout
+
+Hide only the informational page footer at the existing 760px phone breakpoint. Preserve functional controls, header version, privacy distinctions, and all other responsive boundaries. The equivalent English local-processing badge reads `Fully local processing`. Existing populated app/builder footer versions appear as quiet final Help content, preserving their IDs and update logic; the runtime-network footer explanation stays in place.

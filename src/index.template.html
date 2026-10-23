@@ -437,7 +437,9 @@
       html { scroll-behavior:auto; }
       *,*::before,*::after { transition:none !important; animation:none !important; }
     }
-  </style>
+      @media (max-width: 760px) { body > footer { display: none; } }
+    #helpDialog .help-build { margin-top:18px; color:var(--muted); font-size:11px; }
+</style>
 </head>
 <body>
   <header class="app-header">
@@ -673,7 +675,7 @@
     </div>
   </main>
 
-  <footer class="footer"><div class="footer-inner"><span><span id="footerName">動画をGIF / WebPに変換</span> · v<span id="footerVersion">1.0.3</span></span><span>FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span> · <span data-i18n="footerLocal">runtime network disabled</span></span></div></footer>
+  <footer class="footer"><div class="footer-inner"><span><span id="footerName">動画をGIF / WebPに変換</span></span><span><span data-i18n="footerLocal">runtime network disabled</span></span></div></footer>
 
   <nav class="app-mobile-bottom-bar" id="mobileBar" aria-label="Mobile actions">
     <button class="mobile-item is-active" type="button" data-target="sourceSection" data-key="source" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/></svg><span data-i18n="mobileVideo">動画</span></button>
@@ -696,6 +698,7 @@
       <ul><li data-i18n="helpNotePreview">ブラウザーが再生できないcodecでもFFmpegで変換できる場合があります。その場合は開始・終了を秒数で入力してください。</li><li data-i18n="helpNoteMemory">長時間・高解像度・高FPSは処理時間とメモリ使用量が増えます。まず短い範囲、480px、15fps程度をおすすめします。</li><li data-i18n="helpNoteTiming">GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。</li><li data-i18n="helpNoteOutput">変換結果は一時的にブラウザーのメモリ上にあります。必要な結果は必ず保存してください。</li></ul>
       <p class="dialog-note" data-i18n="helpOffline">保存したHTMLを直接開いて、オフラインでも変換できます。</p>
       <p data-i18n="helpDialogScroll">閉じるボタン、Escキー、外側のクリックで閉じられます。</p>
+      <p class="help-build">v<span id="footerVersion">1.0.3</span> · FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span></p>
     </div>
   </dialog>
 
@@ -736,7 +739,7 @@
           noDecompression:'このブラウザーはgzip展開に必要なDecompressionStreamへ対応していません。最新のブラウザーで開いてください。', unsupportedRuntime:'このブラウザーではFFmpeg WASMを実行できません。', invalidRange:'終了位置は開始位置より後にしてください。', chooseVideoError:'先に動画を選択してください。', conversionFailed:'変換に失敗しました', saved:'保存を開始しました', shareFailed:'共有できませんでした', cleared:'動画を解除しました', selected:'動画を読み込みました', outputReady:'{format}を作成しました', original:'元サイズ'
         },
         en: {
-          brandMeta:'On-device conversion · No upload', pageTitle:'Create an animation from a video', pageIntro:'Choose a range of your video and save it as an animated GIF or WebP. Conversion stays inside your browser.', localBadge:'Local processing',
+          brandMeta:'On-device conversion · No upload', pageTitle:'Create an animation from a video', pageIntro:'Choose a range of your video and save it as an animated GIF or WebP. Conversion stays inside your browser.', localBadge:'Fully local processing',
           sourceTitle:'Video', sourceNote:'Choose a video from your device.', dropTitle:'Drop a video here', dropNote:'or choose one from your device', chooseVideo:'Choose video', fileSize:'File size', duration:'Duration', resolution:'Resolution', replaceVideo:'Choose another', clearVideo:'Remove', previewWarning:'This codec cannot be previewed by the browser. FFmpeg may still be able to convert it. Enter the start and end times manually.',
           trimRange:'Selected range', start:'Start', end:'End', startPosition:'Start position', endPosition:'End position', currentPosition:'Current position', play:'Play', pause:'Pause', setHere:'Use current', playSelection:'Play selected range', useFullVideo:'Use full video', jumpStart:'Play from start', jumpEnd:'Jump to end', jumpStartShort:'Go to S', jumpEndShort:'Go to E', fineTuneStep:'Fine-tune step', oneFrame:'1 frame', fineTune:'Fine tune', nudgeEarlier:'Move earlier by the selected step', nudgeLater:'Move later by the selected step', timelineScrubHint:'Drag the white playhead to seek through the video.', thumbPreparing:'Preparing thumbnails…', thumbReady:'Thumbnails ready', thumbUnavailable:'Thumbnails unavailable', seconds:'sec',
           settingsTitle:'Output settings', settingsNote:'Choose format and quality, then adjust only the details you need.', filename:'Output filename', filenameHint:'The extension follows the selected format automatically', format:'Format', formatWebpHint:'WebP: full color, compact', formatGifHint:'GIF: broad compatibility', gifDescription:'Broad compatibility, up to 256 colors.', webpDescription:'Full color and usually easier to keep small.', crop:'Crop', cropHint:'Keep only the area you need', cropNone:'None', cropNote:'Choose a ratio to show a crop frame. Drag the “Move” handle at the top of the frame to reposition it.', moveCrop:'Move', playback:'Playback', loopAnimation:'Loop animation', loopAnimationHint:'Turn this off to save an animation that plays once and stops.', width:'Width', widthHint:'Aspect ratio is preserved', originalSize:'Original', customValue:'Custom', customWidthLabel:'Custom output width', widthCustomHint:'16–4096', customFpsLabel:'Custom FPS', fpsCustomHint:'1–60', fpsHint:'Higher is smoother and larger', quality:'Quality', qualityHint:'Balance against file size', qualityLight:'Light', qualityLightNote:'Smaller', qualityStandard:'Standard', qualityStandardNote:'Recommended', qualityHigh:'High', qualityHighNote:'Larger', advanced:'Advanced settings', advancedNote:'Only when needed', gifColors:'GIF colors', losslessWebp:'Lossless WebP',
