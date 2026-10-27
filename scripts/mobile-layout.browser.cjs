@@ -4,15 +4,41 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const {pathToFileURL}=require('node:url'),{chromium}=require('playwright');
 const cfg={"slug": "video-to-gif-webp", "bp": 760, "nav": "#mobileBar", "help": "#helpButton", "lang": "#languageButton", "close": "#closeHelpButton", "badge": "[data-i18n=\"localBadge\"]", "hideBadge": true, "selfExtract": true};
 const evidence=path.resolve('test-results/mobile-layout');
+
+async function assertHeaderVersionFits(page, width, height, label) {
+  const expected = 'v' + JSON.parse(fs.readFileSync(path.resolve('app.config.json'), 'utf8')).version;
+  const version = page.locator('.app-header .version-badge, .app-header .version');
+  assert.equal(await version.count(), 1, label + ': one header version');
+  assert.equal((await version.textContent()).trim(), expected, label + ': current version');
+  assert.equal(await version.isVisible(), true, label + ': header version visible');
+  const box = await version.evaluate(el => {
+    const range = document.createRange(); range.selectNodeContents(el); const r = range.getBoundingClientRect();
+    let left = 0, right = innerWidth, top = 0, bottom = innerHeight;
+    for (let p = el; p; p = p.parentElement) {
+      const style = getComputedStyle(p), b = p.getBoundingClientRect();
+      if (/hidden|clip|auto|scroll/.test(style.overflowX)) { left = Math.max(left, b.left); right = Math.min(right, b.right); }
+      if (/hidden|clip|auto|scroll/.test(style.overflowY)) { top = Math.max(top, b.top); bottom = Math.min(bottom, b.bottom); }
+    }
+    const actions = document.querySelector('.header-actions').getBoundingClientRect();
+    return { x:r.left, y:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height, left, clipRight:right, top, clipBottom:bottom,
+      overlapsActions: r.left < actions.right && r.right > actions.left && r.top < actions.bottom && r.bottom > actions.top };
+  });
+  assert.ok(box.width > 0 && box.height > 0 && box.x >= box.left - .5 && box.right <= box.clipRight + .5 && box.y >= box.top - .5 && box.bottom <= box.clipBottom + .5 && !box.overlapsActions, label + ': full version glyphs fit viewport/ancestor clips without action overlap ' + JSON.stringify(box));
+}
+
 async function bounds(locator,width,height,label,vertical=true){const r=await locator.boundingBox();assert.ok(r&&r.x>=-1&&r.x+r.width<=width+1&&(!vertical||(r.y>=-1&&r.y+r.height<=height+1)),label+': bounds '+JSON.stringify(r));}
 async function main(){fs.mkdirSync(evidence,{recursive:true});const browser=await chromium.launch();try{
-const cases=[];for(const language of ['ja','en'])for(const [width,height]of [[1360,900],[cfg.bp+1,568],[cfg.bp,568],[320,568],[393,252]])cases.push({file:'dist/index.html',language,width,height});
+const cases=[];for(const language of ['ja','en'])for(const [width,height]of [[1360,900],[cfg.bp+1,568],[cfg.bp,568],[320,568],[360,640],[390,844],[393,252]])cases.push({file:'dist/index.html',language,width,height});
 if(cfg.selfExtract)cases.push({file:'dist/index.self-extract.html',language:'en',width:360,height:640});cases.push({file:cfg.slug+'.html',language:'ja',width:1360,height:900});
 for(const {file,language,width,height}of cases){const context=await browser.newContext({viewport:{width,height},locale:language,reducedMotion:'reduce'}),page=await context.newPage(),errors=[],requests=[],label=`${file} ${language} ${width}x${height}`;
 page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});page.on('request',r=>{if(/^https?:/.test(r.url()))requests.push(r.url());});
 try{await page.goto(pathToFileURL(path.resolve(file)).href);await page.locator(cfg.help).waitFor();
 
 if(await page.locator('html').getAttribute('lang')!==language)await page.locator(cfg.lang).click();
+await assertHeaderVersionFits(page, width, height, label);
+if(file==='dist/index.html'&&[1360,320,360,390].includes(width))await page.screenshot({path:path.join(evidence,`main-${language}-${width}.png`)});
+assert.equal(await page.locator('.local-badge svg[aria-hidden="true"]').count(),1,label+': decorative shield');
+assert.match(await page.locator('.local-badge svg path').first().getAttribute('d'),/^M12 3 /,label+': shield outline');
 assert.equal((await page.locator(cfg.badge).textContent()).trim(),language==='ja'?'完全ローカル処理':'Fully local processing');
 assert.equal(await page.locator('.local-badge').isVisible(),cfg.hideBadge?width>cfg.bp:true,label+': existing badge visibility');if(await page.locator('.local-badge').isVisible())await bounds(page.locator('.local-badge'),width,height,label,false);
 assert.equal(await page.locator('body > footer').isVisible(),width>cfg.bp,label+': informational footer');
