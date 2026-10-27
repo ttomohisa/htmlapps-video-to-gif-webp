@@ -4,7 +4,7 @@
 
 - **Name:** Video to GIF / WebP / 動画をGIF / WebPに変換
 - **Repository:** `ttomohisa/htmlapps-video-to-gif-webp`
-- **Version:** `1.0.3`
+- **Version:** `1.0.4`
 - **Purpose:** Convert a chosen range of a local video into an animated GIF or animated WebP without uploading the source file.
 - **Primary users:** Smartphone and desktop users who need a short animation for chat, documentation, social posts, issue reports, or web pages.
 - **Release artifacts:** `dist/index.html` and `dist/index.self-extract.html`
@@ -118,3 +118,9 @@ Help and confirmation dialogs remain within the current viewport at narrow width
 ## Shared phone layout
 
 Hide only the informational page footer at the existing 760px phone breakpoint. Preserve functional controls, header version, privacy distinctions, and all other responsive boundaries. The equivalent English local-processing badge reads `Fully local processing`. Existing populated app/builder footer versions appear as quiet final Help content, preserving their IDs and update logic; the runtime-network footer explanation stays in place.
+
+## UI symbol consistency (v1.0.4)
+
+- Replace the local-processing status dot with a decorative shield, preserving Japanese/English text and the existing phone visibility rule.
+
+- Keep the complete current header version visible at 320px, 360px and 390px; only the app title may truncate, never the version or header controls.
