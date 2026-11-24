@@ -20,7 +20,7 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 
 ![日本語スクリーンショット](assets/screenshot.png)
 
-スクリーンショットは、テスト用の合成動画を変換した現在のアプリ画面です。以前のスクリーンショットでは **Big Buck Bunny** の素材を使用していたため、以下に帰属表示を残します。
+スクリーンショットには **Big Buck Bunny** の動画を使用しています。復元した画像は以前のバージョンの画面です。最新の撮影は合成動画による回帰テストとは分けて行います。
 
 **Big Buck Bunny 帰属表示:** © 2008 Blender Foundation / www.bigbuckbunny.org — [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) で提供されています。
 

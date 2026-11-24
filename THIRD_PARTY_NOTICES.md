@@ -19,9 +19,9 @@ See `ffmpeg.config.json` for the exact pinned release and profile archive names.
 
 `scripts/test-support/timing-readers.js` and its tests are adapted from the GIF/WebP subset of FFmpeg WASM Builder v1.10.1, commit `5f3f2752fd4bc13627ba34604fe7f550fec329fa`, under MIT. Copyright (c) 2026 Tomohisa Takagi. The complete permission notice is retained in `scripts/test-support/LICENSE`. Test videos are tiny synthetic patterns, not user media.
 
-## Big Buck Bunny — earlier documentation screenshots
+## Big Buck Bunny — documentation screenshots
 
-Earlier repository screenshots used media from **Big Buck Bunny** as sample video content. The current screenshots use synthetic test media; the following attribution is retained for the earlier screenshots in repository history.
+Repository documentation screenshots use **Big Buck Bunny** sample video. The dedicated capture script uses the first 30 seconds of the film from [bower-media-samples](https://github.com/bower-media-samples/big-buck-bunny-480p-30s/tree/b2fcfd503b8683b177fde855824096f05b89550d), with the original film attribution below. Synthetic regression inputs are separate.
 
 - Copyright: © 2008 Blender Foundation / www.bigbuckbunny.org
 - License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)

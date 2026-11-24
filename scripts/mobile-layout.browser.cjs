@@ -62,11 +62,6 @@ async function verifyConversion(page,label,language,desktop){
   await waitIdle();
   assert.equal(await result.getAttribute('src'),previous,label+': previous result retained after cancel');
   await convert('gif');
-  if(desktop){
-    await page.waitForFunction(()=>!document.querySelector('#toast').classList.contains('show'));
-    await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
-    await page.screenshot({path:path.join(evidence,'readme-candidate-'+language+'.png'),fullPage:true});
-  }
   console.log('CONVERSION_PASS '+label);
 }
 async function main(){fs.mkdirSync(evidence,{recursive:true});const browser=await chromium.launch();try{
