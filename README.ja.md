@@ -18,9 +18,9 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 
 ### UI
 
-![日本語スクリーンショット](assets/screenshot.png)
+![Big Buck Bunnyの選択範囲と変換後のWebPプレビューを表示したv1.0.5の日本語画面](assets/screenshot.png)
 
-スクリーンショットには **Big Buck Bunny** の動画を使用しています。復元した画像は以前のバージョンの画面です。最新の撮影は合成動画による回帰テストとは分けて行います。
+v1.0.5で **Big Buck Bunny** の18秒から23秒までを選び、480 × 270ピクセル・15 fpsのアニメーションWebPに変換した画面です。
 
 **Big Buck Bunny 帰属表示:** © 2008 Blender Foundation / www.bigbuckbunny.org — [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) で提供されています。
 

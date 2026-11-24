@@ -18,9 +18,9 @@ GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding
 
 ### UI
 
-![English screenshot](assets/screenshot-en.png)
+![English v1.0.5 interface showing the selected Big Buck Bunny clip and its WebP preview](assets/screenshot-en.png)
 
-The screenshots use **Big Buck Bunny** sample video. These restored images show an earlier app version; new captures are generated separately from synthetic regression tests.
+In v1.0.5, we converted seconds 18–23 of **Big Buck Bunny** into a 480 × 270 animated WebP at 15 fps.
 
 **Big Buck Bunny attribution:** © 2008 Blender Foundation / www.bigbuckbunny.org — licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
