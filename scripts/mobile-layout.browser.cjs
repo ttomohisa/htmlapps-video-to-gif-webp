@@ -63,6 +63,7 @@ async function verifyConversion(page,label,language,desktop){
   assert.equal(await result.getAttribute('src'),previous,label+': previous result retained after cancel');
   await convert('gif');
   if(desktop){
+    await page.waitForFunction(()=>!document.querySelector('#toast').classList.contains('show'));
     await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
     await page.screenshot({path:path.join(evidence,'readme-candidate-'+language+'.png'),fullPage:true});
   }

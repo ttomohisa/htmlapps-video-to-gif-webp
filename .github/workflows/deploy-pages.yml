@@ -138,29 +138,7 @@ jobs:
           cp dist/index.self-extract.html video-to-gif-webp.self-extract.html
           awk '/^## /{if(found)exit; if($0=="## v" version || $0=="## " version){found=1;next}} found' version="$version" CHANGELOG.md > release-notes.md
           test -s release-notes.md
-          # Use the exact release archives already pinned and independently verified
-          # by the application build and runtime provenance tests.
-          builder="ttomohisa/htmlapps-ffmpeg-wasm-builder"
-          mkdir -p upstream license-bundle
-          gh release download v1.10.1 --repo "$builder" --dir upstream \
-            --pattern ffmpeg-wasm-video-to-gif-v1.10.1.zip \
-            --pattern ffmpeg-wasm-video-to-webp-v1.10.1.zip
-          (
-            cd upstream
-            printf '%s\n' \
-              'f165f455a6033998de55b0fdf55622199f5cadb8ed27e5af4e6285d1947b08f8  ffmpeg-wasm-video-to-gif-v1.10.1.zip' \
-              'b37711ed8cb05a299ee865c676446e8c400686953ca8e837e43a58e6402dcae4  ffmpeg-wasm-video-to-webp-v1.10.1.zip' | sha256sum -c -
-          )
-          for profile in video-to-gif video-to-webp; do
-            unzip -q "upstream/ffmpeg-wasm-${profile}-v1.10.1.zip" -d "upstream/$profile"
-            mkdir -p "license-bundle/$profile"
-            cp -R "upstream/$profile/LICENSES" "upstream/$profile/BUILDINFO.txt" "upstream/$profile/THIRD_PARTY_NOTICES.md" "license-bundle/$profile/"
-            test -s "license-bundle/$profile/LICENSES/FFmpeg-COPYING.LGPLv2.1"
-          done
-          test -s license-bundle/video-to-webp/LICENSES/libwebp-COPYING
-          cp LICENSE THIRD_PARTY_NOTICES.md license-bundle/
-          printf '%s\n' 'Corresponding source (pinned Builder release):' 'https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/download/v1.10.1/ffmpeg-wasm-sources-v1.10.1.tar.gz' > license-bundle/SOURCE.txt
-          (cd license-bundle && zip -qr ../third-party-licenses.zip .)
+          bash scripts/package-release-licenses.sh
           assets=(video-to-gif-webp.html video-to-gif-webp.self-extract.html dist/dependency-manifest.json dist/self-extract-manifest.json LICENSE THIRD_PARTY_NOTICES.md third-party-licenses.zip)
           if [[ -f existing-assets.txt ]]; then
             for asset in "${assets[@]}"; do
