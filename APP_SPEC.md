@@ -103,7 +103,8 @@ Current stable Chromium, Firefox, and Safari on desktop and mobile. Direct `file
 
 ## UI organization
 
-- Keep format and quality as the primary visible choices.
+- Keep format and quality as the primary visible choices, using compact native radio groups rather than individual cards.
+- Place format guidance, file-size tradeoffs and memory notes in Help instead of permanent tip cards.
 - Present width, FPS, crop, and looping as compact setting rows instead of large button grids.
 - Show custom width/FPS inputs only when Custom is selected, with a compact visible allowed-range hint.
 - On mobile, keep the trim timeline immediately after the video preview; place source metadata below the trim controls.
