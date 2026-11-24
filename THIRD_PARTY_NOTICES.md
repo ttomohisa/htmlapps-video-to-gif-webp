@@ -12,7 +12,7 @@ This application source is distributed under the repository license. The generat
 
 The application build downloads the official v1.10.1 profile ZIPs, verifies them against the release `SHA256SUMS.txt`, and embeds only the runtime files needed by this app. The full upstream notices remain available in the [pinned Builder release](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/tag/v1.10.1), including the corresponding `ffmpeg-wasm-sources-v1.10.1.tar.gz` source archive. See [runtime provenance](docs/RUNTIME_TIMING.md) for exact archive checksums and source versions.
 
-See `ffmpeg.config.json` for the exact pinned release and profile archive names.
+See `ffmpeg.config.json` for the exact pinned release and profile archive names. Application releases include `third-party-licenses.zip`, assembled from the two hash-verified upstream profile ZIPs, including their complete LICENSES directories, BUILDINFO, notices and a link to the corresponding source archive. The standalone HTML also carries the application MIT text and third-party notice summary.
 
 
 ## Timing regression helpers

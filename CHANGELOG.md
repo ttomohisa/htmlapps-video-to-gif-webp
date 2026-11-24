@@ -1,6 +1,7 @@
 # Changelog
 
 ## v1.0.5
+- Add real Chromium conversion, crop, download, cancellation and retry checks for local HTML; package upstream license texts and repair missing release assets only at the original tagged commit.
 - Reconcile late metadata after conversion, bound initialization and preview decoding, preserve prior output if preview fails, avoid duplicate filename extensions, and improve crop availability and workload warnings.
 - Align Start/End controls and update bilingual documentation and release notices.
 - Replace format and quality cards with compact radio controls, align settings and filename fields, and move conversion tips into Help.

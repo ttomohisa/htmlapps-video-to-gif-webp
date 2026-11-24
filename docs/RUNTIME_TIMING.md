@@ -82,7 +82,7 @@ stdout includes arguments, output hashes and structural timing receipts.
 
 Node/MEMFS does not exercise Blob Workers, WORKERFS, browser loading, visual
 playback, save/share, console/network observation, or direct `file://` execution.
-Chromium layout tests cover local opening, media selection, language, Help and network observations without encoding. Before treating conversion as browser-verified, test the exact PR preview and both
+Chromium PR tests cover local opening, media selection, language, Help and network observations. Selected desktop and self-extract cases additionally exercise actual browser/WORKERFS conversion, square crop, download, cancellation, and retry. This is not a substitute for physical-device testing. Before treating conversion as browser-verified, test the exact PR preview and both
 HTML forms directly: load a synthetic video, trim 2–8 seconds at 10 fps, save GIF
 with loop ON/OFF, and independently inspect 60 × 10-cs frame delays. Also check
 15/30 fps, single-frame GIF, WebP, source replacement/repeated conversions, JA/EN

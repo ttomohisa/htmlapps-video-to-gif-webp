@@ -43,7 +43,8 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
 - Light / Standard / High quality presets
 - GIF advanced settings for color count and dithering
 - WebP advanced settings for quality, compression level, and lossless mode
-- Editable output filename with automatic `.gif` / `.webp` extension handling
+- Output filename defaults to the source name, with an editable stem and a fixed `.gif` / `.webp` suffix
+- Cancel conversion and retain the previous successful result if a repeat conversion fails or is cancelled
 - Output preview, file size, Save, and Web Share when supported
 - Japanese and English UI in the same HTML
 - Mobile-first responsive layout with a fixed bottom action bar
@@ -56,6 +57,10 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
 ### Use the web demo
 
 Just [open the demo](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/). No installation or account is required.
+
+### Download a standalone HTML file
+
+Download `video-to-gif-webp.html` or `video-to-gif-webp.self-extract.html` from [GitHub Releases](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/releases), then open the saved file in a supported browser. Each new version is tagged and released after a successful main-branch build. The release also includes dependency manifests and third-party license files.
 
 ### Build a standalone HTML file
 
@@ -158,7 +163,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 .\scripts\check-repository.ps1
 ```
 
-Repository verification requires Node.js 22+ for the dependency-free synthetic trim tests. The standalone builder itself still needs only PowerShell and `tar.exe`. These tests do not replace browser, real encoding, keyboard/touch, or runtime network-panel checks.
+Repository verification requires Node.js 22+ for the dependency-free synthetic trim tests. The standalone builder itself still needs only PowerShell and `tar.exe`. The repository check includes real embedded-WASM encoding in Node.js. PR browser CI additionally exercises local HTML conversion, download, cancellation and network observation in Chromium. These checks do not replace mobile-device, browser-compatibility or touch testing.
 
 Default builds also update the tracked catalog file `video-to-gif-webp.html`. An explicit `-OutputPath` generates only the requested artifacts and leaves that catalog file unchanged.
 

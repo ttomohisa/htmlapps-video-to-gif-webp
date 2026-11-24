@@ -43,7 +43,8 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 - 軽量 / 標準 / 高品質プリセット
 - GIF詳細設定：色数・Dither
 - WebP詳細設定：Quality・Compression level・Lossless
-- 出力ファイル名を編集し、`.gif` / `.webp` 拡張子を形式に合わせて自動調整
+- 元動画の名前を出力ファイル名の初期値にし、名前と固定の `.gif` / `.webp` 拡張子を分けて表示
+- 変換のキャンセル。同じ動画の再変換に失敗した場合や中止した場合は前回の結果を保持
 - 生成結果のプレビュー・ファイルサイズ表示・保存・対応端末で共有
 - 1つのHTML内で日本語 / Englishを切り替え
 - スマートフォン優先のレスポンシブUIと固定アクションバー
@@ -56,6 +57,10 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 ### Webで使う
 
 [デモを開く](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/)だけで利用できます。インストールやアカウント登録は不要です。
+
+### 単一HTMLをダウンロードして使う
+
+[GitHub Releases](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/releases) から `video-to-gif-webp.html` または `video-to-gif-webp.self-extract.html` を取得し、対応ブラウザで開きます。mainのビルド成功後、新しいバージョンのタグとReleaseを自動作成します。依存関係のマニフェストと第三者ライセンスも同梱します。
 
 ### 単一HTMLをビルドして使う
 
@@ -72,7 +77,7 @@ Python、Node.js、ローカルWebサーバーは不要です。Windows標準の
 ## 使い方
 
 1. 動画を選択またはドロップします。
-2. タイムラインで開始位置と終了位置 を決めるか、**動画全体を選択**で全範囲を選び、先頭で一時停止します。
+2. タイムラインで開始位置と終了位置を決めるか、**動画全体を選択**で全範囲を選び、先頭で一時停止します。
 3. 白い再生位置をドラッグしてシークし、動画プレビューはクリック / タップで再生・一時停止します。
 4. **選択範囲を再生**して、アニメーションになる部分だけを確認します。
 5. 必要に応じて、開始・終了を1フレームまたは0.1秒ずつ微調整します。
@@ -95,8 +100,6 @@ Python、Node.js、ローカルWebサーバーは不要です。Windows標準の
 | ループ | 無限 / 1回再生 | 無限 / 1回再生 |
 
 初期設定は **WebP / 横幅480px / 15fps / 標準品質** です。互換性を優先する場合はGIF、色や容量を重視できる環境ではWebPがおすすめです。
-
-[GitHub Releases](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/releases) から単一HTMLを取得してオフラインで使うこともできます。mainのビルド成功後、新しいバージョンのタグと検証済み成果物を含むReleaseを自動作成します。
 
 ## GitHub Pagesで公開する
 
@@ -160,7 +163,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 .\scripts\check-repository.ps1
 ```
 
-リポジトリ検証には、追加パッケージ不要の合成テスト用にNode.js 22以上が必要です。単体のビルダーは引き続きPowerShellと `tar.exe` だけで使えます。合成テストは実ブラウザ・実エンコード・キーボード/タッチ・実行時通信の確認を代替しません。
+リポジトリ検証には、追加パッケージ不要の合成テスト用にNode.js 22以上が必要です。単体のビルダーは引き続きPowerShellと `tar.exe` だけで使えます。リポジトリ検証にはNode.js上での実WASM変換も含まれます。PRのブラウザCIではChromium上のローカルHTMLで変換、保存、キャンセル、通信を検証します。スマートフォン実機や他のブラウザ、タッチ操作の確認は別途必要です。
 
 通常ビルドはカタログ用の追跡対象 `video-to-gif-webp.html` も更新します。`-OutputPath` を明示したビルドは指定先だけに出力し、カタログ用ファイルを変更しません。
 

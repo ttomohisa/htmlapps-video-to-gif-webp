@@ -42,7 +42,7 @@
 - Use an in-app confirmation for unusually heavy settings and for repeating an identical conversion when a result already exists.
 
 - Default the filename to the source stem and show a fixed format suffix. Normalize explicitly typed GIF/WebP suffixes.
-- Release assets include `video-to-gif-webp.html`, `video-to-gif-webp.self-extract.html`, both manifests, LICENSE and third-party notices.
+- Release assets include `video-to-gif-webp.html`, `video-to-gif-webp.self-extract.html`, both manifests, LICENSE, third-party notices, and a ZIP of the pinned upstream profile license texts and source links.
 
 ## 4. Data and privacy
 
