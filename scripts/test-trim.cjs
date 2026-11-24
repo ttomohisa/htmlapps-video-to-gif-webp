@@ -65,13 +65,13 @@ function makeHarness(format = 'webp') {
   const document = {querySelector:s=>queryAll(s)[0] || null, querySelectorAll:queryAll, getElementById:id=>byId.get(id), createElement:t=>new Element(t), documentElement:{}, body:new Element('body')};
   const coreGate = deferred(); const runGate = deferred(); const captured = [];
   const runner = { run: async opts => { captured.push(opts); await runGate.promise; return {files:[{name:opts.outputs[0],data:opts.outputs[0].endsWith('.gif')?Uint8Array.from([71,73,70,56,57,97,1,0,1,0,128,0,0,0,0,0,255,255,255,33,249,4,0,10,0,0,0,44,0,0,0,0,1,0,1,0,0,2,2,68,1,0,59]):Uint8Array.from([82,73,70,70,14,0,0,0,87,69,66,80,86,80,56,76,1,0,0,0,47,0])}]}; }, dispose(){} };
-  const errors = [];
-  const sandbox = {console:{...console,error:e=>errors.push(e)}, document, CSS:{escape:String}, navigator:{language:'en'}, HTMLElement:Element, AbortController, Blob, File, Uint8Array, Response, DecompressionStream, URL:{createObjectURL:()=> 'blob:synthetic',revokeObjectURL(){}}, setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame(){}, localStorage:{getItem(){return null;},setItem(){}}, BrowserFFmpeg:{isSupported:()=>true,videoToGifArgs:o=>o,videoToWebpArgs:o=>o}, __coreGate:coreGate};
+  const errors = []; const preview = {fail:false};
+  const sandbox = {console:{...console,error:e=>errors.push(e)}, document, CSS:{escape:String}, navigator:{language:'en'}, HTMLElement:Element, Image:class {naturalWidth=1;naturalHeight=1;set src(value){if(value)Promise.resolve().then(()=>preview.fail?this.onerror?.():this.onload?.());}}, AbortController, Blob, File, Uint8Array, Response, DecompressionStream, URL:{createObjectURL:()=> 'blob:synthetic',revokeObjectURL(){}}, setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame(){}, localStorage:{getItem(){return null;},setItem(){}}, BrowserFFmpeg:{isSupported:()=>true,videoToGifArgs:o=>o,videoToWebpArgs:o=>o}, __coreGate:coreGate};
   sandbox.window = {addEventListener(){},matchMedia:()=>({matches:true}),innerWidth:1024};
   vm.createContext(sandbox);
   let script = html.slice(html.lastIndexOf('  <script>\n    (() => {') + '  <script>'.length).split('</script>')[0];
   script = script.replace('__APP_CONFIG_JSON__', JSON.stringify({slug:'synthetic',defaultLanguage:'en'})).replace('__BUILD_MANIFEST_JSON__', '{}');
-  script = script.replace('      init();', '      loadSelectedRunner = async () => globalThis.__coreGate.promise; globalThis.app = {state,bindEvents,setProcessing,createAnimation,getRange,profileArgs,updateTrimUi,applyLanguage,setVideoFile,removeVideo,adjustRangePoint,settingsObject,cancelConversion,inspectOutput,isHeavy};');
+  script = script.replace('      init();', '      loadSelectedRunner = async () => globalThis.__coreGate.promise; globalThis.app = {state,bindEvents,setProcessing,createAnimation,getRange,profileArgs,updateTrimUi,applyLanguage,setVideoFile,removeVideo,adjustRangePoint,settingsObject,cancelConversion,inspectOutput,isHeavy,normalizedFilename};');
   vm.runInContext(script, sandbox, {filename:sourcePath});
   const app = sandbox.app;
   for (const n of nodes.filter(n => n.name === 'format')) n.checked = n.value === format;
@@ -81,7 +81,7 @@ function makeHarness(format = 'webp') {
   app.bindEvents();
   app.updateTrimUi();
   app.applyLanguage();
-  return {app,byId,nodes,coreGate,runGate,runner,captured,errors};
+  return {app,byId,nodes,coreGate,runGate,runner,captured,errors,preview};
 }
 
 const tick = () => new Promise(resolve=>setImmediate(resolve));
@@ -206,7 +206,7 @@ test('durationchange enables the shortcut for a newly known duration without res
 for(const format of ['gif','webp']) test(`${format}: durationchange during processing refreshes availability without mutating the captured range`,async()=>{
   const h=makeHarness(format);metadata(h,Infinity);selectRange(h,1,5);const done=h.app.createAnimation();
   const video=h.byId.get('videoPreview');video.duration=2;video.dispatch('durationchange');assert.equal(h.app.state.previewDuration,2);assert.equal(h.byId.get('useFullVideo').disabled,true);assert.deepEqual(range(h),{start:1,end:5});
-  await finish(h,done);assertJob(h,1,5);assert.equal(h.byId.get('useFullVideo').disabled,false);h.byId.get('useFullVideo').click();assert.deepEqual(range(h),{start:0,end:2});
+  await finish(h,done);assertJob(h,1,5);assert.equal(range(h).end,2);assert.equal(h.byId.get('useFullVideo').disabled,false);h.byId.get('useFullVideo').click();assert.deepEqual(range(h),{start:0,end:2});
 });
 
 // Header regressions use real translations, markup, and the language click handler.
@@ -305,3 +305,7 @@ test('original filename stem and fixed suffix survive format and language change
   assert.equal(h.byId.get('outputFilename').value,'my.clip');
   assert.equal(h.byId.get('outputExtension').textContent,'.gif');
 });
+
+ test('cancel during pending core load restores controls before load settles',async()=>{const h=makeHarness();const done=h.app.createAnimation();h.app.cancelConversion();await done;assert.equal(h.app.state.processing,false);h.coreGate.resolve(h.runner);await tick();assert.equal(h.captured.length,0);});
+ test('preview decode failure preserves previous result',async()=>{const h=makeHarness('gif'),previous=new Uint8Array([1]);h.app.state.output=previous;h.preview.fail=true;const done=h.app.createAnimation();await finish(h,done);assert.equal(h.app.state.output,previous);assert.match(h.byId.get('statusMessage').textContent,/image/i);});
+ test('typed output suffix is not duplicated',()=>{const h=makeHarness('gif');h.byId.get('outputFilename').value='holiday.webp.gif';h.byId.get('outputFilename').dispatch('input');assert.equal(h.app.normalizedFilename('gif'),'holiday.gif');});

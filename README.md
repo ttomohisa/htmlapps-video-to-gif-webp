@@ -72,7 +72,7 @@ Python, Node.js, and a local web server are not required. The build uses Windows
 ## Usage
 
 1. Choose or drop a video.
-2. Use the thumbnail timeline to set the start (`S`) and end (`E`) of the animation, or choose **Use full video** to select the whole clip and pause at its beginning.
+2. Use the thumbnail timeline to set the start and end of the animation, or choose **Use full video** to select the whole clip and pause at its beginning.
 3. Drag the white playhead to seek, or click/tap the video preview to play and pause.
 4. Use **Play selected range** to review exactly what will be converted.
 5. If needed, fine-tune the start/end by one output frame or 0.1 second.
@@ -190,6 +190,10 @@ The generated standalone HTML is designed to run without sending the selected me
 
 The GitHub Pages version requires the initial HTML request, but the selected video content is not transmitted by the app. For fully disconnected use, open the generated `dist/index.html` locally.
 
+## Conversion reliability
+
+Conversions can be cancelled; a failed or cancelled repeat conversion keeps the last successful result. The output duration is read from the encoded file. Cropping requires known video dimensions. The filename defaults to the source name without its extension; the output suffix is shown separately.
+
 ## Limitations
 
 - The app converts one continuous range at a time; it is not a general-purpose video editor.
@@ -224,8 +228,3 @@ The application source in this repository is licensed under the [MIT License](LI
 
 The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Dismiss Help and confirmations with Close, Esc, or a click outside the dialog.
-
-### Conversion reliability (v1.0.5)
-
-Conversions can be cancelled. A failed or cancelled repeat conversion retains the previous result. The result duration is read from the encoded GIF/WebP (a still WebP is labelled as such). Cropping requires known video dimensions; large or long jobs prompt for confirmation.

@@ -1,6 +1,8 @@
 # Changelog
 
 ## v1.0.5
+- Reconcile late metadata after conversion, bound initialization and preview decoding, preserve prior output if preview fails, avoid duplicate filename extensions, and improve crop availability and workload warnings.
+- Align Start/End controls and update bilingual documentation and release notices.
 - Replace format and quality cards with compact radio controls, align settings and filename fields, and move conversion tips into Help.
 - Simplify introductory copy and panel styling, stack the mobile file chooser, explain WebP settings, and separate the output extension from the editable source filename.
 - Publish a version tag and GitHub Release with both verified standalone HTML variants after a successful main build.
@@ -10,11 +12,11 @@
 - Improve high-load warnings, thumbnail cleanup, trim metadata handling and translated status.
 - Improve crop controls and validate empty inputs and advanced quality settings.
 
-## Unreleased
+## 1.0.4 - 2026-10-27
 
 - Verify the complete current header version at narrow phone widths; reserve space for the version beside truncated app titles.
 
-- 1.0.4: Replace the local-processing status dot with a decorative shield, preserving Japanese/English text and the existing phone visibility rule.
+- Replace the local-processing status dot with a decorative shield, preserving Japanese/English text and the existing phone visibility rule.
 
 - Hide only the informational page footer at the existing 760px phone breakpoint. Preserve functional controls, header version, privacy distinctions, and all other responsive boundaries. The equivalent English local-processing badge reads `Fully local processing`. Existing populated app/builder footer versions appear as quiet final Help content, preserving their IDs and update logic; the runtime-network footer explanation stays in place.
 

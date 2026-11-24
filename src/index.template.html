@@ -874,10 +874,11 @@
       <h3 data-i18n="helpPrivacyTitle">プライバシー</h3>
       <p data-i18n="helpPrivacyBody">動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。</p>
       <h3 data-i18n="helpNotesTitle">注意事項</h3>
-      <ul><li data-i18n="helpNotePreview">プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。</li><li data-i18n="helpNoteMemory">動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。</li><li data-i18n="helpNoteSettings">横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。</li><li data-i18n="helpNoteTiming">GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。</li></ul>
+      <ul><li data-i18n="helpNotePreview">プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。切り抜きには動画のサイズが必要です。</li><li data-i18n="helpNoteMemory">動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。</li><li data-i18n="helpNoteSettings">横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。</li><li data-i18n="helpNoteTiming">GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。</li></ul>
       <p class="dialog-note" data-i18n="helpOffline">保存したHTMLを直接開いて、オフラインでも変換できます。</p>
       
-      <p class="help-build">v<span id="footerVersion">1.0.4</span> · FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span></p>
+      <p class="dialog-note"><span data-i18n="licenseSummary">アプリ本体: MIT。FFmpeg: LGPL-2.1-or-later。libwebp: BSD系ライセンス。</span> <a href="https://github.com/ttomohisa/htmlapps-video-to-gif-webp/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer" data-i18n="licenseDetails">ライセンスとソース</a></p>
+      <p class="help-build">v<span id="footerVersion">1.0.5</span> · FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span></p>
     </div>
   </dialog>
 
@@ -912,20 +913,20 @@
           createTitle:'作成',  selectVideoSummary:'動画を選択してください', createGif:'GIFを作成', createWebp:'WebPを作成', preparing:'準備中…', converting:'変換中…', loadingCore:'FFmpeg coreを展開中…', processing:'変換しています…', complete:'変換が完了しました。',
           resultTitle:'完成', resultNote:'プレビューを確認して保存してください。', outputDimensions:'サイズ', outputDuration:'長さ', save:'保存', share:'共有', makeAnother:'設定を変えてもう一度',
           footerLocal:'変換はブラウザー内で完結', mobileVideo:'動画', mobileSettings:'設定', mobileCreate:'作成', mobileSave:'保存',
-          helpTitle:'使い方と注意事項', close:'閉じる', helpBasicsTitle:'基本操作', helpStep1:'動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。', helpStep2:'GIFまたはWebPを選び、必要に応じて出力設定を変更します。', helpStep3:'出力ファイル名を確認して作成し、完成後にプレビューを確認して保存します。', helpFormatTitle:'GIFとWebP', helpFormatBody:'GIFは広い互換性がありますが最大256色です。WebPはフルカラーで、同程度の見た目なら小さくしやすいため、対応先に制約がなければWebPがおすすめです。', helpPrivacyTitle:'プライバシー', helpPrivacyBody:'動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。', helpNotesTitle:'注意事項', helpNotePreview:'プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。', helpNoteMemory:'動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。', helpNoteSettings:'横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。', helpNoteTiming:'GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。', helpOffline:'保存したHTMLを直接開いて、オフラインでも変換できます。',
-          emptyFile:'空のファイルは読み込めません。',invalidFile:'動画ファイルを選択してください。',cropUnavailable:'動画のサイズが不明なため、クロップを解除して作成してください。',invalidQuality:'画質は0〜100、圧縮レベルは0〜6の整数で入力してください。',cancelledRun:'変換をキャンセルしました。',cancelling:'中止しています…',resultPreviewFailed:'結果をプレビューできません。保存して対応アプリで確認してください。',staticImage:'静止画',requestedFps:'指定FPS',ditherLabel:'ディザ（色の表現）',webpQualityLabel:'WebP画質',compressionLabel:'圧縮レベル',webpQualityHint:'0〜100。高いほど画質が良くなりますが、容量が増えます。ロスレス時は圧縮の度合いを調整します。',webpCompressionHint:'0〜6。高いほど圧縮に時間がかかりますが、容量を抑えやすくなります。',unknown:'不明', frames:'フレーム', currentSettings:'{duration}秒 · {width} · {fps}fps · 約{frames}フレーム', heavyTitle:'処理が重くなる可能性があります', heavyMessage:'現在の設定は端末のメモリや処理時間を大きく使う可能性があります。短い範囲・480px・15fps程度がおすすめです。このまま作成しますか？', continue:'このまま作成', cancel:'キャンセル', sameTitle:'同じ設定です', sameMessage:'前回と同じ動画・同じ設定で、もう一度変換しますか？', runAgain:'もう一度作成',
+          helpTitle:'使い方と注意事項', close:'閉じる', helpBasicsTitle:'基本操作', helpStep1:'動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。', helpStep2:'GIFまたはWebPを選び、必要に応じて出力設定を変更します。', helpStep3:'出力ファイル名を確認して作成し、完成後にプレビューを確認して保存します。', helpFormatTitle:'GIFとWebP', helpFormatBody:'GIFは広い互換性がありますが最大256色です。WebPはフルカラーで、同程度の見た目なら小さくしやすいため、対応先に制約がなければWebPがおすすめです。', helpPrivacyTitle:'プライバシー', helpPrivacyBody:'動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。', helpNotesTitle:'注意事項', helpNotePreview:'プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。切り抜きには動画のサイズが必要です。', helpNoteMemory:'動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。', helpNoteSettings:'横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。', helpNoteTiming:'GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。', helpOffline:'保存したHTMLを直接開いて、オフラインでも変換できます。',licenseSummary:'アプリ本体: MIT。FFmpeg: LGPL-2.1-or-later。libwebp: BSD系ライセンス。',licenseDetails:'ライセンスとソース',
+          emptyFile:'空のファイルは読み込めません。',invalidFile:'動画ファイルを選択してください。',cropUnknownNote:'動画のサイズを取得できない場合は切り抜きできません。',cropUnavailable:'動画のサイズが不明なため、切り抜きを「なし」にして作成してください。',invalidQuality:'画質は0〜100、圧縮レベルは0〜6の整数で入力してください。',cancelledRun:'変換をキャンセルしました。',cancelling:'中止しています…',resultPreviewFailed:'作成した画像を読み込めませんでした。設定を変えてもう一度お試しください。',staticImage:'静止画',requestedFps:'指定FPS',ditherLabel:'ディザ（色の表現）',webpQualityLabel:'WebP画質',compressionLabel:'圧縮レベル',webpQualityHint:'0〜100。高いほど画質が良くなりますが、容量が増えます。ロスレス時は圧縮の度合いを調整します。',webpCompressionHint:'0〜6。高いほど圧縮に時間がかかりますが、容量を抑えやすくなります。',unknown:'不明', frames:'フレーム', currentSettings:'{duration}秒 · {width} · {fps}fps · 約{frames}フレーム', heavyTitle:'処理が重くなる可能性があります', heavyMessage:'現在の設定は端末のメモリや処理時間を大きく使う可能性があります。短い範囲・480px・15fps程度がおすすめです。このまま作成しますか？', continue:'このまま作成', cancel:'キャンセル', sameTitle:'同じ設定です', sameMessage:'前回と同じ動画・同じ設定で、もう一度変換しますか？', runAgain:'もう一度作成',
           noDecompression:'このブラウザーはgzip展開に必要なDecompressionStreamへ対応していません。最新のブラウザーで開いてください。', unsupportedRuntime:'このブラウザーではFFmpeg WASMを実行できません。', invalidRange:'開始・終了位置を確認してください。終了位置は動画の長さ以内で、開始位置より後に指定してください。', chooseVideoError:'先に動画を選択してください。', conversionFailed:'変換できませんでした。動画形式を確認するか、短い範囲・小さいサイズで試してください。', saved:'保存を開始しました', shareFailed:'共有できませんでした', cleared:'動画を解除しました', selected:'動画を読み込みました', outputReady:'{format}を作成しました', original:'元サイズ'
         },
         en: {
           brandMeta:'On-device conversion · No upload', pageIntro:'Convert any part of a video to an animated GIF or WebP.', localBadge:'Fully local processing',
-          sourceTitle:'Video', sourceNote:'Choose a video from your device.', dropTitle:'Drop a video here', chooseVideo:'Choose video',fileFallback:'Choose from files', fileSize:'File size', duration:'Duration', resolution:'Resolution', replaceVideo:'Choose another', clearVideo:'Remove', previewWarning:'This video cannot be previewed, but conversion may still work. Enter the start and end times in seconds.',
+          sourceTitle:'Video', sourceNote:'Choose a video from your device.', dropTitle:'Drop a video here', chooseVideo:'Choose video',fileFallback:'Choose from files', fileSize:'File size', duration:'Duration', resolution:'Resolution', replaceVideo:'Choose another', clearVideo:'Remove', previewWarning:'This video cannot be previewed, but conversion may still work. Enter the start and end times in seconds. Cropping requires known video dimensions.',
           trimRange:'Selected range', start:'Start', end:'End', startPosition:'Start position', endPosition:'End position', currentPosition:'Current position', play:'Play', pause:'Pause', setHere:'Use current', playSelection:'Play selected range', useFullVideo:'Use full video', jumpStart:'Play from start', jumpEnd:'Jump to end', jumpStartShort:'Go to start', jumpEndShort:'Go to end', fineTuneStep:'Fine-tune step', oneFrame:'1 frame', fineTune:'Fine tune', nudgeEarlier:'Move earlier by the selected step', nudgeLater:'Move later by the selected step', timelineScrubHint:'Drag the start and end handles to trim. Drag the white line to seek.', thumbPreparing:'Preparing thumbnails…', thumbReady:'Thumbnails ready', thumbUnavailable:'Thumbnails unavailable', seconds:'sec',
           settingsTitle:'Output settings', filename:'Output filename', format:'Format', formatWebpHint:'WebP: full color, compact', formatGifHint:'GIF: broad compatibility', gifDescription:'Broad compatibility · up to 256 colors', webpDescription:'High quality · compact · full color', crop:'Crop', cropHint:'Keep only the area you need', cropNone:'None', cropNote:'Choose a ratio to show a crop frame. Drag the “Move” handle at the top of the frame to reposition it.', moveCrop:'Move', playback:'Playback', loopAnimation:'Loop playback', loopAnimationHint:'Turn off to play only once', width:'Width', widthHint:'Aspect ratio is preserved', originalSize:'Original', customValue:'Custom', customWidthLabel:'Custom output width', widthCustomHint:'16–4096', customFpsLabel:'Custom FPS', fpsCustomHint:'1–60', fpsHint:'Higher FPS is smoother and usually increases file size', quality:'Quality', qualityHint:'Higher quality usually means larger files', qualityLight:'Light', qualityLightNote:'Smaller', qualityStandard:'Standard', qualityStandardNote:'Recommended', qualityHigh:'High', qualityHighNote:'Larger', advanced:'Advanced settings', gifColors:'GIF colors', losslessWebp:'Lossless WebP',
           createTitle:'Create',  selectVideoSummary:'Choose a video first', createGif:'Create GIF', createWebp:'Create WebP', preparing:'Preparing…', converting:'Converting…', loadingCore:'Inflating FFmpeg core…', processing:'Converting…', complete:'Conversion complete.',
           resultTitle:'Done', resultNote:'Review the preview, then save the file.', outputDimensions:'Dimensions', outputDuration:'Duration', save:'Save', share:'Share', makeAnother:'Change settings and create again',
           footerLocal:'Conversion stays in the browser', mobileVideo:'Video', mobileSettings:'Settings', mobileCreate:'Create', mobileSave:'Save',
-          helpTitle:'How to use & notes', close:'Close', helpBasicsTitle:'Basics', helpStep1:'Choose a video and set the start/end positions. Use full video selects the whole range and pauses at the beginning. It is unavailable when duration is unknown or conversion is running.', helpStep2:'Choose GIF or WebP and adjust the output settings as needed.', helpStep3:'Confirm the output filename, create the animation, then review and save it.', helpFormatTitle:'GIF vs WebP', helpFormatBody:'GIF has broad compatibility but is limited to 256 colors. WebP supports full color and is often smaller for a similar appearance, so prefer WebP when your destination supports it.', helpPrivacyTitle:'Privacy', helpPrivacyBody:'The video and output stay on this device. Runtime network connections are blocked by the app CSP.', helpNotesTitle:'Notes', helpNotePreview:'Some videos can still be converted even if preview is unavailable. Enter the start and end times in seconds.', helpNoteMemory:'A shorter range, smaller width or lower FPS usually reduces conversion time and file size. The output is temporarily held in browser memory, so start with a short range when converting long 4K videos. If unsure, start with 480px and 15fps.', helpNoteSettings:'Changing the width preserves the aspect ratio of the selected crop (or the full video if cropping is off). Higher FPS makes motion smoother and usually increases file size. Turn off looping to play the animation once.', helpNoteTiming:'GIF frame delays use 1/100-second units. Some frame rates require rounding, and playback apps may display short delays differently.', helpOffline:'Open the saved HTML directly to convert videos offline.',
-          emptyFile:'The file is empty.',invalidFile:'Choose a video file.',cropUnavailable:'Video dimensions are unknown. Turn off cropping before creating.',invalidQuality:'Enter whole numbers: quality 0–100 and compression 0–6.',cancelledRun:'Conversion cancelled.',cancelling:'Cancelling…',resultPreviewFailed:'Preview unavailable. Save the file and check it in a compatible app.',staticImage:'Still image',requestedFps:'Requested FPS',ditherLabel:'Dithering (color rendering)',webpQualityLabel:'WebP quality',compressionLabel:'Compression level',webpQualityHint:'0–100. Higher values improve quality but increase file size. In lossless mode, this controls compression effort.',webpCompressionHint:'0–6. Higher values take longer to encode but can reduce file size.',unknown:'Unknown', frames:'frames', currentSettings:'{duration}s · {width} · {fps}fps · about {frames} frames', heavyTitle:'This may be a heavy conversion', heavyMessage:'These settings may use substantial device memory or processing time. A short range around 480px and 15fps is recommended. Continue anyway?', continue:'Continue', cancel:'Cancel', sameTitle:'Same settings', sameMessage:'Create the same video again with exactly the same settings?', runAgain:'Create again',
+          helpTitle:'How to use & notes', close:'Close', helpBasicsTitle:'Basics', helpStep1:'Choose a video and set the start/end positions. Use full video selects the whole range and pauses at the beginning. It is unavailable when duration is unknown or conversion is running.', helpStep2:'Choose GIF or WebP and adjust the output settings as needed.', helpStep3:'Confirm the output filename, create the animation, then review and save it.', helpFormatTitle:'GIF vs WebP', helpFormatBody:'GIF has broad compatibility but is limited to 256 colors. WebP supports full color and is often smaller for a similar appearance, so prefer WebP when your destination supports it.', helpPrivacyTitle:'Privacy', helpPrivacyBody:'The video and output stay on this device. Runtime network connections are blocked by the app CSP.', helpNotesTitle:'Notes', helpNotePreview:'Some videos can still be converted even if preview is unavailable. Enter the start and end times in seconds. Cropping requires known video dimensions.', helpNoteMemory:'A shorter range, smaller width or lower FPS usually reduces conversion time and file size. The output is temporarily held in browser memory, so start with a short range when converting long 4K videos. If unsure, start with 480px and 15fps.', helpNoteSettings:'Changing the width preserves the aspect ratio of the selected crop (or the full video if cropping is off). Higher FPS makes motion smoother and usually increases file size. Turn off looping to play the animation once.', helpNoteTiming:'GIF frame delays use 1/100-second units. Some frame rates require rounding, and playback apps may display short delays differently.', helpOffline:'Open the saved HTML directly to convert videos offline.',licenseSummary:'App: MIT. FFmpeg: LGPL-2.1-or-later. libwebp: BSD-style license.',licenseDetails:'Licenses and source',
+          emptyFile:'The file is empty.',invalidFile:'Choose a video file.',cropUnknownNote:'Cropping is available when the video dimensions are known.',cropUnavailable:'Video dimensions are unknown. Turn off cropping before creating.',invalidQuality:'Enter whole numbers: quality 0–100 and compression 0–6.',cancelledRun:'Conversion cancelled.',cancelling:'Cancelling…',resultPreviewFailed:'The created image could not be loaded. Try again with different settings.',staticImage:'Still image',requestedFps:'Requested FPS',ditherLabel:'Dithering (color rendering)',webpQualityLabel:'WebP quality',compressionLabel:'Compression level',webpQualityHint:'0–100. Higher values improve quality but increase file size. In lossless mode, this controls compression effort.',webpCompressionHint:'0–6. Higher values take longer to encode but can reduce file size.',unknown:'Unknown', frames:'frames', currentSettings:'{duration}s · {width} · {fps}fps · about {frames} frames', heavyTitle:'This may be a heavy conversion', heavyMessage:'These settings may use substantial device memory or processing time. A short range around 480px and 15fps is recommended. Continue anyway?', continue:'Continue', cancel:'Cancel', sameTitle:'Same settings', sameMessage:'Create the same video again with exactly the same settings?', runAgain:'Create again',
           noDecompression:'This browser does not support DecompressionStream, which is required to unpack the compact embedded core. Open the app in a current browser.', unsupportedRuntime:'This browser cannot run the FFmpeg WASM runtime.', invalidRange:'Check the start and end times. End must be after start and within the video duration.', chooseVideoError:'Choose a video first.', conversionFailed:'Conversion failed. Check the video format or try a shorter clip or smaller size.', saved:'Download started', shareFailed:'Could not share the file', cleared:'Video removed', selected:'Video loaded', outputReady:'Created {format}', original:'Original'
         }
       };
@@ -933,7 +934,7 @@
       const state = {
         language:'ja', file:null, inputUrl:'', previewDuration:0, previewWidth:0, previewHeight:0,
         format:'webp', output:null, outputUrl:'', outputMime:'', outputExt:'', outputName:'', outputWidth:0, outputHeight:0, outputMeta:null,
-        processing:false, job:null, pendingConfirmation:false, trimTouched:false, statusKey:'', progressKey:'preparing', filmstripKey:'thumbPreparing', filmstripAbort:null, lastRunSignature:'', filenameTouched:false, toastTimer:0, filmstripToken:0, playheadDragging:false, rangePlayback:false, cropPreset:'none', cropRect:{x:0,y:0,width:1,height:1}, cropDragging:false, cropDragStart:null, fineTuneStep:'frame'
+        processing:false, job:null, pendingConfirmation:false, trimTouched:false, metadataPending:false, statusKey:'', progressKey:'preparing', filmstripKey:'thumbPreparing', filmstripAbort:null, lastRunSignature:'', filenameTouched:false, toastTimer:0, filmstripToken:0, playheadDragging:false, rangePlayback:false, cropPreset:'none', cropRect:{x:0,y:0,width:1,height:1}, cropDragging:false, cropDragStart:null, fineTuneStep:'frame'
       };
       const storageKey = `${APP_CONFIG.slug}:settings`;
       const languageKey = `${APP_CONFIG.slug}:language`;
@@ -959,7 +960,12 @@
         const widthChoice=selectedValue('width')||'480',fpsChoice=selectedValue('fps')||'15',cropChoice=selectedValue('crop')||'none';
         if($('#widthSelect'))$('#widthSelect').value=widthChoice;if($('#fpsSelect'))$('#fpsSelect').value=fpsChoice;if($('#cropSelect'))$('#cropSelect').value=cropChoice;
         if($('#customWidthWrap'))$('#customWidthWrap').hidden=widthChoice!=='custom';if($('#customFpsWrap'))$('#customFpsWrap').hidden=fpsChoice!=='custom';
-        if($('#cropNote'))$('#cropNote').hidden=cropChoice==='none';if($('#loopStateLabel'))$('#loopStateLabel').textContent=$('#loopAnimation')?.checked?'ON':'OFF';
+        updateCropAvailability();if($('#loopStateLabel'))$('#loopStateLabel').textContent=$('#loopAnimation')?.checked?'ON':'OFF';
+      }
+      function updateCropAvailability(){
+        const known=!!(state.previewWidth&&state.previewHeight),select=$('#cropSelect'),note=$('#cropNote');
+        for(const option of Array.from(select?.options||[]))option.disabled=!known&&option.value!=='none';
+        if(note){note.hidden=!state.file||(known&&state.cropPreset==='none');note.textContent=t(known?'cropNote':'cropUnknownNote');}
       }
       function updateFineTuneUi(){
         const fps=Math.max(1,selectedFps()),frameSeconds=1/fps;
@@ -1049,7 +1055,7 @@
       function syncFilenameExtension(ext){ $('#outputExtension').textContent=`.${ext}`; }
 
       function updatePreviewPlayButton(){ const video=$('#videoPreview'),button=$('#videoPlayButton'),playing=!video.paused&&!video.ended; button.classList.toggle('is-playing',playing); button.setAttribute('aria-label',t(playing?'pause':'play')); }
-      async function togglePreviewPlayback(){ const video=$('#videoPreview'); state.rangePlayback=false; if(video.paused||video.ended){try{await video.play();}catch{}}else video.pause(); updatePreviewPlayButton(); }
+      async function togglePreviewPlayback(){ if(state.processing)return;const video=$('#videoPreview'); state.rangePlayback=false; if(video.paused||video.ended){try{await video.play();}catch{}}else video.pause(); updatePreviewPlayButton(); }
 
       function videoContentRect(){
         const box=$('#videoBox'); if(!box||!state.previewWidth||!state.previewHeight)return null;
@@ -1074,6 +1080,7 @@
       }
       function cropForRunner(){ if(state.cropPreset==='none')return undefined; const r=state.cropRect; return {x:+r.x.toFixed(6),y:+r.y.toFixed(6),width:+r.width.toFixed(6),height:+r.height.toFixed(6)}; }
       async function playSelectedRange(){
+        if(state.processing)return;
         const video=$('#videoPreview'),{start,end}=getRange(); if(!Number.isFinite(video.duration)||!(end>start))return;
         state.rangePlayback=true; try{video.currentTime=Math.max(0,Math.min(video.duration,start));await video.play();}catch{state.rangePlayback=false;} updatePreviewPlayButton();
       }
@@ -1126,7 +1133,7 @@
         return waitForProbe(video,'seeked',signal,()=>{video.currentTime=target;});
       }
       async function buildFilmstrip(){
-        const probe=$('#filmstripProbe'),strip=$('#timelineFilmstrip'),status=$('#filmstripStatus'); if(!state.file||!state.previewDuration||!probe||!strip)return; state.filmstripAbort?.abort();const controller=new AbortController();state.filmstripAbort=controller;const token=++state.filmstripToken; strip.replaceChildren(); filmstripFor('thumbPreparing'); const count=window.innerWidth<=520?6:9; for(let i=0;i<count;i++){const frame=document.createElement('span');frame.className='timeline-filmstrip-frame is-loading';strip.appendChild(frame);} const frames=Array.from(strip.children); const canvas=document.createElement('canvas'); canvas.width=180;canvas.height=102; const ctx=canvas.getContext('2d',{alpha:false}); if(!ctx){filmstripFor('thumbUnavailable');return;} try{
+        const probe=$('#filmstripProbe'),strip=$('#timelineFilmstrip'),status=$('#filmstripStatus'); if(state.processing||!state.file||!state.previewDuration||!probe||!strip)return; state.filmstripAbort?.abort();const controller=new AbortController();state.filmstripAbort=controller;const token=++state.filmstripToken; strip.replaceChildren(); filmstripFor('thumbPreparing'); const count=window.innerWidth<=520?6:9; for(let i=0;i<count;i++){const frame=document.createElement('span');frame.className='timeline-filmstrip-frame is-loading';strip.appendChild(frame);} const frames=Array.from(strip.children); const canvas=document.createElement('canvas'); canvas.width=180;canvas.height=102; const ctx=canvas.getContext('2d',{alpha:false}); if(!ctx){filmstripFor('thumbUnavailable');return;} try{
           if(probe.error)throw new Error('metadata unavailable');if(probe.readyState<1)await waitForProbe(probe,'loadedmetadata',controller.signal);
           for(let i=0;i<count;i++){ if(token!==state.filmstripToken)return; const time=state.previewDuration*((i+.5)/count); await seekProbe(probe,time,controller.signal); if(token!==state.filmstripToken)return; const vw=probe.videoWidth||16,vh=probe.videoHeight||9,scale=Math.max(canvas.width/vw,canvas.height/vh),sw=canvas.width/scale,sh=canvas.height/scale,sx=(vw-sw)/2,sy=(vh-sh)/2; ctx.drawImage(probe,sx,sy,sw,sh,0,0,canvas.width,canvas.height); const img=document.createElement('img');img.alt='';img.src=canvas.toDataURL('image/jpeg',.68);frames[i].replaceChildren(img);frames[i].classList.remove('is-loading'); }
           filmstripFor('thumbReady');
@@ -1134,19 +1141,19 @@
       }
       function setVideoFile(file){
         if(!file||state.processing||state.pendingConfirmation)return;
-        if(file.size===0){statusFor('emptyFile',true);showToast(t('emptyFile'));return;} if(/^(image|audio|text)\//i.test(file.type||'')||file.type==='application/pdf'){statusFor('invalidFile',true);showToast(t('invalidFile'));return;} setStatus('');state.trimTouched=false;state.rangePlayback=false;state.cropDragging=false;
+        if(file.size===0){statusFor('emptyFile',true);showToast(t('emptyFile'));return;} if(/^(image|audio|text)\//i.test(file.type||'')||file.type==='application/pdf'){statusFor('invalidFile',true);showToast(t('invalidFile'));return;} setStatus('');state.trimTouched=false;state.metadataPending=false;state.rangePlayback=false;state.cropDragging=false;
         clearOutput(); clearFilmstrip();
         if(state.inputUrl)URL.revokeObjectURL(state.inputUrl);
         state.file=file; state.inputUrl=URL.createObjectURL(file); state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.filenameTouched=false;resetCropRect(selectedValue('crop')||'none');
         const video=$('#videoPreview'),probe=$('#filmstripProbe'); video.pause(); video.src=state.inputUrl; video.load(); $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); probe.src=state.inputUrl; probe.load();
         $('#dropZone').hidden=true; $('#sourceWrap').classList.add('is-visible'); $('#trimBlock').hidden=false; $('#fileName').textContent=file.name; $('#fileSize').textContent=formatBytes(file.size); $('#videoDuration').textContent=t('unknown'); $('#videoResolution').textContent=t('unknown'); $('#previewWarning').classList.remove('is-visible');
         $('#startInput').value='0:00.000'; $('#endInput').value='0:05.000'; $('#startRange').value='0'; $('#endRange').value='5'; $('#startRange').max='5'; $('#endRange').max='5';
-        setDefaultFilename(); setRunEnabled(true); updateTrimUi(); updateRunSummary(); showToast(t('selected'));
+        setDefaultFilename(); setRunEnabled(true); updateCropAvailability(); updateTrimUi(); updateRunSummary(); showToast(t('selected'));
       }
 
       function removeVideo(){
         if(state.processing||state.pendingConfirmation)return;
-        setStatus('');state.trimTouched=false;clearFilmstrip(); if(state.inputUrl)URL.revokeObjectURL(state.inputUrl); state.inputUrl=''; state.file=null; $('#videoInput').value=''; state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.rangePlayback=false; state.cropRect={x:0,y:0,width:1,height:1};renderCropOverlay(); const preview=$('#videoPreview');preview.pause(); for(const id of['videoPreview','filmstripProbe']){const v=$('#'+id);v.removeAttribute('src');v.load();} $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); $('#sourceWrap').classList.remove('is-visible'); $('#dropZone').hidden=false; $('#trimBlock').hidden=true; $('#previewWarning').classList.remove('is-visible'); clearOutput(); setRunEnabled(false); updateTrimActions(); updateRunSummary(); showToast(t('cleared'));
+        setStatus('');state.trimTouched=false;state.metadataPending=false;clearFilmstrip(); if(state.inputUrl)URL.revokeObjectURL(state.inputUrl); state.inputUrl=''; state.file=null; $('#videoInput').value=''; state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.rangePlayback=false; state.cropRect={x:0,y:0,width:1,height:1};renderCropOverlay(); const preview=$('#videoPreview');preview.pause(); for(const id of['videoPreview','filmstripProbe']){const v=$('#'+id);v.removeAttribute('src');v.load();} $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); $('#sourceWrap').classList.remove('is-visible'); $('#dropZone').hidden=false; $('#trimBlock').hidden=true; $('#previewWarning').classList.remove('is-visible'); clearOutput(); setRunEnabled(false); updateCropAvailability(); updateTrimActions(); updateRunSummary(); showToast(t('cleared'));
       }
 
       function updatePlayhead(){
@@ -1158,7 +1165,7 @@
         if(source==='start'||source==='end')state.trimTouched=true;
         let start=Math.max(0,parseTimeValue($('#startInput').value)); let end=Math.max(0,parseTimeValue($('#endInput').value)); if(!Number.isFinite(start))start=0;if(!Number.isFinite(end))end=state.previewDuration>0?state.previewDuration:5; const max=state.previewDuration>0?state.previewDuration:Math.max(5,end,start+1);
         if(start>max)start=max; if(end>max&&state.previewDuration>0)end=max;
-        if(end<=start){ if(source==='start')start=Math.max(0,end-.01); else end=Math.min(max,start+.01); }
+        if(end<=start){ if(source==='start'||start>=max){end=Math.min(max,Math.max(end,Math.min(max,.01)));start=Math.max(0,end-.01);} else end=Math.min(max,start+.01); }
         $('#startInput').value=formatTimelineTime(start); $('#endInput').value=formatTimelineTime(end); $('#startRange').max=String(max); $('#endRange').max=String(max); $('#startRange').value=String(start); $('#endRange').value=String(end);
         const startPct=max?Math.max(0,Math.min(100,start/max*100)):0,endPct=max?Math.max(0,Math.min(100,end/max*100)):100; $('#timelineSelected').style.left=`${startPct}%`; $('#timelineSelected').style.width=`${Math.max(0,endPct-startPct)}%`; $('#startEdge').style.left=`${startPct}%`; $('#endEdge').style.left=`${endPct}%`; $('#timelineSelection').textContent=`${formatTimelineTime(start)} → ${formatTimelineTime(end)}`; $('#timelineEndLabel').textContent=formatTimelineTime(max,false); $('#trimDuration').textContent=`${Math.max(0,end-start).toFixed(2)} ${t('seconds')}`; updatePlayhead(); updateRunSummary();
       }
@@ -1166,6 +1173,7 @@
         const duration=$('#videoPreview').duration;
         state.previewDuration=Number.isFinite(duration)&&duration>0?duration:0;
         $('#videoDuration').textContent=state.previewDuration?formatTime(state.previewDuration):t('unknown');
+        if(state.processing){state.metadataPending=true;}else if(state.file&&state.previewDuration>0&&getRange().end>state.previewDuration){updateTrimUi();}
         updateTrimActions();
       }
       function updateTrimActions(){
@@ -1188,16 +1196,28 @@
       }
 
       function setRunEnabled(enabled){ $('#runButton').disabled=!enabled||state.processing; $('#mobileRunButton').disabled=!enabled||state.processing; }
-      function setProcessing(active){ state.processing=active;state.cropDragging=false;state.cropDragStart=null;$('#cropDragHandle').disabled=active;$('#fileFallbackButton').disabled=active;$('#replaceFallbackButton').disabled=active;$('#cancelRunButton').disabled=!active;$('#cancelRunButton').hidden=!active;setRunEnabled(!!state.file); $$('input,select,#replaceButton,#clearVideoButton').forEach(el=>{if(el.id==='outputFilename')return; el.disabled=active;}); updateTrimActions(); $('#progressWrap').classList.toggle('is-visible',active); if(active){progressFor('preparing'); $('#progressFill').style.width='0%'; $('#progressPercent').textContent='0%'; } }
+      function setProcessing(active){ state.processing=active;state.cropDragging=false;state.cropDragStart=null;$('#cropDragHandle').disabled=active;$('#fileFallbackButton').disabled=active;$('#replaceFallbackButton').disabled=active;$('#cancelRunButton').disabled=!active;$('#cancelRunButton').hidden=!active;setRunEnabled(!!state.file); $$('input,select,#replaceButton,#clearVideoButton').forEach(el=>{if(el.id==='outputFilename')return; el.disabled=active;}); updateTrimActions(); updateCropAvailability(); $('#progressWrap').classList.toggle('is-visible',active); if(active){progressFor('preparing'); $('#progressFill').style.width='0%'; $('#progressPercent').textContent='0%'; } }
 
       function base64Bytes(id){ const raw=atob($(id).textContent.replace(/\s+/g,'')); const bytes=new Uint8Array(raw.length); for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i); return bytes; }
       async function gunzipAsset(id,asText=false){ if(typeof DecompressionStream!=='function')throw new Error(t('noDecompression')); const stream=new Blob([base64Bytes(id)]).stream().pipeThrough(new DecompressionStream('gzip')); const response=new Response(stream); return asText?response.text():response.arrayBuffer(); }
-      async function loadSelectedRunner(){
+      async function loadSelectedRunner(signal){
         const prefix=state.format==='gif'?'gif':'webp'; progressFor('loadingCore');
         const [coreJsText,wasmBytes]=await Promise.all([gunzipAsset(`#${prefix}-js-gzip`,true),gunzipAsset(`#${prefix}-wasm-gzip`,false)]);
+        if(signal?.aborted)throw new Error('cancelled');
         return BrowserFFmpeg.loadEmbedded({coreJsText,wasmBytes});
       }
 
+      function waitForRunner(signal){
+        return new Promise((resolve,reject)=>{
+          let settled=false,timer;
+          const finish=(error,runner)=>{if(settled){runner?.dispose();return;}settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);if(error)reject(error);else resolve(runner);};
+          const abort=()=>finish(new Error('cancelled'));
+          if(signal.aborted){abort();return;}
+          signal.addEventListener('abort',abort,{once:true});
+          timer=setTimeout(()=>finish(new Error('Converter initialization timed out')),60000);
+          loadSelectedRunner(signal).then(runner=>finish(null,runner),error=>finish(error));
+        });
+      }
       function profileArgs({start,end}=getRange()){
         const width=selectedWidth(), fps=selectedFps(), crop=cropForRunner(); const input='/workerfs/input.bin';
         if(state.format==='gif')return BrowserFFmpeg.videoToGifArgs({input,output:'/output.gif',start,end,maxWidth:width,fps,crop,colors:Number($('#gifColors').value),dither:$('#gifDither').value});
@@ -1209,7 +1229,7 @@
         const duration=end-start,fps=selectedFps(),width=selectedWidth(),frames=Math.ceil(duration*fps),crop=cropForRunner();
         const sourceWidth=state.previewWidth*(crop?.width||1),sourceHeight=state.previewHeight*(crop?.height||1);
         const w=width||sourceWidth,h=sourceWidth&&sourceHeight?w*sourceHeight/sourceWidth:w*16/9;
-        return duration>15||frames>450||w>=1920||h>=1920||w*h*frames>160000000||(!width&&!sourceWidth)||(width>=720&&frames>300)||(state.format==='webp'&&$('#webpLossless').checked&&frames>180);
+        return duration>15||frames>450||w>=1920||h>=1920||w*h*frames>160000000||state.previewWidth*state.previewHeight>=8000000||(!sourceWidth&&(!width||width>=720))||(width>=720&&frames>300)||(state.format==='webp'&&$('#webpLossless').checked&&frames>180);
       }
 
       // The structural timing readers are shared with the repository timing tests.
@@ -1353,7 +1373,20 @@
         const m=format==='gif'?timingApi.TimingReaders.readGif(bytes):timingApi.TimingReaders.readWebp(bytes);
         return {duration:format==='gif'?m.totalDurationCs/100:m.totalDurationMs===null?null:m.totalDurationMs/1000,frameCount:m.frameCount};
       }
-      function cancelConversion(){const job=state.job;if(!job)return;$('#cancelRunButton').disabled=true;progressFor('cancelling');job.controller.abort();job.runner?.dispose();}
+      function verifyPreview(url,signal){
+        return new Promise((resolve,reject)=>{
+          const img=new Image();let timer,settled=false;
+          const finish=(error)=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);img.onload=img.onerror=null;if(error){img.src='';reject(error);}else resolve({width:img.naturalWidth,height:img.naturalHeight});};
+          const abort=()=>finish(new Error('cancelled'));
+          if(signal.aborted){abort();return;}
+          img.onload=()=>finish(img.naturalWidth&&img.naturalHeight?null:new Error('Preview has no dimensions'));
+          img.onerror=()=>finish(new Error('Output image could not be decoded'));
+          signal.addEventListener('abort',abort,{once:true});
+          timer=setTimeout(()=>finish(new Error('Output preview timed out')),30000);
+          img.src=url;
+        });
+      }
+      function cancelConversion(){const job=state.job;if(!job)return;$('#cancelRunButton').disabled=true;progressFor('cancelling');job.controller.abort();}
       async function createAnimation(){
         if(state.processing||state.pendingConfirmation)return;
         if(!state.file){statusFor('chooseVideoError',true);return;}
@@ -1379,9 +1412,10 @@
           if(state.output&&signature===state.lastRunSignature&&!await AppConfirm.ask({title:t('sameTitle'),message:t('sameMessage'),confirmLabel:t('runAgain'),cancelLabel:t('cancel')}))return;
           if(isHeavy(range)&&!await AppConfirm.ask({title:t('heavyTitle'),message:t('heavyMessage'),confirmLabel:t('continue'),cancelLabel:t('cancel')}))return;
         }finally{state.pendingConfirmation=false;}
-        const job={controller:new AbortController(),runner:null};state.job=job;setStatus('');setProcessing(true);
+        const job={controller:new AbortController(),runner:null};state.job=job;setStatus('');state.rangePlayback=false;$('#videoPreview').pause();const resumeFilmstrip=!!state.filmstripAbort&&state.filmstripKey==='thumbPreparing';if(resumeFilmstrip)clearFilmstrip();setProcessing(true);
+        let candidateUrl='';
         try{
-          job.runner=await loadSelectedRunner();
+          job.runner=await waitForRunner(job.controller.signal);
           if(job.controller.signal.aborted)return;
           progressFor('processing');
           const result=await job.runner.run({files:[{name:'/workerfs/input.bin',data:source,workerfs:true}],outputs:[output],args,signal:job.controller.signal,onProgress:p=>{if(job.controller.signal.aborted||!Number.isFinite(p))return;const percent=Math.max(0,Math.min(100,Math.round(p*100)));$('#progressFill').style.width=percent+'%';$('#progressPercent').textContent=percent+'%';},onLog:()=>{}});
@@ -1390,10 +1424,13 @@
           const raw=new Uint8Array(file.data);inspectOutput(raw,format);
           const bytes=applyLoopPreference(raw,format,settings.loop),meta=inspectOutput(bytes,format);
           const outputName=normalizedFilename(format);
-          clearOutput();state.output=bytes;state.outputMime=format==='gif'?'image/gif':'image/webp';state.outputExt=format;state.outputName=outputName;state.outputMeta={...meta,requestedDuration:end-start,fps:settings.fps,format,loop:settings.loop,crop};state.lastRunSignature=signature;
+          candidateUrl=URL.createObjectURL(new Blob([bytes],{type:format==='gif'?'image/gif':'image/webp'}));
+          let dimensions;try{dimensions=await verifyPreview(candidateUrl,job.controller.signal);}catch(error){if(!job.controller.signal.aborted)statusFor('resultPreviewFailed',true,String(error?.message||error));return;}
+          if(job.controller.signal.aborted)return;
+          clearOutput();state.outputUrl=candidateUrl;candidateUrl='';state.outputWidth=dimensions.width;state.outputHeight=dimensions.height;state.output=bytes;state.outputMime=format==='gif'?'image/gif':'image/webp';state.outputExt=format;state.outputName=outputName;state.outputMeta={...meta,requestedDuration:end-start,fps:settings.fps,format,loop:settings.loop,crop};state.lastRunSignature=signature;
           syncFilenameExtension(format);showResult();statusFor('complete');showToast(t('outputReady',{format:format.toUpperCase()}));
         }catch(error){if(!job.controller.signal.aborted){console.error(error);statusFor('conversionFailed',true,String(error?.message||error));}}
-        finally{job.runner?.dispose();if(job.controller.signal.aborted)statusFor('cancelledRun');state.job=null;setProcessing(false);}
+        finally{if(candidateUrl)URL.revokeObjectURL(candidateUrl);job.runner?.dispose();if(job.controller.signal.aborted)statusFor('cancelledRun');state.job=null;setProcessing(false);if(state.metadataPending){state.metadataPending=false;if(!state.trimTouched&&state.previewDuration>0){$('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(Math.min(5,state.previewDuration));}updateTrimUi();resetCropRect(selectedValue('crop')||'none');updateCropAvailability();}if((resumeFilmstrip||state.filmstripKey==='thumbPreparing')&&state.previewDuration&&$('#filmstripProbe').readyState>=1)buildFilmstrip();}
       }
 
       function clearOutput(){
@@ -1401,7 +1438,7 @@
       }
 
       function showResult(){
-        if(!state.output)return; if(state.outputUrl)URL.revokeObjectURL(state.outputUrl); state.outputUrl=URL.createObjectURL(new Blob([state.output],{type:state.outputMime}));
+        if(!state.output)return; if(!state.outputUrl)state.outputUrl=URL.createObjectURL(new Blob([state.output],{type:state.outputMime}));
         const img=$('#resultPreview'); img.onload=()=>{state.outputWidth=img.naturalWidth;state.outputHeight=img.naturalHeight;updateResultLabels();}; img.onerror=()=>{statusFor('resultPreviewFailed',true);};img.src=state.outputUrl; img.alt=state.outputExt.toUpperCase();
         $('#resultSection').classList.add('is-visible'); $('#mobileSaveButton').disabled=false; updateResultLabels(); const shareSupported=typeof navigator.share==='function'&&typeof File==='function'; $('#shareButton').hidden=!shareSupported;
         if(!state.filenameTouched)setDefaultFilename();
@@ -1412,7 +1449,7 @@
         if(!state.output)return; const meta=state.outputMeta||{duration:0,fps:15}; $('#resultSize').textContent=formatBytes(state.output.length); $('#resultFormat').textContent=meta.duration===null?`${state.outputExt.toUpperCase()} · ${t('staticImage')}`:`Animated ${state.outputExt.toUpperCase()}`; $('#outputDimensions').textContent=state.outputWidth?`${state.outputWidth} × ${state.outputHeight}`:'—'; $('#outputDuration').textContent=meta.duration===null?t('staticImage'):`${Number(meta.duration||0).toFixed(2)} ${t('seconds')}`; $('#outputFps').textContent=String(meta.fps||15);$('#outputFrames').textContent=Number.isFinite(meta.frameCount)?String(meta.frameCount):'—'; $('#resultFilename').textContent=state.outputName||normalizedFilename(state.outputExt);
       }
 
-      function normalizedFilename(ext=state.format){ let name=($('#outputFilename').value||'').trim().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim(); if(!name)name='animation'; return `${name}.${ext}`; }
+      function normalizedFilename(ext=state.format){ let name=($('#outputFilename').value||'').trim().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim(); if(state.filenameTouched)name=name.replace(/(?:\.(?:gif|webp))+$/i,'').trim(); if(!name)name='animation'; return `${name}.${ext}`; }
       function saveOutput(){ if(!state.output||!state.outputUrl)return; const a=document.createElement('a'); a.href=state.outputUrl; a.download=state.outputName||normalizedFilename(state.outputExt); document.body.appendChild(a); a.click(); a.remove(); showToast(t('saved')); }
       async function shareOutput(){ if(!state.output)return; try{const file=new File([state.output],state.outputName||normalizedFilename(state.outputExt),{type:state.outputMime}); if(navigator.canShare&& !navigator.canShare({files:[file]}))throw new Error('File sharing is not supported.'); await navigator.share({files:[file]});}catch(error){if(error?.name!=='AbortError')showToast(t('shareFailed'));} }
 
@@ -1421,7 +1458,7 @@
         const help=$('#helpDialog'); $('#helpButton').addEventListener('click',()=>help.showModal()); $('#closeHelpButton').addEventListener('click',()=>help.close()); help.addEventListener('click',e=>{const r=help.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)help.close();});
         $('#videoInput').addEventListener('change',e=>setVideoFile(e.target.files?.[0]));$('#fileFallbackButton').addEventListener('click',()=>$('#fileFallbackInput').click());$('#replaceFallbackButton').addEventListener('click',()=>$('#fileFallbackInput').click());$('#fileFallbackInput').addEventListener('change',e=>{const file=e.target.files?.[0];e.target.value='';setVideoFile(file)}); $('#replaceButton').addEventListener('click',()=>{$('#videoInput').value='';$('#videoInput').click();}); $('#clearVideoButton').addEventListener('click',removeVideo);
         const drop=$('#dropZone'); ['dragenter','dragover'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragging');})); ['dragleave','drop'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragging');})); drop.addEventListener('drop',e=>{const file=Array.from(e.dataTransfer?.files||[]).find(item=>item.type.startsWith('video/')||/\.(mp4|mov|m4v|webm|mkv|avi)$/i.test(item.name));if(file)setVideoFile(file);else{statusFor('invalidFile',true);showToast(t('invalidFile'));}});
-        const video=$('#videoPreview'); $('#videoPlayButton').addEventListener('click',togglePreviewPlayback); video.addEventListener('click',togglePreviewPlayback); video.addEventListener('loadedmetadata',()=>{if(!state.file)return;updatePreviewDuration(); state.previewWidth=video.videoWidth||0; state.previewHeight=video.videoHeight||0; $('#videoResolution').textContent=state.previewWidth?`${state.previewWidth} × ${state.previewHeight}`:t('unknown'); if(!state.processing){if(!state.trimTouched){const end=state.previewDuration?Math.min(state.previewDuration,5):5; $('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(end);}updateTrimUi();resetCropRect(selectedValue('crop')||'none');}else updateTrimActions();buildFilmstrip();}); video.addEventListener('error',()=>{if(!state.file)return;clearFilmstrip();$('#previewWarning').classList.add('is-visible');filmstripFor('thumbUnavailable');$('#videoPlayButton').disabled=true;updatePreviewPlayButton();}); video.addEventListener('loadeddata',()=>{if(!state.file)return;$('#previewWarning').classList.remove('is-visible');$('#videoPlayButton').disabled=false;updatePreviewPlayButton();}); video.addEventListener('play',updatePreviewPlayButton); video.addEventListener('pause',updatePreviewPlayButton); video.addEventListener('ended',updatePreviewPlayButton); video.addEventListener('timeupdate',()=>{if(state.rangePlayback){const end=getRange().end;if(Number(video.currentTime)>=end-.012){state.rangePlayback=false;video.pause();try{video.currentTime=Math.min(video.duration,end);}catch{}}}updatePlayhead();}); video.addEventListener('seeked',updatePlayhead); video.addEventListener('durationchange',()=>{updatePreviewDuration();updatePlayhead();});
+        const video=$('#videoPreview'); $('#videoPlayButton').addEventListener('click',togglePreviewPlayback); video.addEventListener('click',togglePreviewPlayback); video.addEventListener('loadedmetadata',()=>{if(!state.file)return;updatePreviewDuration(); state.previewWidth=video.videoWidth||0; state.previewHeight=video.videoHeight||0; $('#videoResolution').textContent=state.previewWidth?`${state.previewWidth} × ${state.previewHeight}`:t('unknown'); if(!state.processing){if(!state.trimTouched){const end=state.previewDuration?Math.min(state.previewDuration,5):5; $('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(end);}updateTrimUi();resetCropRect(selectedValue('crop')||'none');updateCropAvailability();buildFilmstrip();}else{state.metadataPending=true;updateTrimActions();}}); video.addEventListener('error',()=>{if(!state.file)return;clearFilmstrip();$('#previewWarning').classList.add('is-visible');filmstripFor('thumbUnavailable');$('#videoPlayButton').disabled=true;updatePreviewPlayButton();}); video.addEventListener('loadeddata',()=>{if(!state.file)return;$('#previewWarning').classList.remove('is-visible');$('#videoPlayButton').disabled=false;updatePreviewPlayButton();}); video.addEventListener('play',updatePreviewPlayButton); video.addEventListener('pause',updatePreviewPlayButton); video.addEventListener('ended',updatePreviewPlayButton); video.addEventListener('timeupdate',()=>{if(state.rangePlayback){const end=getRange().end;if(Number(video.currentTime)>=end-.012){state.rangePlayback=false;video.pause();try{video.currentTime=Math.min(video.duration,end);}catch{}}}updatePlayhead();}); video.addEventListener('seeked',updatePlayhead); video.addEventListener('durationchange',()=>{updatePreviewDuration();updatePlayhead();});
         $('#startRange').addEventListener('input',e=>{if(state.processing)return;$('#startInput').value=formatTimelineTime(Number(e.target.value));updateTrimUi('start');seekPreview(Number(e.target.value));}); $('#endRange').addEventListener('input',e=>{if(state.processing)return;$('#endInput').value=formatTimelineTime(Number(e.target.value));updateTrimUi('end');seekPreview(Number(e.target.value));}); $('#startInput').addEventListener('change',()=>{if(state.processing)return;updateTrimUi('start');seekPreview(getRange().start);}); $('#endInput').addEventListener('change',()=>{if(state.processing)return;updateTrimUi('end');seekPreview(getRange().end);});
         $('#setStartHere').addEventListener('click',()=>{if(state.processing)return;if(Number.isFinite(video.currentTime)){$('#startInput').value=formatTimelineTime(video.currentTime);updateTrimUi('start');}}); $('#setEndHere').addEventListener('click',()=>{if(state.processing)return;if(Number.isFinite(video.currentTime)){$('#endInput').value=formatTimelineTime(video.currentTime);updateTrimUi('end');}}); $('#useFullVideo').addEventListener('click',useFullVideo); $('#playSelection').addEventListener('click',playSelectedRange); $('#jumpStart').addEventListener('click',()=>seekPreview(getRange().start)); $('#jumpEnd').addEventListener('click',()=>seekPreview(getRange().end));
         $$('.fine-step-button').forEach(button=>button.addEventListener('click',()=>{state.fineTuneStep=button.dataset.fineStep==='tenths'?'tenths':'frame';updateFineTuneUi();}));
@@ -1448,5 +1485,62 @@
       init();
     })();
   </script>
+<!-- Application license and third-party notices
+MIT License
+
+Copyright (c) 2026 ttomohisa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+# Third-party notices
+
+This application source is distributed under the repository license. The generated standalone HTML also embeds profile-specific binary assets built by **FFmpeg WASM Builder v1.10.1**.
+
+## FFmpeg WASM Builder v1.10.1
+
+- Repository: `ttomohisa/htmlapps-ffmpeg-wasm-builder`
+- Profiles embedded by this app: `video-to-gif`, `video-to-webp`
+- The builder's own source is MIT-licensed.
+- The generated GIF/WebP FFmpeg cores are distributed under LGPL-2.1-or-later according to the builder release metadata.
+- The WebP profile also links libwebp and carries its upstream notice/license in the release bundle.
+
+The application build downloads the official v1.10.1 profile ZIPs, verifies them against the release `SHA256SUMS.txt`, and embeds only the runtime files needed by this app. The full upstream notices remain available in the [pinned Builder release](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/tag/v1.10.1), including the corresponding `ffmpeg-wasm-sources-v1.10.1.tar.gz` source archive. See [runtime provenance](docs/RUNTIME_TIMING.md) for exact archive checksums and source versions.
+
+See `ffmpeg.config.json` for the exact pinned release and profile archive names.
+
+
+## Timing regression helpers
+
+`scripts/test-support/timing-readers.js` and its tests are adapted from the GIF/WebP subset of FFmpeg WASM Builder v1.10.1, commit `5f3f2752fd4bc13627ba34604fe7f550fec329fa`, under MIT. Copyright (c) 2026 Tomohisa Takagi. The complete permission notice is retained in `scripts/test-support/LICENSE`. Test videos are tiny synthetic patterns, not user media.
+
+## Big Buck Bunny — documentation screenshots
+
+The repository screenshots (`assets/screenshot.png` and `assets/screenshot-en.png`) use media from **Big Buck Bunny** as sample video content.
+
+- Copyright: © 2008 Blender Foundation / www.bigbuckbunny.org
+- License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+- License URL: https://creativecommons.org/licenses/by/3.0/
+- Project/license information: https://peach.blender.org/about/
+- Usage in this repository: documentation screenshots only; the screenshot-capture sample video is not redistributed in the repository.
+
+The Big Buck Bunny project states that reused parts of the movie should be attributed as: `(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org`.
+
+-->
 </body>
 </html>
