@@ -1,6 +1,8 @@
 # Changelog
 
 ## v1.0.5
+- Simplify introductory copy and panel styling, stack the mobile file chooser, explain WebP settings, and separate the output extension from the editable source filename.
+- Publish a version tag and GitHub Release with both verified standalone HTML variants after a successful main build.
 
 - Freeze conversion parameters, support cancellation and retain prior output on failure.
 - Validate output structure and display encoded duration; correct format/filename state.

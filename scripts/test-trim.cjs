@@ -75,7 +75,7 @@ function makeHarness(format = 'webp') {
   vm.runInContext(script, sandbox, {filename:sourcePath});
   const app = sandbox.app;
   for (const n of nodes.filter(n => n.name === 'format')) n.checked = n.value === format;
-  for (const [id,value] of Object.entries({startInput:'0:00.000',endInput:'0:05.000',gifColors:'128',gifDither:'sierra2_4a',webpQuality:'75',webpCompression:'4',outputFilename:'synthetic.'+format})) byId.get(id).value = value;
+  for (const [id,value] of Object.entries({startInput:'0:00.000',endInput:'0:05.000',gifColors:'128',gifDither:'sierra2_4a',webpQuality:'75',webpCompression:'4',outputFilename:'synthetic'})) byId.get(id).value = value;
   app.state.file = {name:'synthetic.mp4',size:1024,lastModified:0};
   app.state.format = format; app.state.previewDuration = 10; app.state.language = 'en'; app.state.fineTuneStep = 'tenths';
   app.bindEvents();
@@ -256,7 +256,7 @@ test('late metadata preserves manually edited range',()=>{
   const h=makeHarness();h.app.setVideoFile({name:'new.mp4',size:10});h.byId.get('startInput').value='1';h.byId.get('startInput').dispatch('change');h.byId.get('endInput').value='4';h.byId.get('endInput').dispatch('change');metadata(h,12);assert.deepEqual(range(h),{start:1,end:4});
 });
 test('output extension does not leak into a replacement source',()=>{
-  const h=makeHarness('gif');h.app.state.outputExt='webp';h.app.setVideoFile({name:'new.mp4',size:10});assert.equal(h.byId.get('outputFilename').value,'new-animation.gif');
+  const h=makeHarness('gif');h.app.state.outputExt='webp';h.app.setVideoFile({name:'new.mp4',size:10});assert.equal(h.byId.get('outputFilename').value,'new');assert.equal(h.byId.get('outputExtension').textContent,'.gif');
 });
 test('invalid output is rejected structurally',()=>{
   const h=makeHarness();assert.throws(()=>h.app.inspectOutput(new Uint8Array(0),'gif'));assert.throws(()=>h.app.inspectOutput(new Uint8Array(0),'webp'));
@@ -285,4 +285,23 @@ test('unknown preview dimensions prevent misleading crop conversion',async()=>{
 });
 test('non-video image MIME does not replace a current source',()=>{
   const h=makeHarness(),source=h.app.state.file;h.app.setVideoFile({name:'image.png',size:20,type:'image/png'});assert.equal(h.app.state.file,source);
+});
+
+
+test('original filename stem and fixed suffix survive format and language changes',()=>{
+  const h=makeHarness('webp');
+  h.app.setVideoFile({name:'holiday.v2.mp4',size:10});
+  assert.equal(h.byId.get('outputFilename').value,'holiday.v2');
+  assert.equal(h.byId.get('outputExtension').textContent,'.webp');
+  const radio=h.nodes.find(n=>n.name==='format'&&n.value==='gif');
+  assert.ok(radio);
+  for(const n of h.nodes.filter(n=>n.name==='format'))n.checked=n===radio;
+  radio.dispatch('change');
+  assert.equal(h.byId.get('outputFilename').value,'holiday.v2');
+  assert.equal(h.byId.get('outputExtension').textContent,'.gif');
+  h.byId.get('outputFilename').value='my.clip';
+  h.byId.get('outputFilename').dispatch('input');
+  h.byId.get('languageButton').click();
+  assert.equal(h.byId.get('outputFilename').value,'my.clip');
+  assert.equal(h.byId.get('outputExtension').textContent,'.gif');
 });

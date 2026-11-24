@@ -95,3 +95,40 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  release:
+    name: Publish version tag and GitHub Release
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          name: standalone-html-${{ github.sha }}
+          path: dist
+      - name: Publish release if version is new
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./app.config.json').version")"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          tag="v$version"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; leaving it unchanged."
+            exit 0
+          fi
+          if git show-ref --verify --quiet "refs/tags/$tag"; then
+            test "$(git rev-parse "$tag^{commit}")" = "$GITHUB_SHA"
+          fi
+          cp dist/index.html video-to-gif-webp.html
+          cp dist/index.self-extract.html video-to-gif-webp.self-extract.html
+          gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" --generate-notes \
+            video-to-gif-webp.html video-to-gif-webp.self-extract.html \
+            dist/dependency-manifest.json dist/self-extract-manifest.json
