@@ -225,3 +225,7 @@ The application source in this repository is licensed under the [MIT License](LI
 The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
 Dismiss Help and confirmations with Close, Esc, or a click outside the dialog.
+
+### Conversion reliability (v1.0.5)
+
+Conversions can be cancelled. A failed or cancelled repeat conversion retains the previous result. The result duration is read from the encoded GIF/WebP (a still WebP is labelled as such). Cropping requires known video dimensions; large or long jobs prompt for confirmation.

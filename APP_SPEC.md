@@ -4,7 +4,7 @@
 
 - **Name:** Video to GIF / WebP / 動画をGIF / WebPに変換
 - **Repository:** `ttomohisa/htmlapps-video-to-gif-webp`
-- **Version:** `1.0.4`
+- **Version:** `1.0.5`
 - **Purpose:** Convert a chosen range of a local video into an animated GIF or animated WebP without uploading the source file.
 - **Primary users:** Smartphone and desktop users who need a short animation for chat, documentation, social posts, issue reports, or web pages.
 - **Release artifacts:** `dist/index.html` and `dist/index.self-extract.html`
@@ -64,7 +64,7 @@
 - Default output: WebP, 480px, 15fps, Standard.
 - Initial selected range: first 5 seconds when duration is known.
 - Keep both cores compressed in the HTML; inflate only the currently selected format during conversion.
-- Dispose the runner after each job.
+- Dispose the runner after each job. Cancel uses the runner AbortSignal; retain the previous successful result until a replacement is structurally verified. Capture all encoder arguments and output settings at creation. Reject cropping when source dimensions are unknown. Show actual encoded duration (or still image), separately from requested range. Thumbnail waits are bounded and cancelled on source replacement.
 - Revoke obsolete Blob URLs.
 - Output is currently returned through MEMFS, so very large animations can exceed browser/device memory.
 

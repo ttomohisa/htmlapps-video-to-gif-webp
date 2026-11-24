@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.5
+
+- Freeze conversion parameters, support cancellation and retain prior output on failure.
+- Validate output structure and display encoded duration; correct format/filename state.
+- Improve high-load warnings, thumbnail cleanup, trim metadata handling and translated status.
+- Improve crop controls and validate empty inputs and advanced quality settings.
+
 ## Unreleased
 
 - Verify the complete current header version at narrow phone widths; reserve space for the version beside truncated app titles.
