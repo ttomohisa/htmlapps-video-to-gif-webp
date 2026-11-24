@@ -20,7 +20,7 @@ GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding
 
 ![English screenshot](assets/screenshot-en.png)
 
-The screenshots use **Big Buck Bunny** media as the sample video content. The screenshot-capture sample itself is not included in this repository.
+The screenshots show the current app after converting a synthetic test video. Earlier documentation screenshots used **Big Buck Bunny** media; its attribution is retained below.
 
 **Big Buck Bunny attribution:** © 2008 Blender Foundation / www.bigbuckbunny.org — licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 

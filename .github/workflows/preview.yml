@@ -53,17 +53,6 @@ jobs:
         New-Item -ItemType Directory -Force -Path "test-results/mobile-layout" | Out-Null
         node scripts/mobile-layout.browser.cjs 2>&1 | Tee-Object -FilePath "test-results/mobile-layout/browser.log"
         if ($LASTEXITCODE -ne 0) { throw "Phone layout browser regression failed." }
-    - name: Export README screenshot bytes for review
-      shell: pwsh
-      run: |
-        foreach ($language in @("ja", "en")) {
-          $file = "test-results/mobile-layout/readme-candidate-$language.png"
-          $encoded = [Convert]::ToBase64String([IO.File]::ReadAllBytes((Resolve-Path $file)))
-          for ($i = 0; $i -lt $encoded.Length; $i += 2048) {
-            $length = [Math]::Min(2048, $encoded.Length - $i)
-            Write-Output ("README_PNG_{0}_{1:D6}:{2}" -f $language, $i, $encoded.Substring($i, $length))
-          }
-        }
     - name: Upload phone layout screenshots
       if: always()
       uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
