@@ -75,24 +75,23 @@
     .icon-button svg { width:20px; height:20px; }
 
     .main { width:min(1040px,100%); margin:0 auto; padding:24px clamp(14px,2.8vw,30px) 96px; }
-    .intro { display:flex; align-items:flex-end; justify-content:space-between; gap:18px; margin-bottom:16px; }
+    .intro { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-bottom:16px; }
     .intro h1 { margin:0; font-size:clamp(22px,3.6vw,30px); letter-spacing:-.025em; line-height:1.2; }
-    .intro p { max-width:660px; margin:6px 0 0; color:var(--muted); font-size:13px; }
+    .intro p { max-width:660px; margin:0; color:var(--muted); font-size:13px; }
     .local-badge { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; margin-top:3px; padding:7px 0; border:0; border-radius:0; background:transparent; color:var(--accent); font-size:12px; font-weight:500; white-space:nowrap; }
     .local-badge svg { width:15px; height:15px; flex:0 0 auto; color:var(--accent); }
 
     .stack { display:grid; gap:14px; }
-    .panel { scroll-margin-top:calc(var(--header-height) + 12px); border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:var(--shadow-sm); overflow:hidden; }
+    .panel { scroll-margin-top:calc(var(--header-height) + 12px); border:1px solid var(--line); border-radius:10px; background:var(--surface); box-shadow:none; overflow:hidden; }
     .panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:16px 18px 12px; border-bottom:1px solid var(--line); }
     .panel-title { margin:0; font-size:16px; letter-spacing:-.01em; }
     .panel-note { margin:3px 0 0; color:var(--muted); font-size:12px; }
-    .step-badge { display:inline-grid; place-items:center; min-width:26px; height:26px; padding:0 8px; border-radius:999px; background:var(--surface-muted); color:var(--muted); font-size:11px; font-weight:800; }
     .panel-body { padding:18px; }
 
     .drop-zone { border:1.5px dashed var(--line-strong); border-radius:14px; background:var(--surface-muted); padding:26px 18px; text-align:center; transition:border-color .15s ease,background .15s ease; }
     .drop-zone.is-dragging { border-color:var(--accent); background:var(--accent-soft); }
     .drop-zone-icon { width:42px; height:42px; margin:0 auto 10px; color:var(--accent); }
-    .drop-zone-title { margin:0; font-weight:800; }
+    .drop-zone-title { margin:0 0 14px; font-weight:700; }
     .drop-zone-note { margin:4px 0 14px; color:var(--muted); font-size:12px; }
     .button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; padding:8px 13px; border:1px solid var(--line); border-radius:10px; background:var(--surface); cursor:pointer; font-weight:720; font-size:13px; transition:border-color .15s ease,background .15s ease,transform .05s ease; }
     .button:hover:not(:disabled) { border-color:var(--line-strong); background:var(--surface-hover); }
@@ -122,6 +121,7 @@
     .file-fallback-button:hover { color:var(--text); background:var(--surface-hover); }
     @media (max-width:767px),(pointer:coarse) and (max-height:600px) {
       .file-fallback-button { display:inline-flex; align-items:center; justify-content:center; }
+      #dropZone #fileFallbackButton { display:flex; width:max-content; margin:4px auto 0; }
     }.file-input { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
     .source-wrap { display:none; gap:14px; }
@@ -130,7 +130,7 @@
     .video-box video { display:block; width:100%; height:100%; object-fit:contain; background:#111; }
     #videoPreview { cursor:pointer; }
     .crop-overlay { position:absolute; z-index:3; border:2px solid rgba(255,255,255,.96); border-radius:5px; box-shadow:0 0 0 9999px rgba(0,0,0,.52),0 0 0 1px rgba(0,0,0,.42); pointer-events:none; background-image:linear-gradient(to right,transparent 33.333%,rgba(255,255,255,.32) 33.333%,rgba(255,255,255,.32) calc(33.333% + 1px),transparent calc(33.333% + 1px),transparent 66.666%,rgba(255,255,255,.32) 66.666%,rgba(255,255,255,.32) calc(66.666% + 1px),transparent calc(66.666% + 1px)),linear-gradient(to bottom,transparent 33.333%,rgba(255,255,255,.32) 33.333%,rgba(255,255,255,.32) calc(33.333% + 1px),transparent calc(33.333% + 1px),transparent 66.666%,rgba(255,255,255,.32) 66.666%,rgba(255,255,255,.32) calc(66.666% + 1px),transparent calc(66.666% + 1px)); }
-    .crop-drag-handle { position:absolute; left:50%; top:0; transform:translate(-50%,-50%); min-width:54px; height:24px; padding:0 9px; border:1px solid rgba(255,255,255,.48); border-radius:999px; background:rgba(15,17,16,.86); color:#fff; font-size:10px; font-weight:800; cursor:move; touch-action:none; pointer-events:auto; box-shadow:0 3px 10px rgba(0,0,0,.28); }
+    .crop-drag-handle { position:absolute; left:50%; top:0; transform:translate(-50%,-50%); min-width:54px; height:36px; padding:0 9px; border:1px solid rgba(255,255,255,.48); border-radius:999px; background:rgba(15,17,16,.86); color:#fff; font-size:10px; font-weight:800; cursor:move; touch-action:none; pointer-events:auto; box-shadow:0 3px 10px rgba(0,0,0,.28); }
     .crop-drag-handle:active { cursor:grabbing; }
     .video-play-button { position:absolute; left:11px; bottom:11px; z-index:2; display:grid; place-items:center; width:38px; height:38px; padding:0; border:1px solid rgba(255,255,255,.2); border-radius:11px; background:rgba(15,17,16,.78); color:#fff; box-shadow:0 4px 16px rgba(0,0,0,.24); backdrop-filter:blur(10px); cursor:pointer; }
     .video-play-button:hover { background:rgba(15,17,16,.94); }
@@ -149,7 +149,7 @@
     .preview-warning.is-visible { display:block; }
 
     .trim-block { margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
-    .timeline-wrap { padding:14px; border:1px solid var(--line); border-radius:16px; background:#f1f1ee; }
+    .timeline-wrap { padding:14px 0; background:transparent; }
     .timeline-top { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:8px; }
     .timeline-title-row { display:flex; align-items:center; gap:7px; }
     .timeline-title { font-size:13px; font-weight:800; }
@@ -223,10 +223,7 @@
 
     .settings-grid { display:grid; gap:16px; }
     .setting-group { display:grid; gap:8px; }
-    .compact-format-choice .format-card { min-height:70px; padding:10px 12px; }
-    .compact-quality-choice .quality-card { min-height:52px; padding:8px 10px; }
-    .compact-quality-choice .quality-card small { margin-top:1px; }
-    .compact-settings-card { overflow:hidden; border:1px solid var(--line); border-radius:13px; background:var(--surface); }
+    .compact-settings-card { min-width:0; border-block:1px solid var(--line); background:transparent; }
     .compact-setting-row { display:grid; grid-template-columns:minmax(0,1fr) minmax(220px,42%); align-items:center; gap:14px; min-height:62px; padding:10px 12px; border-bottom:1px solid var(--line); }
     .compact-setting-row:last-child { border-bottom:0; }
     .compact-setting-copy { display:grid; gap:2px; min-width:0; }
@@ -251,7 +248,10 @@
     .switch-label { min-width:24px; color:var(--muted); font-size:10px; font-weight:800; }
     .create-filename-row { display:grid; gap:7px; margin-bottom:14px; padding-bottom:14px; border-bottom:1px solid var(--line); }
     details.advanced summary { display:flex; align-items:center; gap:8px; }
-    .advanced-summary-note { color:var(--muted); font-size:10px; font-weight:500; }
+    .filename-field { display:flex; align-items:stretch; min-width:0; border:1px solid var(--line); border-radius:8px; background:var(--surface); }
+    .filename-field .input { flex:1 1 auto; width:0; min-width:0; border:0; border-radius:8px 0 0 8px; }
+    .filename-extension { display:flex; flex:none; align-items:center; padding:0 12px; border-left:1px solid var(--line); color:var(--muted); background:var(--surface-muted); border-radius:0 7px 7px 0; font-size:12px; }
+    .advanced-body .setting-hint { line-height:1.45; overflow-wrap:anywhere; }
     .legacy-radio-state { display:none!important; }
     .setting-title { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:0; font-size:12px; font-weight:800; }
     .setting-hint { color:var(--muted); font-size:11px; font-weight:500; }
@@ -279,19 +279,9 @@
     .format-choice { grid-template-columns:repeat(2,minmax(0,1fr)); display:grid; gap:8px; }
     .format-choice label { position:relative; }
     .format-choice input { position:absolute; opacity:0; pointer-events:none; }
-    .format-card { display:block; min-height:82px; padding:12px 13px; border:1px solid var(--line); border-radius:12px; cursor:pointer; }
-    .format-card strong { display:block; margin-bottom:2px; font-size:14px; }
-    .format-card small { color:var(--muted); font-size:11px; }
-    .format-choice input:checked + .format-card { border-color:var(--accent); background:var(--accent-soft); box-shadow:inset 0 0 0 1px var(--accent); }
-    .format-choice input:focus-visible + .format-card { outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent); outline-offset:2px; }
     .quality-choice { grid-template-columns:repeat(3,minmax(0,1fr)); display:grid; gap:7px; }
     .quality-choice label { position:relative; }
     .quality-choice input { position:absolute; opacity:0; pointer-events:none; }
-    .quality-card { display:block; min-height:67px; padding:10px; border:1px solid var(--line); border-radius:11px; cursor:pointer; text-align:center; }
-    .quality-card strong { display:block; font-size:12px; }
-    .quality-card small { display:block; margin-top:2px; color:var(--muted); font-size:10px; }
-    .quality-choice input:checked + .quality-card { border-color:var(--accent); background:var(--accent-soft); color:var(--accent); }
-    .quality-choice input:focus-visible + .quality-card { outline:3px solid color-mix(in srgb,var(--focus) 55%,transparent); outline-offset:2px; }
     details.advanced { border-top:1px solid var(--line); padding-top:12px; }
     details.advanced summary { cursor:pointer; color:var(--muted); font-size:12px; font-weight:750; }
     .advanced-body { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; padding-top:12px; }
@@ -326,10 +316,6 @@
     .result-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
     .result-actions .primary { grid-column:1 / -1; }
 
-    .tips { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-    .tip { padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
-    .tip strong { display:block; margin-bottom:3px; font-size:12px; }
-    .tip p { margin:0; color:var(--muted); font-size:11px; }
 
     .footer { width:min(1040px,100%); margin:0 auto; padding:0 clamp(14px,2.8vw,30px) 32px; color:var(--muted); font-size:12px; }
     .footer-inner { padding-top:14px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
@@ -371,7 +357,7 @@
       #sourceSection .source-wrap.is-visible { display:contents; }
       #sourceSection .source-preview-area { grid-row:1; min-width:0; }
       #sourceSection .trim-block { grid-row:2; margin-top:10px; padding-top:0; border-top:0; }
-      #sourceSection .source-info { grid-row:3; margin-top:10px; padding:10px 11px; border:1px solid var(--line); border-radius:12px; background:var(--surface-muted); }
+      #sourceSection .source-info { grid-row:3; margin-top:10px; padding:10px 0 0; border-top:1px solid var(--line); background:transparent; }
       #sourceSection .source-actions { margin-top:2px; }
       .video-box { aspect-ratio:16/10; }
       .timeline-wrap { padding:12px 10px; }
@@ -396,7 +382,6 @@
       .fine-tune-help { width:100%; margin-left:0; }
       .run-area { grid-template-columns:1fr; }
       .run-button { width:100%; }
-      .tips { grid-template-columns:1fr; }
       .panel-body { padding:14px; }
       .panel-head { padding:14px 14px 11px; }
       .app-mobile-bottom-bar {
@@ -419,8 +404,6 @@
       .brand-meta { font-size:10px; }
       .header-actions { gap:7px; }
       .intro h1 { font-size:22px; }
-      .format-card { min-height:78px; }
-      .format-card small { line-height:1.45; display:block; }
       .segment { grid-auto-flow:row; grid-template-columns:repeat(2,minmax(0,1fr)); }
       .segment.width-segment { grid-template-columns:repeat(2,minmax(0,1fr)); }
       .custom-number-choice { grid-template-columns:auto minmax(0,1fr); }
@@ -441,7 +424,6 @@
       .selection-play-button { flex:1 1 auto; justify-content:center; }
       .time-action-divider { display:none; }
       .quality-choice { gap:5px; }
-      .quality-card { padding:9px 5px; }
       .advanced-body { grid-template-columns:1fr; }
       .trim-fields { grid-template-columns:1fr; }
       .time-row { grid-template-columns:minmax(0,1fr) 96px; }
@@ -462,6 +444,187 @@
     .brand-name { display:flex; align-items:center; min-width:0; overflow:visible; }
     .brand-name > #brandName { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
     .version-badge, .header-actions { flex:0 0 auto; }
+
+    /* Plain settings form: native radios, a shared control column and no nested cards. */
+    #settingsSection .settings-grid { gap:0; }
+    #settingsSection .setting-group { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,320px); align-items:center; gap:12px; min-height:54px; padding:6px 0; border-bottom:1px solid var(--line); }
+    #settingsSection .setting-title, #settingsSection .compact-setting-copy strong, #createSection .setting-title { font-size:14px; font-weight:650; }
+    #settingsSection .format-choice, #settingsSection .quality-choice { display:flex; justify-content:flex-end; align-items:center; flex-wrap:wrap; gap:4px 20px; }
+    #settingsSection .format-choice label, #settingsSection .quality-choice label { display:inline-flex; align-items:center; gap:7px; min-height:44px; cursor:pointer; }
+    #settingsSection .format-choice input, #settingsSection .quality-choice input { position:static; opacity:1; pointer-events:auto; width:18px; height:18px; margin:0; flex:none; accent-color:var(--accent); }
+    #settingsSection .format-choice label:has(input:disabled), #settingsSection .quality-choice label:has(input:disabled) { cursor:default; opacity:.55; }
+    #settingsSection .plain-choice { font-size:14px; font-weight:500; white-space:nowrap; }
+    #settingsSection .compact-settings-card { border:0; }
+    #settingsSection .compact-setting-row { grid-template-columns:minmax(0,1fr) minmax(0,320px); min-height:54px; padding:7px 0; gap:12px; border-bottom:1px solid var(--line); }
+    #settingsSection .compact-setting-row:last-child { border-bottom:1px solid var(--line); }
+    #settingsSection .compact-setting-copy { display:block; }
+    #settingsSection .compact-setting-control { justify-content:flex-end; width:auto; }
+    #settingsSection .compact-select { width:148px; min-width:0; flex:0 1 148px; min-height:44px; }
+    #settingsSection .switch { justify-self:end; min-height:44px; }
+    #settingsSection .switch-label { display:none; }
+    #settingsSection .switch input:disabled + .switch-track { opacity:.5; }
+    #settingsSection .compact-crop-note { margin:8px 0; padding:0; font-size:12px; }
+    #settingsSection details.advanced { border:0; padding-top:12px; }
+    #settingsSection details.advanced summary { display:list-item; color:var(--text); font-size:13px; font-weight:600; min-height:36px; padding:8px 0; }
+    #settingsSection details.advanced .checkbox-row { border:0; padding:4px 0; }
+    #createSection .create-filename-row { grid-template-columns:minmax(0,1fr) minmax(0,320px); align-items:center; gap:12px; margin-bottom:14px; padding-bottom:14px; }
+    #createSection .filename-field { min-height:44px; }
+    #createSection .run-summary strong { font-weight:600; overflow-wrap:anywhere; }
+    #createSection #frameSummary:empty, #createSection .status-message:empty { display:none; }
+    #settingsSection .panel-head, #createSection .panel-head { padding-bottom:12px; }
+    @media (max-width:760px) {
+      #settingsSection .compact-setting-row, #settingsSection .setting-group { grid-template-columns:minmax(0,1fr) auto; }
+      #settingsSection .numeric-setting-row .compact-setting-control { display:flex; align-items:center; flex-wrap:wrap; }
+      #settingsSection .numeric-setting-row:has(.inline-custom-number:not([hidden])) { grid-template-columns:1fr; gap:4px; }
+      #settingsSection .numeric-setting-row:has(.inline-custom-number:not([hidden])) .compact-setting-control { justify-content:flex-start; width:100%; }
+      #settingsSection .numeric-setting-row .inline-custom-number { flex:1 1 120px; width:auto; min-width:0; }
+      #settingsSection .numeric-setting-row .compact-select { flex:0 1 132px; width:132px; }
+      #settingsSection .compact-select { width:132px; flex-basis:132px; }
+      #settingsSection .format-choice, #settingsSection .quality-choice { gap:2px 12px; }
+      #createSection .create-filename-row { grid-template-columns:1fr; gap:6px; }
+    }
+    @media (max-width:520px) {
+      #settingsSection .setting-group { grid-template-columns:minmax(0,1fr); gap:0; padding:8px 0 4px; }
+      #settingsSection .format-choice, #settingsSection .quality-choice { justify-content:flex-start; gap:2px 20px; }
+      #settingsSection .compact-setting-row { align-items:center; }
+      #settingsSection .compact-setting-control { flex-wrap:nowrap; }
+      #settingsSection .numeric-setting-row:has(.inline-custom-number:not([hidden])) .compact-setting-control { flex-wrap:wrap; }
+    }
+
+    /* Compact explanatory labels and a stable filename suffix. */
+    .filename-extension { box-sizing:border-box; flex:0 0 64px; width:64px; padding:0; justify-content:center; }
+    #settingsSection .format-choice { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 14px; justify-content:stretch; }
+    #settingsSection .format-choice label { align-items:flex-start; padding:8px 0; min-width:0; }
+    #settingsSection .format-choice input { margin-top:2px; }
+    #settingsSection .format-choice .choice-copy { display:grid; gap:3px; min-width:0; }
+    #settingsSection .format-choice .choice-description { color:var(--muted); font-size:11px; font-weight:400; line-height:1.4; overflow-wrap:anywhere; }
+    #settingsSection .compact-setting-copy { display:grid; gap:3px; }
+    #settingsSection .compact-setting-copy small { font-size:11px; max-width:none; }
+    #settingsSection .setting-group:has(.format-choice) { align-items:center; }
+    #settingsSection .setting-group:has(.quality-choice) .setting-title { display:grid; justify-content:start; gap:3px; }
+    #settingsSection .setting-group .setting-title small { color:var(--muted); font-size:11px; font-weight:400; line-height:1.4; }
+    @media (max-width:760px) {
+      #sourceSection .trim-block { margin-top:14px; }
+      #sourceSection .timeline-wrap { padding:6px 0 12px; }
+      #sourceSection .timeline-top { align-items:center; gap:8px; margin-bottom:8px; }
+      #sourceSection .timeline-title { font-size:14px; font-weight:650; }
+      #sourceSection .timeline-selection { flex-direction:row; align-items:center; }
+      #sourceSection #timelineSelection { display:none; }
+      #sourceSection #trimDuration { color:var(--accent); font-size:16px; font-weight:700; }
+      #sourceSection .timeline { height:108px; margin-inline:18px; }
+      #sourceSection .timeline-base { top:28px; height:52px; border-radius:7px; box-shadow:none; }
+      #sourceSection .timeline-selected { border:2px solid #d8f3e7; border-radius:6px; }
+      #sourceSection .timeline-edge span { font-size:11px; height:20px; min-width:24px; padding:0 4px; border-radius:4px; box-shadow:none; white-space:nowrap; }
+      #sourceSection .timeline-edge.start { top:0; }
+      #sourceSection .timeline-edge.end { top:auto; bottom:0; }
+      #sourceSection .timeline-edge.end span { background:var(--accent); }
+      #sourceSection .range-input { left:-16px; right:auto; width:calc(100% + 32px); height:44px; touch-action:none; }
+      #sourceSection #startRange { top:15px; }
+      #sourceSection #endRange { top:49px; }
+      #sourceSection .range-input::-webkit-slider-runnable-track { height:44px; background:transparent; }
+      #sourceSection .range-input::-webkit-slider-thumb { width:32px; height:44px; margin-top:0; border:1px solid var(--accent); border-radius:6px; background:linear-gradient(90deg,#fff 0 42%,#16624f 42% 48%,#fff 48% 54%,#16624f 54% 60%,#fff 60%); box-shadow:0 1px 3px #0003; }
+      #sourceSection .range-input::-moz-range-track { height:44px; background:transparent; }
+      #sourceSection .range-input::-moz-range-thumb { width:32px; height:44px; box-sizing:border-box; border:1px solid var(--accent); border-radius:6px; background:linear-gradient(90deg,#fff 0 42%,#16624f 42% 48%,#fff 48% 54%,#16624f 54% 60%,#fff 60%); box-shadow:0 1px 3px #0003; }
+      #sourceSection .range-input:focus-visible::-webkit-slider-thumb { outline:2px solid var(--focus); outline-offset:2px; }
+      #sourceSection .range-input:focus-visible::-moz-range-thumb { outline:2px solid var(--focus); outline-offset:2px; }
+      #sourceSection .playhead { top:28px; height:52px; }
+      #sourceSection .playhead-grab { width:32px; height:52px; }
+      #sourceSection .playhead-time { top:52px; z-index:25; }
+      #sourceSection .timeline-labels { margin-inline:18px; font-size:11px; }
+      #sourceSection .timeline-scrub-hint { font-size:11px; line-height:1.45; align-items:flex-start; margin:8px 0 12px; }
+      #sourceSection .fine-tune-toolbar { flex-wrap:nowrap; justify-content:space-between; margin:0 0 12px; padding:0; border:0; background:transparent; gap:6px; }
+      #sourceSection .fine-tune-label { font-size:12px; font-weight:500; white-space:normal; }
+      #sourceSection .fine-step-segment { margin-left:auto; }
+      #sourceSection .fine-step-button { min-height:40px; font-size:12px; padding:4px 10px; }
+      #sourceSection .fine-tune-help { display:none; }
+      #sourceSection .trim-fields { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+      #sourceSection .trim-time-card { min-width:0; padding:0; border:0; border-radius:0; gap:6px; background:transparent; }
+      #sourceSection .trim-time-head .field-label { color:var(--text); font-size:13px; font-weight:650; }
+      #sourceSection .trim-point-badge { display:none; }
+      #sourceSection .time-row { grid-template-columns:minmax(0,1fr); gap:6px; }
+      #sourceSection .time-row .input { min-width:0; min-height:44px; text-align:center; font-size:16px; font-variant-numeric:tabular-nums; padding:8px 5px; }
+      #sourceSection .time-row .tiny-button { min-height:44px; font-size:12px; font-weight:500; padding:5px 3px; white-space:normal; }
+      #sourceSection .nudge-row { grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; }
+      #sourceSection .nudge-button { min-height:44px; font-size:20px; background:var(--surface); }
+      #sourceSection .nudge-caption { display:none; }
+      #sourceSection .time-actions { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-top:14px; padding-top:12px; border-top:1px solid var(--line); }
+      #sourceSection .time-actions .selection-play-button, #sourceSection .time-actions .tiny-button { min-height:44px; font-size:12px; padding:6px; justify-content:center; text-align:center; }
+      #sourceSection .time-actions .time-link { min-height:44px; font-size:12px; text-decoration:underline; text-underline-offset:3px; }
+      #sourceSection .time-action-divider { display:none; }
+      #sourceSection .video-play-button { width:44px; height:44px; }
+      #settingsSection .loop-row .compact-setting-copy { min-width:0; }
+    }
+
+    /* Align option names independently of the description's line count. */
+    #settingsSection .format-choice { align-items:stretch; }
+    #settingsSection .format-choice label { display:grid; grid-template-columns:18px minmax(0,1fr); align-items:start; align-content:start; gap:7px; min-height:44px; }
+    #settingsSection .format-choice .choice-copy { grid-template-rows:auto auto; align-content:start; }
+    #settingsSection .format-choice .plain-choice { line-height:20px; }
+    #settingsSection .format-choice input { margin:1px 0 0; }
+
+    /* The same start/end labels on the timeline and in the time fields. */
+    #sourceSection .timeline-edge span, #sourceSection .trim-point-badge {
+      display:inline-flex; align-items:center; justify-content:center; width:max-content;
+      min-width:0; min-height:22px; height:auto; padding:3px 7px; border-radius:4px;
+      font-size:11px; line-height:16px; font-weight:650; white-space:nowrap; box-shadow:none;
+    }
+    #sourceSection .timeline-edge.start span, #sourceSection .trim-point-badge.start { background:var(--accent); color:#fff; }
+    #sourceSection .timeline-edge.end span, #sourceSection .trim-point-badge.end { background:#30332f; color:#fff; }
+    #sourceSection .trim-time-head { justify-content:flex-start; }
+    #sourceSection .timeline-selected { border-color:#b7d9cb; }
+
+    @media (max-width:760px) {
+      #sourceSection .timeline { height:122px; margin-inline:22px; }
+      #sourceSection .timeline-base { top:33px; height:56px; border-radius:6px; }
+      #sourceSection .timeline-selected { border:2px solid #b7d9cb; border-radius:4px; }
+      #sourceSection .range-input { left:-22px; width:calc(100% + 44px); height:44px; }
+      #sourceSection #startRange { top:15px; --trim-handle-color:var(--accent); }
+      #sourceSection #endRange { top:64px; --trim-handle-color:#30332f; }
+      #sourceSection .range-input::-webkit-slider-thumb {
+        box-sizing:border-box; width:44px; height:44px; margin:0;
+        border:7px solid transparent; border-inline-width:14px; border-radius:18px;
+        background:linear-gradient(#fff,#fff) center / 2px 12px no-repeat,var(--trim-handle-color);
+        background-clip:padding-box; box-shadow:none; touch-action:none;
+      }
+      #sourceSection .range-input::-moz-range-thumb {
+        box-sizing:border-box; width:44px; height:44px;
+        border:7px solid transparent; border-inline-width:14px; border-radius:18px;
+        background:linear-gradient(#fff,#fff) center / 2px 12px no-repeat,var(--trim-handle-color);
+        background-clip:padding-box; box-shadow:none; touch-action:none;
+      }
+      #sourceSection .range-input:disabled::-webkit-slider-thumb { opacity:.5; }
+      #sourceSection .range-input:disabled::-moz-range-thumb { opacity:.5; }
+      #sourceSection .playhead { top:33px; height:56px; }
+      #sourceSection .playhead-grab { width:44px; height:56px; }
+      #sourceSection .playhead-grab::before { width:10px; height:10px; border-radius:50%; transform:translate(-50%,-35%); box-shadow:0 0 0 1px #30332f; }
+      #sourceSection .playhead-line { width:2px; box-shadow:0 0 0 1px #30332f; }
+      #sourceSection .playhead-time { top:56px; }
+      #sourceSection .timeline-labels { margin-inline:22px; }
+      #sourceSection .trim-fields { gap:12px; }
+      #sourceSection .trim-time-card { gap:4px; }
+      #sourceSection .trim-time-head { min-height:24px; }
+      #sourceSection .time-row { gap:2px; }
+      #sourceSection .time-row .input { min-height:44px; border-radius:7px; }
+      #sourceSection .time-row .tiny-button {
+        display:flex; align-items:center; justify-content:center; gap:5px; min-height:44px;
+        padding:5px 2px; border:0; border-radius:6px; background:transparent;
+        color:var(--accent); font-size:12px; font-weight:550; line-height:1.25;
+      }
+      #sourceSection .time-row .tiny-button:hover:not(:disabled) { background:var(--accent-soft); }
+      #sourceSection .time-row .tiny-button svg { flex:none; width:14px; height:14px; }
+      #sourceSection .nudge-row { gap:0; border:1px solid var(--line); border-radius:7px; background:var(--surface-muted); overflow:hidden; }
+      #sourceSection .nudge-button {
+        display:grid; place-items:center; min-height:44px; min-width:0;
+        border:0; border-radius:0; background:transparent; color:var(--text);
+      }
+      #sourceSection .nudge-button + .nudge-caption + .nudge-button { border-left:1px solid var(--line); }
+      #sourceSection .nudge-button svg { width:17px; height:17px; }
+      #sourceSection .nudge-button:focus-visible { outline-offset:-3px; }
+      #sourceSection .nudge-button:hover:not(:disabled) { background:var(--accent-soft); }
+      #sourceSection .time-actions .selection-play-button, #sourceSection .time-actions .tiny-button { border-radius:7px; }
+    }
+    #sourceSection .nudge-button svg { width:16px; height:16px; vertical-align:middle; }
+    #sourceSection .time-row .tiny-button svg { width:13px; height:13px; vertical-align:middle; margin-right:3px; }
   </style>
 </head>
 <body>
@@ -496,10 +659,10 @@
   </header>
 
   <main class="main">
-    <section class="intro" aria-labelledby="pageTitle">
+    <section class="intro" aria-labelledby="pageIntro">
       <div>
-        <h1 id="pageTitle" data-i18n="pageTitle">動画からアニメーション画像を作成</h1>
-        <p data-i18n="pageIntro">動画の好きな範囲を選んで、GIFまたはWebPとして保存します。変換はブラウザー内で完結します。</p>
+        
+        <p id="pageIntro" data-i18n="pageIntro">動画の好きな範囲をアニメーションGIFやWebPに変換できます。</p>
       </div>
       <span class="local-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6z"/><path d="m9 12 2 2 4-5"/></svg><span data-i18n="localBadge">完全ローカル処理</span></span>
     </section>
@@ -508,13 +671,12 @@
       <section class="panel" id="sourceSection" aria-labelledby="sourceTitle">
         <div class="panel-head">
           <div><h2 class="panel-title" id="sourceTitle" data-i18n="sourceTitle">動画</h2><p class="panel-note" data-i18n="sourceNote">端末から動画を選択してください。</p></div>
-          <span class="step-badge">1</span>
         </div>
         <div class="panel-body">
           <div class="drop-zone" id="dropZone">
             <svg class="drop-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3z"/><path d="M8 3v4M16 3v4"/></svg>
             <p class="drop-zone-title" data-i18n="dropTitle">動画をここにドロップ</p>
-            <p class="drop-zone-note" data-i18n="dropNote">または端末から選択</p>
+            
             <label class="button primary" for="videoInput" data-i18n="chooseVideo">動画を選択</label>
             <input class="file-input" id="videoInput" type="file" accept="video/*,.mp4,.mov,.m4v,.webm,.mkv,.avi">
             <button class="file-fallback-button" id="fileFallbackButton" type="button" data-i18n="fileFallback">ファイルから選択</button>
@@ -524,7 +686,7 @@
           <div class="source-wrap" id="sourceWrap">
             <div class="source-preview-area">
               <div class="video-box" id="videoBox"><video id="videoPreview" playsinline preload="metadata"></video><div class="crop-overlay" id="cropOverlay" hidden><button class="crop-drag-handle" id="cropDragHandle" type="button" data-i18n="moveCrop">移動</button></div><button class="video-play-button" id="videoPlayButton" type="button" disabled data-i18n-aria-label="play"><svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg></button><video id="filmstripProbe" class="filmstrip-probe" muted playsinline preload="auto" aria-hidden="true" tabindex="-1"></video></div>
-              <div class="preview-warning" id="previewWarning" data-i18n="previewWarning">この動画はブラウザーでプレビューできません。FFmpegで変換できる場合があります。開始・終了は時刻で指定してください。</div>
+              <div class="preview-warning" id="previewWarning" data-i18n="previewWarning">この動画はプレビューできませんが、変換できる場合があります。開始・終了は秒数で指定してください。</div>
             </div>
             <div class="source-info">
               <p class="file-name" id="fileName">—</p>
@@ -535,7 +697,7 @@
               </dl>
               <div class="source-actions">
                 <button class="button" id="replaceButton" type="button" data-i18n="replaceVideo">別の動画</button>
-                <button class="button ghost" id="clearVideoButton" type="button" data-i18n="clearVideo">解除</button>
+                <button class="button ghost" id="clearVideoButton" type="button" data-i18n="clearVideo">解除</button><button class="file-fallback-button" id="replaceFallbackButton" type="button" data-i18n="fileFallback">ファイルから選択</button>
               </div>
             </div>
           </div>
@@ -543,19 +705,19 @@
           <div class="trim-block" id="trimBlock" hidden>
             <div class="timeline-wrap">
               <div class="timeline-top">
-                <div class="timeline-title-row"><span class="timeline-title" data-i18n="trimRange">切り出す範囲</span><span class="animation-pill">GIF / WebP</span></div>
+                <div class="timeline-title-row"><span class="timeline-title" data-i18n="trimRange">切り出す範囲</span></div>
                 <span class="timeline-selection"><span id="timelineSelection">0:00.000 → 0:05.000</span><strong id="trimDuration">5.00秒</strong></span>
               </div>
               <div class="timeline" id="timeline" role="group" data-i18n-aria-label="trimRange">
                 <div class="timeline-base"><div class="timeline-filmstrip" id="timelineFilmstrip" aria-hidden="true"></div><div class="timeline-selected" id="timelineSelected"></div></div>
-                <div class="timeline-edge start" id="startEdge"><span>S</span></div>
-                <div class="timeline-edge end" id="endEdge"><span>E</span></div>
+                <div class="timeline-edge start" id="startEdge" aria-hidden="true"><span data-i18n="start">開始</span></div>
+                <div class="timeline-edge end" id="endEdge" aria-hidden="true"><span data-i18n="end">終了</span></div>
                 <div class="playhead" id="playhead"><span class="playhead-line" aria-hidden="true"></span><button class="playhead-grab" id="playheadGrab" type="button" role="slider" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" data-i18n-aria-label="currentPosition"></button><span class="playhead-time" id="playheadTime">0:00.000</span></div>
                 <input class="range-input" id="startRange" type="range" min="0" max="5" step="0.01" value="0" data-i18n-aria-label="startPosition">
                 <input class="range-input" id="endRange" type="range" min="0" max="5" step="0.01" value="5" data-i18n-aria-label="endPosition">
               </div>
               <div class="timeline-labels"><span>0:00</span><span id="timelineEndLabel">0:05</span></div>
-              <div class="timeline-scrub-hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M8 9l-3 3 3 3M16 9l3 3-3 3"/></svg><span data-i18n="timelineScrubHint">白い縦線をドラッグして再生位置を移動できます。</span><span class="timeline-filmstrip-status" id="filmstripStatus" data-i18n="thumbPreparing">サムネイルを準備中…</span></div>
+              <div class="timeline-scrub-hint"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M8 9l-3 3 3 3M16 9l3 3-3 3"/></svg><span data-i18n="timelineScrubHint">開始・終了をドラッグして範囲を調整できます。白い縦線で再生位置を移動できます。</span><span class="timeline-filmstrip-status" id="filmstripStatus" data-i18n="thumbPreparing">サムネイルを準備中…</span></div>
               <div class="fine-tune-toolbar" aria-label="Fine tune step">
                 <span class="fine-tune-label" data-i18n="fineTuneStep">微調整幅</span>
                 <div class="fine-step-segment" role="group" data-i18n-aria-label="fineTuneStep">
@@ -566,17 +728,17 @@
               </div>
               <div class="trim-fields">
                 <div class="trim-time-card">
-                  <div class="trim-time-head"><span class="field-label" data-i18n="start">開始</span><span class="trim-point-badge start">S</span></div>
-                  <div class="time-row"><input class="input" id="startInput" type="text" inputmode="decimal" value="0:00.000" placeholder="0:00.000"><button class="tiny-button" id="setStartHere" type="button" data-i18n="setHere">現在位置</button></div>
-                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier">−</button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="1" data-i18n-aria-label="nudgeLater">＋</button></div>
+                  <div class="trim-time-head"><label class="trim-point-badge start" for="startInput" data-i18n="start">開始</label></div>
+                  <div class="time-row"><input class="input" id="startInput" type="text" inputmode="decimal" value="0:00.000" placeholder="0:00.000"><button class="tiny-button" id="setStartHere" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg><span data-i18n="setHere">現在位置</span></button></div>
+                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="1" data-i18n-aria-label="nudgeLater"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div>
                 </div>
                 <div class="trim-time-card">
-                  <div class="trim-time-head"><span class="field-label" data-i18n="end">終了</span><span class="trim-point-badge end">E</span></div>
-                  <div class="time-row"><input class="input" id="endInput" type="text" inputmode="decimal" value="0:05.000" placeholder="0:05.000"><button class="tiny-button" id="setEndHere" type="button" data-i18n="setHere">現在位置</button></div>
-                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier">−</button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="1" data-i18n-aria-label="nudgeLater">＋</button></div>
+                  <div class="trim-time-head"><label class="trim-point-badge end" for="endInput" data-i18n="end">終了</label></div>
+                  <div class="time-row"><input class="input" id="endInput" type="text" inputmode="decimal" value="0:05.000" placeholder="0:05.000"><button class="tiny-button" id="setEndHere" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg><span data-i18n="setHere">現在位置</span></button></div>
+                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="1" data-i18n-aria-label="nudgeLater"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div>
                 </div>
               </div>
-              <div class="time-actions"><button class="selection-play-button" id="playSelection" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span data-i18n="playSelection">選択範囲を再生</span></button><button class="tiny-button" id="useFullVideo" type="button" data-i18n="useFullVideo" disabled>動画全体を選択</button><span class="time-action-divider" aria-hidden="true"></span><button class="time-link" id="jumpStart" type="button" data-i18n="jumpStartShort">Sへ移動</button><button class="time-link" id="jumpEnd" type="button" data-i18n="jumpEndShort">Eへ移動</button></div>
+              <div class="time-actions"><button class="selection-play-button" id="playSelection" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span data-i18n="playSelection">選択範囲を再生</span></button><button class="tiny-button" id="useFullVideo" type="button" data-i18n="useFullVideo" disabled>動画全体を選択</button><span class="time-action-divider" aria-hidden="true"></span><button class="time-link" id="jumpStart" type="button" data-i18n="jumpStartShort">開始へ移動</button><button class="time-link" id="jumpEnd" type="button" data-i18n="jumpEndShort">終了へ移動</button></div>
             </div>
           </div>
         </div>
@@ -584,24 +746,23 @@
 
       <section class="panel" id="settingsSection" aria-labelledby="settingsTitle">
         <div class="panel-head">
-          <div><h2 class="panel-title" id="settingsTitle" data-i18n="settingsTitle">出力設定</h2><p class="panel-note" data-i18n="settingsNote">形式と品質を選び、サイズなどは必要なところだけ調整します。</p></div>
-          <span class="step-badge">2</span>
+          <div><h2 class="panel-title" id="settingsTitle" data-i18n="settingsTitle">出力設定</h2></div>
         </div>
         <div class="panel-body settings-grid">
           <div class="setting-group">
-            <p class="setting-title"><span data-i18n="format">形式</span><span class="setting-hint" id="formatHint">WebP: 高画質・小容量</span></p>
-            <div class="format-choice compact-format-choice">
-              <label><input type="radio" name="format" value="gif"><span class="format-card"><strong>GIF</strong><small data-i18n="gifDescription">互換性重視。256色まで。</small></span></label>
-              <label><input type="radio" name="format" value="webp" checked><span class="format-card"><strong>WebP</strong><small data-i18n="webpDescription">フルカラーで小さくしやすい。</small></span></label>
+            <p class="setting-title" id="formatLabel" data-i18n="format">形式</p>
+            <div class="format-choice compact-format-choice" role="radiogroup" aria-labelledby="formatLabel">
+              <label><input type="radio" name="format" value="gif"><span class="choice-copy"><span class="plain-choice">GIF</span><small class="choice-description" data-i18n="gifDescription">互換性重視・256色まで</small></span></label>
+              <label><input type="radio" name="format" value="webp" checked><span class="choice-copy"><span class="plain-choice">WebP</span><small class="choice-description" data-i18n="webpDescription">高画質・小容量・フルカラー</small></span></label>
             </div>
           </div>
 
           <div class="setting-group">
-            <p class="setting-title"><span data-i18n="quality">品質</span><span class="setting-hint" data-i18n="qualityHint">サイズとのバランス</span></p>
-            <div class="quality-choice compact-quality-choice">
-              <label><input type="radio" name="quality" value="light"><span class="quality-card"><strong data-i18n="qualityLight">軽量</strong><small data-i18n="qualityLightNote">小さめ</small></span></label>
-              <label><input type="radio" name="quality" value="standard" checked><span class="quality-card"><strong data-i18n="qualityStandard">標準</strong><small data-i18n="qualityStandardNote">おすすめ</small></span></label>
-              <label><input type="radio" name="quality" value="high"><span class="quality-card"><strong data-i18n="qualityHigh">高品質</strong><small data-i18n="qualityHighNote">大きめ</small></span></label>
+            <div class="setting-title"><span id="qualityLabel" data-i18n="quality">品質</span><small data-i18n="qualityHint">高品質ほど容量が増えやすくなります</small></div>
+            <div class="quality-choice compact-quality-choice" role="radiogroup" aria-labelledby="qualityLabel">
+              <label><input type="radio" name="quality" value="light"><span class="plain-choice" data-i18n="qualityLight">軽量</span></label>
+              <label><input type="radio" name="quality" value="standard" checked><span class="plain-choice" data-i18n="qualityStandard">標準</span></label>
+              <label><input type="radio" name="quality" value="high"><span class="plain-choice" data-i18n="qualityHigh">高品質</span></label>
             </div>
           </div>
 
@@ -611,16 +772,16 @@
               <div class="compact-setting-control"><select class="select compact-select" id="widthSelect"><option value="320">320px</option><option value="480" selected>480px</option><option value="720">720px</option><option value="0" data-i18n="originalSize">元サイズ</option><option value="custom" data-i18n="customValue">自由入力</option></select><span class="inline-custom-number" id="customWidthWrap" hidden><span class="inline-custom-input"><input class="input" id="customWidth" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" value="640" autocomplete="off" aria-describedby="customWidthRange" data-i18n-aria-label="customWidthLabel"><span class="custom-unit">px</span></span><small class="custom-range-hint" id="customWidthRange" data-i18n="widthCustomHint">16〜4096</small></span></div>
             </div>
             <div class="compact-setting-row numeric-setting-row">
-              <label class="compact-setting-copy" for="fpsSelect"><strong>FPS</strong><small data-i18n="fpsHint">高いほど滑らか・大容量</small></label>
+              <label class="compact-setting-copy" for="fpsSelect"><strong>FPS</strong><small data-i18n="fpsHint">高いほど滑らかで容量も増えやすくなります</small></label>
               <div class="compact-setting-control"><select class="select compact-select" id="fpsSelect"><option value="10">10 fps</option><option value="15" selected>15 fps</option><option value="20">20 fps</option><option value="30">30 fps</option><option value="custom" data-i18n="customValue">自由入力</option></select><span class="inline-custom-number" id="customFpsWrap" hidden><span class="inline-custom-input"><input class="input" id="customFps" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" value="24" autocomplete="off" aria-describedby="customFpsRange" data-i18n-aria-label="customFpsLabel"><span class="custom-unit">fps</span></span><small class="custom-range-hint" id="customFpsRange" data-i18n="fpsCustomHint">1〜60</small></span></div>
             </div>
             <div class="compact-setting-row">
-              <label class="compact-setting-copy" for="cropSelect"><strong data-i18n="crop">クロップ</strong><small data-i18n="cropHint">必要な部分だけ切り抜き</small></label>
+              <label class="compact-setting-copy" for="cropSelect"><strong data-i18n="crop">切り抜き</strong></label>
               <div class="compact-setting-control"><select class="select compact-select" id="cropSelect"><option value="none" data-i18n="cropNone">なし</option><option value="1:1">1:1</option><option value="4:3">4:3</option><option value="16:9">16:9</option><option value="9:16">9:16</option></select></div>
             </div>
             <div class="compact-setting-row loop-row">
-              <span class="compact-setting-copy"><strong data-i18n="loopAnimation">ループする</strong><small data-i18n="loopAnimationHint">OFFにすると1回再生で停止します。</small></span>
-              <label class="switch" for="loopAnimation"><input id="loopAnimation" type="checkbox" checked><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label" id="loopStateLabel">ON</span></label>
+              <span class="compact-setting-copy"><strong id="loopLabel" data-i18n="loopAnimation">繰り返し再生</strong><small data-i18n="loopAnimationHint">オフにすると1回だけ再生します</small></span>
+              <label class="switch" for="loopAnimation"><input id="loopAnimation" type="checkbox" aria-labelledby="loopLabel" checked><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label" id="loopStateLabel">ON</span></label>
             </div>
           </div>
           <p class="crop-note compact-crop-note" id="cropNote" hidden data-i18n="cropNote">比率を選ぶとプレビューに枠が表示されます。枠上部の「移動」をドラッグして位置を調整できます。</p>
@@ -632,14 +793,14 @@
           </div>
 
           <details class="advanced" id="advancedDetails">
-            <summary><span data-i18n="advanced">詳細設定</span><span class="advanced-summary-note" data-i18n="advancedNote">必要なときだけ</span></summary>
+            <summary><span data-i18n="advanced">詳細設定</span></summary>
             <div class="advanced-body format-advanced" id="gifAdvanced" hidden>
-              <label class="field"><span class="field-label" data-i18n="gifColors">GIF色数</span><select class="select" id="gifColors"><option value="32">32</option><option value="64">64</option><option value="128" selected>128</option><option value="256">256</option></select></label>
-              <label class="field"><span class="field-label">Dither</span><select class="select" id="gifDither"><option value="sierra2_4a" selected>sierra2_4a</option><option value="floyd_steinberg">floyd_steinberg</option><option value="sierra2">sierra2</option><option value="bayer">bayer</option><option value="heckbert">heckbert</option></select></label>
+              <label class="field"><span class="field-label" data-i18n="gifColors">GIF色数</span><select class="select" id="gifColors"><option value="16">16</option><option value="32">32</option><option value="64">64</option><option value="128" selected>128</option><option value="256">256</option></select></label>
+              <label class="field"><span class="field-label" data-i18n="ditherLabel">ディザ（色の表現）</span><select class="select" id="gifDither"><option value="sierra2_4a" selected>sierra2_4a</option><option value="floyd_steinberg">floyd_steinberg</option><option value="sierra2">sierra2</option><option value="bayer">bayer</option><option value="heckbert">heckbert</option></select></label>
             </div>
             <div class="advanced-body format-advanced" id="webpAdvanced">
-              <label class="field"><span class="field-label">WebP Quality</span><input class="input" id="webpQuality" type="number" min="0" max="100" step="1" value="75"></label>
-              <label class="field"><span class="field-label">Compression level</span><input class="input" id="webpCompression" type="number" min="0" max="6" step="1" value="4"></label>
+              <label class="field"><span class="field-label" data-i18n="webpQualityLabel">WebP画質</span><input class="input" id="webpQuality" type="number" min="0" max="100" step="1" value="75" aria-describedby="webpQualityHint"><small class="setting-hint" id="webpQualityHint" data-i18n="webpQualityHint">0〜100。高いほど画質が良くなりますが、容量が増えます。ロスレス時は圧縮の度合いを調整します。</small></label>
+              <label class="field"><span class="field-label" data-i18n="compressionLabel">圧縮レベル</span><input class="input" id="webpCompression" type="number" min="0" max="6" step="1" value="4" aria-describedby="webpCompressionHint"><small class="setting-hint" id="webpCompressionHint" data-i18n="webpCompressionHint">0〜6。高いほど圧縮に時間がかかりますが、容量を抑えやすくなります。</small></label>
               <label class="checkbox-row"><input id="webpLossless" type="checkbox"><span data-i18n="losslessWebp">Lossless WebP</span></label>
             </div>
           </details>
@@ -649,12 +810,11 @@
       <section class="panel" id="createSection" aria-labelledby="createTitle">
         <div class="panel-head">
           <div><h2 class="panel-title" id="createTitle" data-i18n="createTitle">作成</h2></div>
-          <span class="step-badge">3</span>
         </div>
         <div class="panel-body">
-          <div class="create-filename-row"><label class="setting-title" for="outputFilename"><span data-i18n="filename">出力ファイル名</span><span class="setting-hint" data-i18n="filenameHint">拡張子は形式に合わせて自動変更します</span></label><input class="input" id="outputFilename" type="text" value="animation.webp" autocomplete="off" spellcheck="false" enterkeyhint="done"></div>
+          <div class="create-filename-row"><label class="setting-title" for="outputFilename"><span data-i18n="filename">出力ファイル名</span></label><div class="filename-field"><input class="input" id="outputFilename" type="text" value="animation" autocomplete="off" spellcheck="false" enterkeyhint="done" aria-describedby="outputExtension"><span id="outputExtension" class="filename-extension">.webp</span></div></div>
           <div class="run-area">
-            <div class="run-summary"><strong id="runSummary">動画を選択してください</strong><span id="frameSummary">—</span></div>
+            <div class="run-summary"><strong id="runSummary">動画を選択してください</strong><span id="frameSummary"></span></div>
             <button class="button primary run-button" id="runButton" type="button" disabled>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>
               <span id="runButtonLabel" data-i18n="createWebp">WebPを作成</span>
@@ -662,7 +822,7 @@
           </div>
           <div class="progress-wrap" id="progressWrap">
             <div class="progress-line"><span id="progressLabel" data-i18n="preparing">準備中…</span><span id="progressPercent">0%</span></div>
-            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div><button class="button" id="cancelRunButton" type="button" data-i18n="cancel" hidden disabled>キャンセル</button>
           </div>
           <p class="status-message" id="statusMessage" aria-live="polite"></p>
         </div>
@@ -671,7 +831,6 @@
       <section class="panel result-panel" id="resultSection" aria-labelledby="resultTitle">
         <div class="panel-head">
           <div><h2 class="panel-title" id="resultTitle" data-i18n="resultTitle">完成</h2><p class="panel-note" data-i18n="resultNote">プレビューを確認して保存してください。</p></div>
-          <span class="step-badge">4</span>
         </div>
         <div class="panel-body result-layout">
           <div class="result-preview"><img id="resultPreview" alt=""></div>
@@ -680,7 +839,7 @@
             <dl class="result-stats">
               <dt data-i18n="outputDimensions">サイズ</dt><dd id="outputDimensions">—</dd>
               <dt data-i18n="outputDuration">長さ</dt><dd id="outputDuration">—</dd>
-              <dt>FPS</dt><dd id="outputFps">—</dd>
+              <dt data-i18n="requestedFps">指定FPS</dt><dd id="outputFps">—</dd><dt data-i18n="frames">フレーム</dt><dd id="outputFrames">—</dd>
             </dl>
             <div><span class="field-label" data-i18n="filename">ファイル名</span><p class="result-sub" id="resultFilename">animation.webp</p></div>
             <div class="result-actions">
@@ -692,11 +851,6 @@
         </div>
       </section>
 
-      <div class="tips" aria-label="Tips">
-        <div class="tip"><strong data-i18n="tipWebpTitle">WebPがおすすめ</strong><p data-i18n="tipWebpBody">対応先に制約がなければ、GIFより色数が多く小さくしやすいWebPが便利です。</p></div>
-        <div class="tip"><strong data-i18n="tipShortTitle">短くすると軽い</strong><p data-i18n="tipShortBody">時間・横幅・FPSを下げるほど、処理時間と出力サイズを抑えやすくなります。</p></div>
-        <div class="tip"><strong data-i18n="tipMemoryTitle">端末メモリに注意</strong><p data-i18n="tipMemoryBody">出力は一時的にブラウザーのメモリへ作られます。長い4K動画は短い範囲を選んでください。</p></div>
-      </div>
     </div>
   </main>
 
@@ -714,16 +868,17 @@
     <div class="dialog-header"><h2 id="helpTitle" data-i18n="helpTitle">使い方と注意事項</h2><button class="dialog-close" id="closeHelpButton" type="button" data-i18n-aria-label="close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12"/><path d="M18 6 6 18"/></svg></button></div>
     <div class="dialog-body">
       <h3 data-i18n="helpBasicsTitle">基本操作</h3>
-      <ol><li data-i18n="helpStep1">動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。</li><li data-i18n="helpStep2">GIFまたはWebP、横幅、FPS、品質を選んで「作成」を押します。</li><li data-i18n="helpStep3">完成後にプレビューを確認し、ファイル名を指定して保存します。</li></ol>
+      <ol><li data-i18n="helpStep1">動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。</li><li data-i18n="helpStep2">GIFまたはWebPを選び、必要に応じて出力設定を変更します。</li><li data-i18n="helpStep3">出力ファイル名を確認して作成し、完成後にプレビューを確認して保存します。</li></ol>
       <h3 data-i18n="helpFormatTitle">GIFとWebP</h3>
       <p data-i18n="helpFormatBody">GIFは広い互換性がありますが最大256色です。WebPはフルカラーで、同程度の見た目なら小さくしやすいため、対応先に制約がなければWebPがおすすめです。</p>
       <h3 data-i18n="helpPrivacyTitle">プライバシー</h3>
       <p data-i18n="helpPrivacyBody">動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。</p>
       <h3 data-i18n="helpNotesTitle">注意事項</h3>
-      <ul><li data-i18n="helpNotePreview">ブラウザーが再生できないcodecでもFFmpegで変換できる場合があります。その場合は開始・終了を秒数で入力してください。</li><li data-i18n="helpNoteMemory">長時間・高解像度・高FPSは処理時間とメモリ使用量が増えます。まず短い範囲、480px、15fps程度をおすすめします。</li><li data-i18n="helpNoteTiming">GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。</li><li data-i18n="helpNoteOutput">変換結果は一時的にブラウザーのメモリ上にあります。必要な結果は必ず保存してください。</li></ul>
+      <ul><li data-i18n="helpNotePreview">プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。切り抜きには動画のサイズが必要です。</li><li data-i18n="helpNoteMemory">動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。</li><li data-i18n="helpNoteSettings">横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。</li><li data-i18n="helpNoteTiming">GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。</li></ul>
       <p class="dialog-note" data-i18n="helpOffline">保存したHTMLを直接開いて、オフラインでも変換できます。</p>
-      <p data-i18n="helpDialogScroll">閉じるボタン、Escキー、外側のクリックで閉じられます。</p>
-      <p class="help-build">v<span id="footerVersion">1.0.4</span> · FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span></p>
+      
+      <p class="dialog-note"><span data-i18n="licenseSummary">アプリ本体: MIT。FFmpeg: LGPL-2.1-or-later。libwebp: BSD系ライセンス。</span> <a href="https://github.com/ttomohisa/htmlapps-video-to-gif-webp/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer" data-i18n="licenseDetails">ライセンスとソース</a></p>
+      <p class="help-build">v<span id="footerVersion">1.0.5</span> · FFmpeg WASM Builder v<span id="builderVersion">1.10.1</span></p>
     </div>
   </dialog>
 
@@ -1321,44 +1476,42 @@
   <script>
     (() => {
       'use strict';
-      const APP_CONFIG = {"$schema":"./schemas/app-config.schema.json","name":"Video to GIF / WebP","nameJa":"動画をGIF / WebPに変換","slug":"video-to-gif-webp","version":"1.0.4","description":"Create animated GIF or WebP files from a selected range of a video entirely in your browser.","descriptionJa":"動画の好きな範囲を、ブラウザー内だけでアニメーションGIFまたはWebPに変換します。","defaultLanguage":"auto","repository":{"owner":"ttomohisa","name":"htmlapps-video-to-gif-webp"},"build":{"output":"dist/index.html","blockRuntimeNetwork":true,"selfExtract":{"enabled":true,"output":"dist/index.self-extract.html"}}};
-      const BUILD_MANIFEST = {"schemaVersion":1,"builder":"htmlapps-video-to-gif-webp/1.0","generatedAtUtc":"2026-11-14T02:00:49.9908301Z","app":{"name":"Video to GIF / WebP","slug":"video-to-gif-webp","version":"1.0.4"},"dependencies":[],"ffmpeg":{"repository":"ttomohisa/htmlapps-ffmpeg-wasm-builder","version":"1.10.1","profiles":[{"id":"video-to-gif","archive":"ffmpeg-wasm-video-to-gif-v1.10.1.zip","archiveSha256":"f165f455a6033998de55b0fdf55622199f5cadb8ed27e5af4e6285d1947b08f8","outputMime":"image/gif","license":"LGPL-2.1-or-later","ffmpegJsGzipBytes":18782,"ffmpegJsGzipSha256":"1ab494804cc3eecfc7c56aca9fd28d7b840a695f3cb60b37c50afa92616771c9","ffmpegWasmGzipBytes":1042963,"ffmpegWasmGzipSha256":"1c7ece9af7e953330a06fc80d9bb9bf9316cdcdd7503da926a563ece500da2c1","upstreamManifest":{"schemaVersion":8,"builderVersion":"1.10.1","profile":"video-to-gif","displayName":"Video to Animated GIF","binaryLicense":"LGPL-2.1-or-later","versions":{"emscripten":"6.0.6","emscriptenCommit":"ce75e06884093bcefb86a6b8fd56a5d62a4cc245","ffmpegRef":"n9.0.1","ffmpegCommit":"bf1b838f2ab88b4f8fd83443325c782ea0e0f7fa","x264Ref":"stable","x264Commit":"31e19f92f00c7003fa115047ce50978bc98c3a0d","x264Linked":false,"zlibLinked":false,"freetypePortLinked":false,"harfbuzzPortLinked":false,"libwebpRef":"v1.6.0","libwebpCommit":"4fa21912338357f89e4fd51cf2368325b59e9bd9","libwebpLinked":false,"libvpxRef":"v1.16.0","libvpxCommit":"1024874c5919305883187e2953de8fcb4c3d7fa6","libvpxLinked":false,"libopusRef":"v1.5.2","libopusCommit":"ddbe48383984d56acd9e1ab6a090c54ca6b735a6","libopusLinked":false,"lameVersion":"4.0","lameSourceSha256":"3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb","libmp3lameLinked":false},"runtime":{"frontend":"public-libav-runner","runnerApiVersion":1,"threading":"single-thread","factory":"createFFmpegCore","pthreadPoolSize":0,"decoderThreadCount":1,"encoderThreadCount":1,"x264LookaheadThreadCount":0,"requiresSharedArrayBuffer":false,"requiresCrossOriginIsolation":false,"fileProtocolSingleHtml":true,"workerFsInput":true,"pthreadWorkerStrategy":"none"},"capabilities":{"operation":"video-to-animated-gif","trim":true,"resize":true,"crop":true,"fps":true,"palettegen":true,"paletteuse":true,"colors":true,"dither":true,"autorotate":true,"loop":true,"audio":false,"workerFsInput":true,"arbitraryFfmpegArgs":false},"catalog":{"filters":[],"encoders":[],"decoders":[],"muxers":[],"demuxers":[]},"files":{"ffmpeg.js":{"bytes":68493,"sha256":"20fc1be88bec702465339b65f53823c4537647334a26228e1efef979d909e202"},"ffmpeg.wasm":{"bytes":2760868,"sha256":"b0bdf097cf014e5d2951dd1b00bd3f778ba34c283abb97e15449bc4102d2ce9d"},"ffmpeg.js.gz":{"bytes":18782},"ffmpeg.wasm.gz":{"bytes":1042963}}}},{"id":"video-to-webp","archive":"ffmpeg-wasm-video-to-webp-v1.10.1.zip","archiveSha256":"b37711ed8cb05a299ee865c676446e8c400686953ca8e837e43a58e6402dcae4","outputMime":"image/webp","license":"LGPL-2.1-or-later","ffmpegJsGzipBytes":18782,"ffmpegJsGzipSha256":"d296986efea049393c72f7c82755ae9b12fb2e5c6b7da891757ed7142279df17","ffmpegWasmGzipBytes":1159104,"ffmpegWasmGzipSha256":"24ce3e687b0a9685eea7a99c9a5176f407375e88a865b6150878d5ed7f46821a","upstreamManifest":{"schemaVersion":8,"builderVersion":"1.10.1","profile":"video-to-webp","displayName":"Video to Animated WebP","binaryLicense":"LGPL-2.1-or-later","versions":{"emscripten":"6.0.6","emscriptenCommit":"ce75e06884093bcefb86a6b8fd56a5d62a4cc245","ffmpegRef":"n9.0.1","ffmpegCommit":"bf1b838f2ab88b4f8fd83443325c782ea0e0f7fa","x264Ref":"stable","x264Commit":"31e19f92f00c7003fa115047ce50978bc98c3a0d","x264Linked":false,"zlibLinked":false,"freetypePortLinked":false,"harfbuzzPortLinked":false,"libwebpRef":"v1.6.0","libwebpCommit":"4fa21912338357f89e4fd51cf2368325b59e9bd9","libwebpLinked":true,"libvpxRef":"v1.16.0","libvpxCommit":"1024874c5919305883187e2953de8fcb4c3d7fa6","libvpxLinked":false,"libopusRef":"v1.5.2","libopusCommit":"ddbe48383984d56acd9e1ab6a090c54ca6b735a6","libopusLinked":false,"lameVersion":"4.0","lameSourceSha256":"3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb","libmp3lameLinked":false},"runtime":{"frontend":"public-libav-runner","runnerApiVersion":1,"threading":"single-thread","factory":"createFFmpegCore","pthreadPoolSize":0,"decoderThreadCount":1,"encoderThreadCount":1,"x264LookaheadThreadCount":0,"requiresSharedArrayBuffer":false,"requiresCrossOriginIsolation":false,"fileProtocolSingleHtml":true,"workerFsInput":true,"pthreadWorkerStrategy":"none"},"capabilities":{"operation":"video-to-animated-webp","trim":true,"resize":true,"crop":true,"fps":true,"quality":true,"lossless":true,"compressionLevel":true,"autorotate":true,"loop":true,"audio":false,"libwebp":true,"workerFsInput":true,"arbitraryFfmpegArgs":false},"catalog":{"filters":[],"encoders":[],"decoders":[],"muxers":[],"demuxers":[]},"files":{"ffmpeg.js":{"bytes":68493,"sha256":"20fc1be88bec702465339b65f53823c4537647334a26228e1efef979d909e202"},"ffmpeg.wasm":{"bytes":3040010,"sha256":"55fa11417fe1e5f13bf52282cc2049c65d3a8987c9298faeaadbc0aef8984ee8"},"ffmpeg.js.gz":{"bytes":18782},"ffmpeg.wasm.gz":{"bytes":1159104}}}}]}};
+      const APP_CONFIG = {"$schema":"./schemas/app-config.schema.json","name":"Video to GIF / WebP","nameJa":"動画をGIF / WebPに変換","slug":"video-to-gif-webp","version":"1.0.5","description":"Create animated GIF or WebP files from a selected range of a video entirely in your browser.","descriptionJa":"動画の好きな範囲を、ブラウザー内だけでアニメーションGIFまたはWebPに変換します。","defaultLanguage":"auto","repository":{"owner":"ttomohisa","name":"htmlapps-video-to-gif-webp"},"build":{"output":"dist/index.html","blockRuntimeNetwork":true,"selfExtract":{"enabled":true,"output":"dist/index.self-extract.html"}}};
+      const BUILD_MANIFEST = {"schemaVersion":1,"builder":"htmlapps-video-to-gif-webp/1.0","generatedAtUtc":"2026-11-24T07:27:00.0000000Z","app":{"name":"Video to GIF / WebP","slug":"video-to-gif-webp","version":"1.0.5"},"dependencies":[],"ffmpeg":{"repository":"ttomohisa/htmlapps-ffmpeg-wasm-builder","version":"1.10.1","profiles":[{"id":"video-to-gif","archive":"ffmpeg-wasm-video-to-gif-v1.10.1.zip","archiveSha256":"f165f455a6033998de55b0fdf55622199f5cadb8ed27e5af4e6285d1947b08f8","outputMime":"image/gif","license":"LGPL-2.1-or-later","ffmpegJsGzipBytes":18782,"ffmpegJsGzipSha256":"1ab494804cc3eecfc7c56aca9fd28d7b840a695f3cb60b37c50afa92616771c9","ffmpegWasmGzipBytes":1042963,"ffmpegWasmGzipSha256":"1c7ece9af7e953330a06fc80d9bb9bf9316cdcdd7503da926a563ece500da2c1","upstreamManifest":{"schemaVersion":8,"builderVersion":"1.10.1","profile":"video-to-gif","displayName":"Video to Animated GIF","binaryLicense":"LGPL-2.1-or-later","versions":{"emscripten":"6.0.6","emscriptenCommit":"ce75e06884093bcefb86a6b8fd56a5d62a4cc245","ffmpegRef":"n9.0.1","ffmpegCommit":"bf1b838f2ab88b4f8fd83443325c782ea0e0f7fa","x264Ref":"stable","x264Commit":"31e19f92f00c7003fa115047ce50978bc98c3a0d","x264Linked":false,"zlibLinked":false,"freetypePortLinked":false,"harfbuzzPortLinked":false,"libwebpRef":"v1.6.0","libwebpCommit":"4fa21912338357f89e4fd51cf2368325b59e9bd9","libwebpLinked":false,"libvpxRef":"v1.16.0","libvpxCommit":"1024874c5919305883187e2953de8fcb4c3d7fa6","libvpxLinked":false,"libopusRef":"v1.5.2","libopusCommit":"ddbe48383984d56acd9e1ab6a090c54ca6b735a6","libopusLinked":false,"lameVersion":"4.0","lameSourceSha256":"3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb","libmp3lameLinked":false},"runtime":{"frontend":"public-libav-runner","runnerApiVersion":1,"threading":"single-thread","factory":"createFFmpegCore","pthreadPoolSize":0,"decoderThreadCount":1,"encoderThreadCount":1,"x264LookaheadThreadCount":0,"requiresSharedArrayBuffer":false,"requiresCrossOriginIsolation":false,"fileProtocolSingleHtml":true,"workerFsInput":true,"pthreadWorkerStrategy":"none"},"capabilities":{"operation":"video-to-animated-gif","trim":true,"resize":true,"crop":true,"fps":true,"palettegen":true,"paletteuse":true,"colors":true,"dither":true,"autorotate":true,"loop":true,"audio":false,"workerFsInput":true,"arbitraryFfmpegArgs":false},"catalog":{"filters":[],"encoders":[],"decoders":[],"muxers":[],"demuxers":[]},"files":{"ffmpeg.js":{"bytes":68493,"sha256":"20fc1be88bec702465339b65f53823c4537647334a26228e1efef979d909e202"},"ffmpeg.wasm":{"bytes":2760868,"sha256":"b0bdf097cf014e5d2951dd1b00bd3f778ba34c283abb97e15449bc4102d2ce9d"},"ffmpeg.js.gz":{"bytes":18782},"ffmpeg.wasm.gz":{"bytes":1042963}}}},{"id":"video-to-webp","archive":"ffmpeg-wasm-video-to-webp-v1.10.1.zip","archiveSha256":"b37711ed8cb05a299ee865c676446e8c400686953ca8e837e43a58e6402dcae4","outputMime":"image/webp","license":"LGPL-2.1-or-later","ffmpegJsGzipBytes":18782,"ffmpegJsGzipSha256":"d296986efea049393c72f7c82755ae9b12fb2e5c6b7da891757ed7142279df17","ffmpegWasmGzipBytes":1159104,"ffmpegWasmGzipSha256":"24ce3e687b0a9685eea7a99c9a5176f407375e88a865b6150878d5ed7f46821a","upstreamManifest":{"schemaVersion":8,"builderVersion":"1.10.1","profile":"video-to-webp","displayName":"Video to Animated WebP","binaryLicense":"LGPL-2.1-or-later","versions":{"emscripten":"6.0.6","emscriptenCommit":"ce75e06884093bcefb86a6b8fd56a5d62a4cc245","ffmpegRef":"n9.0.1","ffmpegCommit":"bf1b838f2ab88b4f8fd83443325c782ea0e0f7fa","x264Ref":"stable","x264Commit":"31e19f92f00c7003fa115047ce50978bc98c3a0d","x264Linked":false,"zlibLinked":false,"freetypePortLinked":false,"harfbuzzPortLinked":false,"libwebpRef":"v1.6.0","libwebpCommit":"4fa21912338357f89e4fd51cf2368325b59e9bd9","libwebpLinked":true,"libvpxRef":"v1.16.0","libvpxCommit":"1024874c5919305883187e2953de8fcb4c3d7fa6","libvpxLinked":false,"libopusRef":"v1.5.2","libopusCommit":"ddbe48383984d56acd9e1ab6a090c54ca6b735a6","libopusLinked":false,"lameVersion":"4.0","lameSourceSha256":"3df5124d5ad3a98312ffd7ba6a9b36230e4f8a3e66d3ce0f425e336c32d216eb","libmp3lameLinked":false},"runtime":{"frontend":"public-libav-runner","runnerApiVersion":1,"threading":"single-thread","factory":"createFFmpegCore","pthreadPoolSize":0,"decoderThreadCount":1,"encoderThreadCount":1,"x264LookaheadThreadCount":0,"requiresSharedArrayBuffer":false,"requiresCrossOriginIsolation":false,"fileProtocolSingleHtml":true,"workerFsInput":true,"pthreadWorkerStrategy":"none"},"capabilities":{"operation":"video-to-animated-webp","trim":true,"resize":true,"crop":true,"fps":true,"quality":true,"lossless":true,"compressionLevel":true,"autorotate":true,"loop":true,"audio":false,"libwebp":true,"workerFsInput":true,"arbitraryFfmpegArgs":false},"catalog":{"filters":[],"encoders":[],"decoders":[],"muxers":[],"demuxers":[]},"files":{"ffmpeg.js":{"bytes":68493,"sha256":"20fc1be88bec702465339b65f53823c4537647334a26228e1efef979d909e202"},"ffmpeg.wasm":{"bytes":3040010,"sha256":"55fa11417fe1e5f13bf52282cc2049c65d3a8987c9298faeaadbc0aef8984ee8"},"ffmpeg.js.gz":{"bytes":18782},"ffmpeg.wasm.gz":{"bytes":1159104}}}}]}};
       const $ = selector => document.querySelector(selector);
       const $$ = selector => Array.from(document.querySelectorAll(selector));
 
       const translations = {
         ja: {
-          brandMeta:'端末内で変換 · アップロードなし', pageTitle:'動画からアニメーション画像を作成', pageIntro:'動画の好きな範囲を選んで、GIFまたはWebPとして保存します。変換はブラウザー内で完結します。', localBadge:'完全ローカル処理',
-          sourceTitle:'動画', sourceNote:'端末から動画を選択してください。', dropTitle:'動画をここにドロップ', dropNote:'または端末から選択', chooseVideo:'動画を選択',fileFallback:'ファイルから選択', fileSize:'ファイルサイズ', duration:'長さ', resolution:'解像度', replaceVideo:'別の動画', clearVideo:'解除', previewWarning:'この動画はブラウザーでプレビューできません。FFmpegで変換できる場合があります。開始・終了は時刻で指定してください。',
-          trimRange:'切り出す範囲', start:'開始', end:'終了', startPosition:'開始位置', endPosition:'終了位置', currentPosition:'現在位置', play:'再生', pause:'一時停止', setHere:'現在位置', playSelection:'選択範囲を再生', useFullVideo:'動画全体を選択', jumpStart:'開始位置を再生', jumpEnd:'終了位置へ移動', jumpStartShort:'Sへ移動', jumpEndShort:'Eへ移動', fineTuneStep:'微調整幅', oneFrame:'1フレーム', fineTune:'微調整', nudgeEarlier:'選択した幅だけ前へ', nudgeLater:'選択した幅だけ後ろへ', timelineScrubHint:'白い縦線をドラッグして再生位置を移動できます。', thumbPreparing:'サムネイルを準備中…', thumbReady:'サムネイル表示', thumbUnavailable:'サムネイルを表示できません', seconds:'秒',
-          settingsTitle:'出力設定', settingsNote:'形式と品質を選び、サイズなどは必要なところだけ調整します。', filename:'出力ファイル名', filenameHint:'拡張子は形式に合わせて自動変更します', format:'形式', formatWebpHint:'WebP: 高画質・小容量', formatGifHint:'GIF: 互換性重視', gifDescription:'互換性重視。256色まで。', webpDescription:'フルカラーで小さくしやすい。', crop:'クロップ', cropHint:'必要な部分だけ切り抜き', cropNone:'なし', cropNote:'比率を選ぶとプレビューに枠が表示されます。枠上部の「移動」をドラッグして位置を調整できます。', moveCrop:'移動', playback:'再生', loopAnimation:'ループする', loopAnimationHint:'OFFにすると1回再生で停止するアニメーションとして保存します。', width:'横幅', widthHint:'縦横比は維持します', originalSize:'元サイズ', customValue:'自由入力', customWidthLabel:'横幅を自由入力', widthCustomHint:'16〜4096', customFpsLabel:'FPSを自由入力', fpsCustomHint:'1〜60', fpsHint:'高いほど滑らか・大容量', quality:'品質', qualityHint:'サイズとのバランス', qualityLight:'軽量', qualityLightNote:'小さめ', qualityStandard:'標準', qualityStandardNote:'おすすめ', qualityHigh:'高品質', qualityHighNote:'大きめ', advanced:'詳細設定', advancedNote:'必要なときだけ', gifColors:'GIF色数', losslessWebp:'Lossless WebP',
+          brandMeta:'端末内で変換 · アップロードなし', pageIntro:'動画の好きな範囲をアニメーションGIFやWebPに変換できます。', localBadge:'完全ローカル処理',
+          sourceTitle:'動画', sourceNote:'端末から動画を選択してください。', dropTitle:'動画をここにドロップ', chooseVideo:'動画を選択',fileFallback:'ファイルから選択', fileSize:'ファイルサイズ', duration:'長さ', resolution:'解像度', replaceVideo:'別の動画', clearVideo:'解除', previewWarning:'この動画はプレビューできませんが、変換できる場合があります。開始・終了は秒数で指定してください。',
+          trimRange:'切り出す範囲', start:'開始', end:'終了', startPosition:'開始位置', endPosition:'終了位置', currentPosition:'現在位置', play:'再生', pause:'一時停止', setHere:'現在位置', playSelection:'選択範囲を再生', useFullVideo:'動画全体を選択', jumpStart:'開始位置を再生', jumpEnd:'終了位置へ移動', jumpStartShort:'開始へ移動', jumpEndShort:'終了へ移動', fineTuneStep:'微調整幅', oneFrame:'1フレーム', fineTune:'微調整', nudgeEarlier:'選択した幅だけ前へ', nudgeLater:'選択した幅だけ後ろへ', timelineScrubHint:'開始・終了をドラッグして範囲を調整できます。白い縦線で再生位置を移動できます。', thumbPreparing:'サムネイルを準備中…', thumbReady:'サムネイル表示', thumbUnavailable:'サムネイルを表示できません', seconds:'秒',
+          settingsTitle:'出力設定', filename:'出力ファイル名', format:'形式', formatWebpHint:'WebP: 高画質・小容量', formatGifHint:'GIF: 互換性重視', gifDescription:'互換性重視・256色まで', webpDescription:'高画質・小容量・フルカラー', crop:'切り抜き', cropHint:'必要な部分だけ切り抜き', cropNone:'なし', cropNote:'比率を選ぶとプレビューに枠が表示されます。枠上部の「移動」をドラッグして位置を調整できます。', moveCrop:'移動', playback:'再生', loopAnimation:'繰り返し再生', loopAnimationHint:'オフにすると1回だけ再生します', width:'横幅', widthHint:'縦横比は維持します', originalSize:'元サイズ', customValue:'自由入力', customWidthLabel:'横幅を自由入力', widthCustomHint:'16〜4096', customFpsLabel:'FPSを自由入力', fpsCustomHint:'1〜60', fpsHint:'高いほど滑らかで容量も増えやすくなります', quality:'品質', qualityHint:'高品質ほど容量が増えやすくなります', qualityLight:'軽量', qualityLightNote:'小さめ', qualityStandard:'標準', qualityStandardNote:'おすすめ', qualityHigh:'高品質', qualityHighNote:'大きめ', advanced:'詳細設定', gifColors:'GIF色数', losslessWebp:'Lossless WebP',
           createTitle:'作成',  selectVideoSummary:'動画を選択してください', createGif:'GIFを作成', createWebp:'WebPを作成', preparing:'準備中…', converting:'変換中…', loadingCore:'FFmpeg coreを展開中…', processing:'変換しています…', complete:'変換が完了しました。',
           resultTitle:'完成', resultNote:'プレビューを確認して保存してください。', outputDimensions:'サイズ', outputDuration:'長さ', save:'保存', share:'共有', makeAnother:'設定を変えてもう一度',
-          tipWebpTitle:'WebPがおすすめ', tipWebpBody:'対応先に制約がなければ、GIFより色数が多く小さくしやすいWebPが便利です。', tipShortTitle:'短くすると軽い', tipShortBody:'時間・横幅・FPSを下げるほど、処理時間と出力サイズを抑えやすくなります。', tipMemoryTitle:'端末メモリに注意', tipMemoryBody:'出力は一時的にブラウザーのメモリへ作られます。長い4K動画は短い範囲を選んでください。',
           footerLocal:'変換はブラウザー内で完結', mobileVideo:'動画', mobileSettings:'設定', mobileCreate:'作成', mobileSave:'保存',
-          helpDialogScroll:'閉じるボタン、Escキー、外側のクリックで閉じられます。',helpTitle:'使い方と注意事項', close:'閉じる', helpBasicsTitle:'基本操作', helpStep1:'動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。', helpStep2:'GIFまたはWebP、クロップ、横幅、FPS、品質、ループを選んで「作成」を押します。', helpStep3:'出力ファイル名を確認して作成し、完成後にプレビューを確認して保存します。', helpFormatTitle:'GIFとWebP', helpFormatBody:'GIFは広い互換性がありますが最大256色です。WebPはフルカラーで、同程度の見た目なら小さくしやすいため、対応先に制約がなければWebPがおすすめです。', helpPrivacyTitle:'プライバシー', helpPrivacyBody:'動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。', helpNotesTitle:'注意事項', helpNotePreview:'ブラウザーが再生できないcodecでもFFmpegで変換できる場合があります。その場合は開始・終了を秒数で入力してください。', helpNoteMemory:'長時間・高解像度・高FPSは処理時間とメモリ使用量が増えます。まず短い範囲、480px、15fps程度をおすすめします。', helpNoteTiming:'GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。', helpNoteOutput:'変換結果は一時的にブラウザーのメモリ上にあります。必要な結果は必ず保存してください。', helpOffline:'保存したHTMLを直接開いて、オフラインでも変換できます。',
-          unknown:'不明', frames:'フレーム', currentSettings:'{duration}秒 · {width} · {fps}fps · 約{frames}フレーム', heavyTitle:'処理が重くなる可能性があります', heavyMessage:'現在の設定は端末のメモリや処理時間を大きく使う可能性があります。短い範囲・480px・15fps程度がおすすめです。このまま作成しますか？', continue:'このまま作成', cancel:'キャンセル', sameTitle:'同じ設定です', sameMessage:'前回と同じ動画・同じ設定で、もう一度変換しますか？', runAgain:'もう一度作成',
-          noDecompression:'このブラウザーはgzip展開に必要なDecompressionStreamへ対応していません。最新のブラウザーで開いてください。', unsupportedRuntime:'このブラウザーではFFmpeg WASMを実行できません。', invalidRange:'終了位置は開始位置より後にしてください。', chooseVideoError:'先に動画を選択してください。', conversionFailed:'変換に失敗しました', saved:'保存を開始しました', shareFailed:'共有できませんでした', cleared:'動画を解除しました', selected:'動画を読み込みました', outputReady:'{format}を作成しました', original:'元サイズ'
+          helpTitle:'使い方と注意事項', close:'閉じる', helpBasicsTitle:'基本操作', helpStep1:'動画を選び、開始・終了位置を決めます。「動画全体を選択」で全範囲を選び、先頭で一時停止できます。長さが不明な場合や変換中は使えません。', helpStep2:'GIFまたはWebPを選び、必要に応じて出力設定を変更します。', helpStep3:'出力ファイル名を確認して作成し、完成後にプレビューを確認して保存します。', helpFormatTitle:'GIFとWebP', helpFormatBody:'GIFは広い互換性がありますが最大256色です。WebPはフルカラーで、同程度の見た目なら小さくしやすいため、対応先に制約がなければWebPがおすすめです。', helpPrivacyTitle:'プライバシー', helpPrivacyBody:'動画と変換結果はこの端末内だけで処理されます。アプリ実行中のネットワーク通信はCSPで無効化されています。', helpNotesTitle:'注意事項', helpNotePreview:'プレビューできない動画も変換できる場合があります。その場合は開始・終了を秒数で入力してください。切り抜きには動画のサイズが必要です。', helpNoteMemory:'動画の範囲を短くしたり、横幅やFPSを下げたりすると、変換時間とファイルサイズを抑えやすくなります。出力は一時的にブラウザーのメモリに作られるため、長い4K動画は短い範囲から試してください。迷ったら横幅480px、15fpsを目安にしてください。', helpNoteSettings:'横幅を変えても、切り抜き後の縦横比は維持されます。FPSを上げると動きが滑らかになり、容量も増えやすくなります。繰り返し再生をオフにすると1回だけ再生します。', helpNoteTiming:'GIFのフレーム間隔は1/100秒単位です。指定FPSによって丸めが発生し、再生アプリによって表示速度が異なる場合があります。', helpOffline:'保存したHTMLを直接開いて、オフラインでも変換できます。',licenseSummary:'アプリ本体: MIT。FFmpeg: LGPL-2.1-or-later。libwebp: BSD系ライセンス。',licenseDetails:'ライセンスとソース',
+          emptyFile:'空のファイルは読み込めません。',invalidFile:'動画ファイルを選択してください。',cropUnknownNote:'動画のサイズを取得できない場合は切り抜きできません。',cropUnavailable:'動画のサイズが不明なため、切り抜きを「なし」にして作成してください。',invalidQuality:'画質は0〜100、圧縮レベルは0〜6の整数で入力してください。',cancelledRun:'変換をキャンセルしました。',cancelling:'中止しています…',resultPreviewFailed:'作成した画像を読み込めませんでした。設定を変えてもう一度お試しください。',staticImage:'静止画',requestedFps:'指定FPS',ditherLabel:'ディザ（色の表現）',webpQualityLabel:'WebP画質',compressionLabel:'圧縮レベル',webpQualityHint:'0〜100。高いほど画質が良くなりますが、容量が増えます。ロスレス時は圧縮の度合いを調整します。',webpCompressionHint:'0〜6。高いほど圧縮に時間がかかりますが、容量を抑えやすくなります。',unknown:'不明', frames:'フレーム', currentSettings:'{duration}秒 · {width} · {fps}fps · 約{frames}フレーム', heavyTitle:'処理が重くなる可能性があります', heavyMessage:'現在の設定は端末のメモリや処理時間を大きく使う可能性があります。短い範囲・480px・15fps程度がおすすめです。このまま作成しますか？', continue:'このまま作成', cancel:'キャンセル', sameTitle:'同じ設定です', sameMessage:'前回と同じ動画・同じ設定で、もう一度変換しますか？', runAgain:'もう一度作成',
+          noDecompression:'このブラウザーはgzip展開に必要なDecompressionStreamへ対応していません。最新のブラウザーで開いてください。', unsupportedRuntime:'このブラウザーではFFmpeg WASMを実行できません。', invalidRange:'開始・終了位置を確認してください。終了位置は動画の長さ以内で、開始位置より後に指定してください。', chooseVideoError:'先に動画を選択してください。', conversionFailed:'変換できませんでした。動画形式を確認するか、短い範囲・小さいサイズで試してください。', saved:'保存を開始しました', shareFailed:'共有できませんでした', cleared:'動画を解除しました', selected:'動画を読み込みました', outputReady:'{format}を作成しました', original:'元サイズ'
         },
         en: {
-          brandMeta:'On-device conversion · No upload', pageTitle:'Create an animation from a video', pageIntro:'Choose a range of your video and save it as an animated GIF or WebP. Conversion stays inside your browser.', localBadge:'Fully local processing',
-          sourceTitle:'Video', sourceNote:'Choose a video from your device.', dropTitle:'Drop a video here', dropNote:'or choose one from your device', chooseVideo:'Choose video',fileFallback:'Choose from files', fileSize:'File size', duration:'Duration', resolution:'Resolution', replaceVideo:'Choose another', clearVideo:'Remove', previewWarning:'This codec cannot be previewed by the browser. FFmpeg may still be able to convert it. Enter the start and end times manually.',
-          trimRange:'Selected range', start:'Start', end:'End', startPosition:'Start position', endPosition:'End position', currentPosition:'Current position', play:'Play', pause:'Pause', setHere:'Use current', playSelection:'Play selected range', useFullVideo:'Use full video', jumpStart:'Play from start', jumpEnd:'Jump to end', jumpStartShort:'Go to S', jumpEndShort:'Go to E', fineTuneStep:'Fine-tune step', oneFrame:'1 frame', fineTune:'Fine tune', nudgeEarlier:'Move earlier by the selected step', nudgeLater:'Move later by the selected step', timelineScrubHint:'Drag the white playhead to seek through the video.', thumbPreparing:'Preparing thumbnails…', thumbReady:'Thumbnails ready', thumbUnavailable:'Thumbnails unavailable', seconds:'sec',
-          settingsTitle:'Output settings', settingsNote:'Choose format and quality, then adjust only the details you need.', filename:'Output filename', filenameHint:'The extension follows the selected format automatically', format:'Format', formatWebpHint:'WebP: full color, compact', formatGifHint:'GIF: broad compatibility', gifDescription:'Broad compatibility, up to 256 colors.', webpDescription:'Full color and usually easier to keep small.', crop:'Crop', cropHint:'Keep only the area you need', cropNone:'None', cropNote:'Choose a ratio to show a crop frame. Drag the “Move” handle at the top of the frame to reposition it.', moveCrop:'Move', playback:'Playback', loopAnimation:'Loop animation', loopAnimationHint:'Turn this off to save an animation that plays once and stops.', width:'Width', widthHint:'Aspect ratio is preserved', originalSize:'Original', customValue:'Custom', customWidthLabel:'Custom output width', widthCustomHint:'16–4096', customFpsLabel:'Custom FPS', fpsCustomHint:'1–60', fpsHint:'Higher is smoother and larger', quality:'Quality', qualityHint:'Balance against file size', qualityLight:'Light', qualityLightNote:'Smaller', qualityStandard:'Standard', qualityStandardNote:'Recommended', qualityHigh:'High', qualityHighNote:'Larger', advanced:'Advanced settings', advancedNote:'Only when needed', gifColors:'GIF colors', losslessWebp:'Lossless WebP',
+          brandMeta:'On-device conversion · No upload', pageIntro:'Convert any part of a video to an animated GIF or WebP.', localBadge:'Fully local processing',
+          sourceTitle:'Video', sourceNote:'Choose a video from your device.', dropTitle:'Drop a video here', chooseVideo:'Choose video',fileFallback:'Choose from files', fileSize:'File size', duration:'Duration', resolution:'Resolution', replaceVideo:'Choose another', clearVideo:'Remove', previewWarning:'This video cannot be previewed, but conversion may still work. Enter the start and end times in seconds. Cropping requires known video dimensions.',
+          trimRange:'Selected range', start:'Start', end:'End', startPosition:'Start position', endPosition:'End position', currentPosition:'Current position', play:'Play', pause:'Pause', setHere:'Use current', playSelection:'Play selected range', useFullVideo:'Use full video', jumpStart:'Play from start', jumpEnd:'Jump to end', jumpStartShort:'Go to start', jumpEndShort:'Go to end', fineTuneStep:'Fine-tune step', oneFrame:'1 frame', fineTune:'Fine tune', nudgeEarlier:'Move earlier by the selected step', nudgeLater:'Move later by the selected step', timelineScrubHint:'Drag the start and end handles to trim. Drag the white line to seek.', thumbPreparing:'Preparing thumbnails…', thumbReady:'Thumbnails ready', thumbUnavailable:'Thumbnails unavailable', seconds:'sec',
+          settingsTitle:'Output settings', filename:'Output filename', format:'Format', formatWebpHint:'WebP: full color, compact', formatGifHint:'GIF: broad compatibility', gifDescription:'Broad compatibility · up to 256 colors', webpDescription:'High quality · compact · full color', crop:'Crop', cropHint:'Keep only the area you need', cropNone:'None', cropNote:'Choose a ratio to show a crop frame. Drag the “Move” handle at the top of the frame to reposition it.', moveCrop:'Move', playback:'Playback', loopAnimation:'Loop playback', loopAnimationHint:'Turn off to play only once', width:'Width', widthHint:'Aspect ratio is preserved', originalSize:'Original', customValue:'Custom', customWidthLabel:'Custom output width', widthCustomHint:'16–4096', customFpsLabel:'Custom FPS', fpsCustomHint:'1–60', fpsHint:'Higher FPS is smoother and usually increases file size', quality:'Quality', qualityHint:'Higher quality usually means larger files', qualityLight:'Light', qualityLightNote:'Smaller', qualityStandard:'Standard', qualityStandardNote:'Recommended', qualityHigh:'High', qualityHighNote:'Larger', advanced:'Advanced settings', gifColors:'GIF colors', losslessWebp:'Lossless WebP',
           createTitle:'Create',  selectVideoSummary:'Choose a video first', createGif:'Create GIF', createWebp:'Create WebP', preparing:'Preparing…', converting:'Converting…', loadingCore:'Inflating FFmpeg core…', processing:'Converting…', complete:'Conversion complete.',
           resultTitle:'Done', resultNote:'Review the preview, then save the file.', outputDimensions:'Dimensions', outputDuration:'Duration', save:'Save', share:'Share', makeAnother:'Change settings and create again',
-          tipWebpTitle:'Prefer WebP when possible', tipWebpBody:'If the destination supports it, WebP keeps full color and is usually easier to make smaller than GIF.', tipShortTitle:'Shorter is lighter', tipShortBody:'Reducing duration, width, or FPS usually lowers processing time and output size.', tipMemoryTitle:'Watch device memory', tipMemoryBody:'The output is temporarily created in browser memory. Use a short range for long 4K videos.',
           footerLocal:'Conversion stays in the browser', mobileVideo:'Video', mobileSettings:'Settings', mobileCreate:'Create', mobileSave:'Save',
-          helpDialogScroll:'Close it with the close button, Esc, or a click outside.',helpTitle:'How to use & notes', close:'Close', helpBasicsTitle:'Basics', helpStep1:'Choose a video and set the start/end positions. Use full video selects the whole range and pauses at the beginning. It is unavailable when duration is unknown or conversion is running.', helpStep2:'Choose GIF or WebP, crop, width, FPS, quality, and looping, then press Create.', helpStep3:'Confirm the output filename, create the animation, then review and save it.', helpFormatTitle:'GIF vs WebP', helpFormatBody:'GIF has broad compatibility but is limited to 256 colors. WebP supports full color and is often smaller for a similar appearance, so prefer WebP when your destination supports it.', helpPrivacyTitle:'Privacy', helpPrivacyBody:'The video and output stay on this device. Runtime network connections are blocked by the app CSP.', helpNotesTitle:'Notes', helpNotePreview:'FFmpeg may convert codecs that your browser cannot preview. If preview fails, enter the start/end times directly.', helpNoteMemory:'Long duration, high resolution, and high FPS increase processing time and memory use. Start around 480px and 15fps.', helpNoteTiming:'GIF frame delays use 1/100-second units. Some frame rates require rounding, and playback apps may display short delays differently.', helpNoteOutput:'The result exists temporarily in browser memory. Save anything you want to keep.', helpOffline:'Open the saved HTML directly to convert videos offline.',
-          unknown:'Unknown', frames:'frames', currentSettings:'{duration}s · {width} · {fps}fps · about {frames} frames', heavyTitle:'This may be a heavy conversion', heavyMessage:'These settings may use substantial device memory or processing time. A short range around 480px and 15fps is recommended. Continue anyway?', continue:'Continue', cancel:'Cancel', sameTitle:'Same settings', sameMessage:'Create the same video again with exactly the same settings?', runAgain:'Create again',
-          noDecompression:'This browser does not support DecompressionStream, which is required to unpack the compact embedded core. Open the app in a current browser.', unsupportedRuntime:'This browser cannot run the FFmpeg WASM runtime.', invalidRange:'End must be after start.', chooseVideoError:'Choose a video first.', conversionFailed:'Conversion failed', saved:'Download started', shareFailed:'Could not share the file', cleared:'Video removed', selected:'Video loaded', outputReady:'Created {format}', original:'Original'
+          helpTitle:'How to use & notes', close:'Close', helpBasicsTitle:'Basics', helpStep1:'Choose a video and set the start/end positions. Use full video selects the whole range and pauses at the beginning. It is unavailable when duration is unknown or conversion is running.', helpStep2:'Choose GIF or WebP and adjust the output settings as needed.', helpStep3:'Confirm the output filename, create the animation, then review and save it.', helpFormatTitle:'GIF vs WebP', helpFormatBody:'GIF has broad compatibility but is limited to 256 colors. WebP supports full color and is often smaller for a similar appearance, so prefer WebP when your destination supports it.', helpPrivacyTitle:'Privacy', helpPrivacyBody:'The video and output stay on this device. Runtime network connections are blocked by the app CSP.', helpNotesTitle:'Notes', helpNotePreview:'Some videos can still be converted even if preview is unavailable. Enter the start and end times in seconds. Cropping requires known video dimensions.', helpNoteMemory:'A shorter range, smaller width or lower FPS usually reduces conversion time and file size. The output is temporarily held in browser memory, so start with a short range when converting long 4K videos. If unsure, start with 480px and 15fps.', helpNoteSettings:'Changing the width preserves the aspect ratio of the selected crop (or the full video if cropping is off). Higher FPS makes motion smoother and usually increases file size. Turn off looping to play the animation once.', helpNoteTiming:'GIF frame delays use 1/100-second units. Some frame rates require rounding, and playback apps may display short delays differently.', helpOffline:'Open the saved HTML directly to convert videos offline.',licenseSummary:'App: MIT. FFmpeg: LGPL-2.1-or-later. libwebp: BSD-style license.',licenseDetails:'Licenses and source',
+          emptyFile:'The file is empty.',invalidFile:'Choose a video file.',cropUnknownNote:'Cropping is available when the video dimensions are known.',cropUnavailable:'Video dimensions are unknown. Turn off cropping before creating.',invalidQuality:'Enter whole numbers: quality 0–100 and compression 0–6.',cancelledRun:'Conversion cancelled.',cancelling:'Cancelling…',resultPreviewFailed:'The created image could not be loaded. Try again with different settings.',staticImage:'Still image',requestedFps:'Requested FPS',ditherLabel:'Dithering (color rendering)',webpQualityLabel:'WebP quality',compressionLabel:'Compression level',webpQualityHint:'0–100. Higher values improve quality but increase file size. In lossless mode, this controls compression effort.',webpCompressionHint:'0–6. Higher values take longer to encode but can reduce file size.',unknown:'Unknown', frames:'frames', currentSettings:'{duration}s · {width} · {fps}fps · about {frames} frames', heavyTitle:'This may be a heavy conversion', heavyMessage:'These settings may use substantial device memory or processing time. A short range around 480px and 15fps is recommended. Continue anyway?', continue:'Continue', cancel:'Cancel', sameTitle:'Same settings', sameMessage:'Create the same video again with exactly the same settings?', runAgain:'Create again',
+          noDecompression:'This browser does not support DecompressionStream, which is required to unpack the compact embedded core. Open the app in a current browser.', unsupportedRuntime:'This browser cannot run the FFmpeg WASM runtime.', invalidRange:'Check the start and end times. End must be after start and within the video duration.', chooseVideoError:'Choose a video first.', conversionFailed:'Conversion failed. Check the video format or try a shorter clip or smaller size.', saved:'Download started', shareFailed:'Could not share the file', cleared:'Video removed', selected:'Video loaded', outputReady:'Created {format}', original:'Original'
         }
       };
 
       const state = {
         language:'ja', file:null, inputUrl:'', previewDuration:0, previewWidth:0, previewHeight:0,
-        format:'webp', output:null, outputUrl:'', outputMime:'', outputExt:'', outputWidth:0, outputHeight:0, outputMeta:null,
-        processing:false, lastRunSignature:'', filenameTouched:false, toastTimer:0, filmstripToken:0, playheadDragging:false, rangePlayback:false, cropPreset:'none', cropRect:{x:0,y:0,width:1,height:1}, cropDragging:false, cropDragStart:null, fineTuneStep:'frame'
+        format:'webp', output:null, outputUrl:'', outputMime:'', outputExt:'', outputName:'', outputWidth:0, outputHeight:0, outputMeta:null,
+        processing:false, job:null, pendingConfirmation:false, trimTouched:false, metadataPending:false, statusKey:'', progressKey:'preparing', filmstripKey:'thumbPreparing', filmstripAbort:null, lastRunSignature:'', filenameTouched:false, toastTimer:0, filmstripToken:0, playheadDragging:false, rangePlayback:false, cropPreset:'none', cropRect:{x:0,y:0,width:1,height:1}, cropDragging:false, cropDragStart:null, fineTuneStep:'frame'
       };
       const storageKey = `${APP_CONFIG.slug}:settings`;
       const languageKey = `${APP_CONFIG.slug}:language`;
@@ -1384,7 +1537,12 @@
         const widthChoice=selectedValue('width')||'480',fpsChoice=selectedValue('fps')||'15',cropChoice=selectedValue('crop')||'none';
         if($('#widthSelect'))$('#widthSelect').value=widthChoice;if($('#fpsSelect'))$('#fpsSelect').value=fpsChoice;if($('#cropSelect'))$('#cropSelect').value=cropChoice;
         if($('#customWidthWrap'))$('#customWidthWrap').hidden=widthChoice!=='custom';if($('#customFpsWrap'))$('#customFpsWrap').hidden=fpsChoice!=='custom';
-        if($('#cropNote'))$('#cropNote').hidden=cropChoice==='none';if($('#loopStateLabel'))$('#loopStateLabel').textContent=$('#loopAnimation')?.checked?'ON':'OFF';
+        updateCropAvailability();if($('#loopStateLabel'))$('#loopStateLabel').textContent=$('#loopAnimation')?.checked?'ON':'OFF';
+      }
+      function updateCropAvailability(){
+        const known=!!(state.previewWidth&&state.previewHeight),select=$('#cropSelect'),note=$('#cropNote');
+        for(const option of Array.from(select?.options||[]))option.disabled=!known&&option.value!=='none';
+        if(note){note.hidden=!state.file||(known&&state.cropPreset==='none');note.textContent=t(known?'cropNote':'cropUnknownNote');}
       }
       function updateFineTuneUi(){
         const fps=Math.max(1,selectedFps()),frameSeconds=1/fps;
@@ -1395,7 +1553,10 @@
       function selectCustom(name){ setChoice(name,'custom'); const select=$('#'+name+'Select');if(select)select.value='custom'; updateCompactVisibility(); }
       function bindCustomIntegerInput(id,name,min,max,fallback){ const input=$('#'+id),maxDigits=String(max).length; input.addEventListener('input',()=>{const digits=sanitizeIntegerText(input.value,maxDigits); let value=digits; if(value&&Number(value)>max)value=String(max); input.value=value; selectCustom(name); updateRunSummary();updateFineTuneUi(); if(value&&Number(value)>=min)saveSettings();}); input.addEventListener('focus',()=>selectCustom(name)); input.addEventListener('blur',()=>{normalizeIntegerInput(input,min,max,fallback);selectCustom(name);saveSettings();updateRunSummary();updateFineTuneUi();}); input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();input.blur();}}); }
       function showToast(message) { const toast=$('#toast'); toast.textContent=message; toast.classList.add('show'); clearTimeout(state.toastTimer); state.toastTimer=setTimeout(()=>toast.classList.remove('show'),1800); }
-      function setStatus(message='', error=false) { const el=$('#statusMessage'); el.textContent=message; el.classList.toggle('error',!!error); }
+      function setStatus(message='', error=false) { const el=$('#statusMessage');state.statusKey='';el.title='';el.textContent=message;el.classList.toggle('error',!!error); }
+      function statusFor(key,error=false,detail=''){setStatus(t(key),error);state.statusKey=key;$('#statusMessage').title=detail;}
+      function progressFor(key){state.progressKey=key;$('#progressLabel').textContent=t(key);}
+      function filmstripFor(key){state.filmstripKey=key;$('#filmstripStatus').textContent=t(key);}
 
       const AppConfirm = (() => {
         const dialog=$('#appConfirmDialog'), title=$('#appConfirmTitle'), message=$('#appConfirmMessage'), close=$('#appConfirmClose'), cancel=$('#appConfirmCancel'), ok=$('#appConfirmOk');
@@ -1419,14 +1580,14 @@
         document.title=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;
         $('#brandName').textContent=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;
         $('#footerName').textContent=state.language==='ja'?APP_CONFIG.nameJa:APP_CONFIG.name;
-        updateFormatUi(); updateTrimUi(); updateRunSummary(); updateResultLabels(); updatePreviewPlayButton(); syncCompactControls();
+        updateFormatUi(); updateTrimUi(); updateRunSummary(); updateResultLabels(); updatePreviewPlayButton(); syncCompactControls(); if(state.statusKey)$('#statusMessage').textContent=t(state.statusKey);progressFor(state.progressKey);filmstripFor(state.filmstripKey);if(state.file){$('#videoDuration').textContent=state.previewDuration?formatTime(state.previewDuration):t('unknown');$('#videoResolution').textContent=state.previewWidth?`${state.previewWidth} × ${state.previewHeight}`:t('unknown');}
       }
 
       function settingsObject(){
         return {
           format:selectedValue('format')||'webp', crop:selectedValue('crop')||'none', width:selectedWidth(), fps:selectedFps(), quality:selectedValue('quality')||'standard', loop:$('#loopAnimation').checked,
           gifColors:Number($('#gifColors').value||128), gifDither:$('#gifDither').value,
-          webpQuality:Number($('#webpQuality').value||75), webpCompression:Number($('#webpCompression').value||4), webpLossless:$('#webpLossless').checked
+          webpQuality:Number($('#webpQuality').value), webpCompression:Number($('#webpCompression').value), webpLossless:$('#webpLossless').checked
         };
       }
       function saveSettings(){ writeStorage(storageKey,JSON.stringify(settingsObject())); }
@@ -1458,21 +1619,20 @@
       function updateFormatUi(){
         state.format=selectedValue('format')||'webp'; const gif=state.format==='gif';
         $('#gifAdvanced').hidden=!gif; $('#webpAdvanced').hidden=gif;
-        $('#formatHint').textContent=t(gif?'formatGifHint':'formatWebpHint');
         $('#runButtonLabel').textContent=t(gif?'createGif':'createWebp');
         const ext=gif?'gif':'webp';
         if(state.file&&!state.filenameTouched)setDefaultFilename(); else syncFilenameExtension(ext);
-        if(state.output)$('#resultFilename').textContent=normalizedFilename();
+        if(state.output)$('#resultFilename').textContent=state.outputName||normalizedFilename(state.outputExt);
         updateRunSummary(); saveSettings();
       }
 
       function setDefaultFilename(){
-        if(!state.file)return; const base=state.file.name.replace(/\.[^.]+$/,'')||'animation'; const ext=state.outputExt||(state.format==='gif'?'gif':'webp'); $('#outputFilename').value=`${base}-animation.${ext}`; state.filenameTouched=false;
+        if(!state.file)return; const base=state.file.name.replace(/\.[^.]+$/,'')||'animation'; $('#outputFilename').value=base; syncFilenameExtension(state.format); state.filenameTouched=false;
       }
-      function syncFilenameExtension(ext){ const input=$('#outputFilename'); let name=(input.value||'animation').trim(); name=name.replace(/\.(gif|webp)$/i,''); input.value=`${name||'animation'}.${ext}`; }
+      function syncFilenameExtension(ext){ $('#outputExtension').textContent=`.${ext}`; }
 
       function updatePreviewPlayButton(){ const video=$('#videoPreview'),button=$('#videoPlayButton'),playing=!video.paused&&!video.ended; button.classList.toggle('is-playing',playing); button.setAttribute('aria-label',t(playing?'pause':'play')); }
-      async function togglePreviewPlayback(){ const video=$('#videoPreview'); state.rangePlayback=false; if(video.paused||video.ended){try{await video.play();}catch{}}else video.pause(); updatePreviewPlayButton(); }
+      async function togglePreviewPlayback(){ if(state.processing)return;const video=$('#videoPreview'); state.rangePlayback=false; if(video.paused||video.ended){try{await video.play();}catch{}}else video.pause(); updatePreviewPlayButton(); }
 
       function videoContentRect(){
         const box=$('#videoBox'); if(!box||!state.previewWidth||!state.previewHeight)return null;
@@ -1497,6 +1657,7 @@
       }
       function cropForRunner(){ if(state.cropPreset==='none')return undefined; const r=state.cropRect; return {x:+r.x.toFixed(6),y:+r.y.toFixed(6),width:+r.width.toFixed(6),height:+r.height.toFixed(6)}; }
       async function playSelectedRange(){
+        if(state.processing)return;
         const video=$('#videoPreview'),{start,end}=getRange(); if(!Number.isFinite(video.duration)||!(end>start))return;
         state.rangePlayback=true; try{video.currentTime=Math.max(0,Math.min(video.duration,start));await video.play();}catch{state.rangePlayback=false;} updatePreviewPlayButton();
       }
@@ -1508,7 +1669,22 @@
         $('#'+(target==='start'?'startInput':'endInput')).value=formatTimelineTime(value); updateTrimUi(target); seekPreview(value);
       }
       function removeGifLoopExtension(bytes){
-        const id='NETSCAPE2.0'; for(let i=0;i+14<bytes.length;i++){if(bytes[i]!==0x21||bytes[i+1]!==0xff||bytes[i+2]!==0x0b)continue;let ok=true;for(let j=0;j<id.length;j++)if(bytes[i+3+j]!==id.charCodeAt(j)){ok=false;break;}if(!ok)continue;let end=i+14;while(end<bytes.length){const size=bytes[end++];if(size===0)break;end+=size;if(end>bytes.length)return bytes;}const out=new Uint8Array(bytes.length-(end-i));out.set(bytes.subarray(0,i),0);out.set(bytes.subarray(end),i);return out;}return bytes;
+        // Only walk real GIF blocks; compressed image bytes can contain the same byte sequence.
+        if(bytes.length<13)return bytes;
+        let p=13;if(bytes[10]&128)p+=3*(1<<((bytes[10]&7)+1));
+        const skipBlocks=()=>{while(p<bytes.length){const n=bytes[p++];if(!n)return true;p+=n;if(p>bytes.length)return false;}return false;};
+        while(p<bytes.length){
+          const start=p,kind=bytes[p++];
+          if(kind===0x3b)break;
+          if(kind===0x21){
+            const label=bytes[p++],isLoop=label===0xff&&bytes[p]===11&&['NETSCAPE2.0','ANIMEXTS1.0'].includes(String.fromCharCode(...bytes.subarray(p+1,p+12)));
+            if(!skipBlocks())return bytes;
+            if(isLoop){const out=new Uint8Array(bytes.length-(p-start));out.set(bytes.subarray(0,start));out.set(bytes.subarray(p),start);return out;}
+          }else if(kind===0x2c){
+            if(p+9>bytes.length)return bytes;const flags=bytes[p+8];p+=9;if(flags&128)p+=3*(1<<((flags&7)+1));p++;if(!skipBlocks())return bytes;
+          }else return bytes;
+        }
+        return bytes;
       }
       function setWebpLoopCount(bytes,count){
         const out=bytes.slice(); if(out.length<20||String.fromCharCode(...out.subarray(0,4))!=='RIFF'||String.fromCharCode(...out.subarray(8,12))!=='WEBP')return out;
@@ -1517,30 +1693,44 @@
       function applyLoopPreference(bytes,format,loop){ if(format==='gif')return loop?bytes:removeGifLoopExtension(bytes); return setWebpLoopCount(bytes,loop?0:1); }
 
       function clearFilmstrip(){
-        state.filmstripToken+=1; const strip=$('#timelineFilmstrip'); if(strip)strip.replaceChildren(); const status=$('#filmstripStatus'); if(status)status.textContent=t('thumbPreparing');
+        state.filmstripAbort?.abort();state.filmstripAbort=null;state.filmstripToken+=1; const strip=$('#timelineFilmstrip'); if(strip)strip.replaceChildren(); const status=$('#filmstripStatus'); if(status)filmstripFor('thumbPreparing');
       }
-      function seekProbe(video,time,token){ return new Promise((resolve,reject)=>{ if(token!==state.filmstripToken)return reject(new Error('cancelled')); const done=()=>{cleanup();resolve();}, fail=()=>{cleanup();reject(new Error('seek failed'));}, cleanup=()=>{video.removeEventListener('seeked',done);video.removeEventListener('error',fail);}; video.addEventListener('seeked',done,{once:true});video.addEventListener('error',fail,{once:true}); try{video.currentTime=Math.max(0,Math.min(time,Math.max(0,(video.duration||0)-.001)));}catch(error){cleanup();reject(error);} }); }
+      function waitForProbe(video,event,signal,start){
+        return new Promise((resolve,reject)=>{
+          if(signal.aborted){reject(new Error('cancelled'));return;}
+          let timer;const cleanup=()=>{clearTimeout(timer);video.removeEventListener(event,done);video.removeEventListener('error',fail);signal.removeEventListener('abort',fail);};
+          const done=()=>{cleanup();resolve();},fail=()=>{cleanup();reject(new Error('thumbnail unavailable'));};
+          video.addEventListener(event,done,{once:true});video.addEventListener('error',fail,{once:true});signal.addEventListener('abort',fail,{once:true});timer=setTimeout(fail,5000);
+          try{start?.();}catch{fail();}
+        });
+      }
+      function seekProbe(video,time,signal){
+        const target=Math.max(0,Math.min(time,Math.max(0,(video.duration||0)-.001)));
+        if(!video.seeking&&video.readyState>=2&&Math.abs(video.currentTime-target)<.0001)return Promise.resolve();
+        return waitForProbe(video,'seeked',signal,()=>{video.currentTime=target;});
+      }
       async function buildFilmstrip(){
-        const probe=$('#filmstripProbe'),strip=$('#timelineFilmstrip'),status=$('#filmstripStatus'); if(!state.file||!state.previewDuration||!probe||!strip)return; const token=++state.filmstripToken; strip.replaceChildren(); status.textContent=t('thumbPreparing'); const count=window.innerWidth<=520?6:9; for(let i=0;i<count;i++){const frame=document.createElement('span');frame.className='timeline-filmstrip-frame is-loading';strip.appendChild(frame);} const frames=Array.from(strip.children); const canvas=document.createElement('canvas'); canvas.width=180;canvas.height=102; const ctx=canvas.getContext('2d',{alpha:false}); if(!ctx){status.textContent=t('thumbUnavailable');return;} try{
-          if(probe.readyState<1)await new Promise((resolve,reject)=>{const ok=()=>{cleanup();resolve();},bad=()=>{cleanup();reject(new Error('metadata unavailable'));},cleanup=()=>{probe.removeEventListener('loadedmetadata',ok);probe.removeEventListener('error',bad);};probe.addEventListener('loadedmetadata',ok,{once:true});probe.addEventListener('error',bad,{once:true});});
-          for(let i=0;i<count;i++){ if(token!==state.filmstripToken)return; const time=state.previewDuration*((i+.5)/count); await seekProbe(probe,time,token); if(token!==state.filmstripToken)return; const vw=probe.videoWidth||16,vh=probe.videoHeight||9,scale=Math.max(canvas.width/vw,canvas.height/vh),sw=canvas.width/scale,sh=canvas.height/scale,sx=(vw-sw)/2,sy=(vh-sh)/2; ctx.drawImage(probe,sx,sy,sw,sh,0,0,canvas.width,canvas.height); const img=document.createElement('img');img.alt='';img.src=canvas.toDataURL('image/jpeg',.68);frames[i].replaceChildren(img);frames[i].classList.remove('is-loading'); }
-          status.textContent=t('thumbReady');
-        }catch(error){ if(token!==state.filmstripToken)return; frames.forEach(frame=>frame.classList.remove('is-loading')); status.textContent=t('thumbUnavailable'); }
+        const probe=$('#filmstripProbe'),strip=$('#timelineFilmstrip'),status=$('#filmstripStatus'); if(state.processing||!state.file||!state.previewDuration||!probe||!strip)return; state.filmstripAbort?.abort();const controller=new AbortController();state.filmstripAbort=controller;const token=++state.filmstripToken; strip.replaceChildren(); filmstripFor('thumbPreparing'); const count=window.innerWidth<=520?6:9; for(let i=0;i<count;i++){const frame=document.createElement('span');frame.className='timeline-filmstrip-frame is-loading';strip.appendChild(frame);} const frames=Array.from(strip.children); const canvas=document.createElement('canvas'); canvas.width=180;canvas.height=102; const ctx=canvas.getContext('2d',{alpha:false}); if(!ctx){filmstripFor('thumbUnavailable');return;} try{
+          if(probe.error)throw new Error('metadata unavailable');if(probe.readyState<1)await waitForProbe(probe,'loadedmetadata',controller.signal);
+          for(let i=0;i<count;i++){ if(token!==state.filmstripToken)return; const time=state.previewDuration*((i+.5)/count); await seekProbe(probe,time,controller.signal); if(token!==state.filmstripToken)return; const vw=probe.videoWidth||16,vh=probe.videoHeight||9,scale=Math.max(canvas.width/vw,canvas.height/vh),sw=canvas.width/scale,sh=canvas.height/scale,sx=(vw-sw)/2,sy=(vh-sh)/2; ctx.drawImage(probe,sx,sy,sw,sh,0,0,canvas.width,canvas.height); const img=document.createElement('img');img.alt='';img.src=canvas.toDataURL('image/jpeg',.68);frames[i].replaceChildren(img);frames[i].classList.remove('is-loading'); }
+          filmstripFor('thumbReady');
+        }catch(error){ if(token!==state.filmstripToken)return; frames.forEach(frame=>frame.classList.remove('is-loading')); filmstripFor('thumbUnavailable'); }
       }
       function setVideoFile(file){
-        if(!file||state.processing)return;
+        if(!file||state.processing||state.pendingConfirmation)return;
+        if(file.size===0){statusFor('emptyFile',true);showToast(t('emptyFile'));return;} if(/^(image|audio|text)\//i.test(file.type||'')||file.type==='application/pdf'){statusFor('invalidFile',true);showToast(t('invalidFile'));return;} setStatus('');state.trimTouched=false;state.metadataPending=false;state.rangePlayback=false;state.cropDragging=false;
         clearOutput(); clearFilmstrip();
         if(state.inputUrl)URL.revokeObjectURL(state.inputUrl);
-        state.file=file; state.inputUrl=URL.createObjectURL(file); state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.filenameTouched=false;
+        state.file=file; state.inputUrl=URL.createObjectURL(file); state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.filenameTouched=false;resetCropRect(selectedValue('crop')||'none');
         const video=$('#videoPreview'),probe=$('#filmstripProbe'); video.pause(); video.src=state.inputUrl; video.load(); $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); probe.src=state.inputUrl; probe.load();
         $('#dropZone').hidden=true; $('#sourceWrap').classList.add('is-visible'); $('#trimBlock').hidden=false; $('#fileName').textContent=file.name; $('#fileSize').textContent=formatBytes(file.size); $('#videoDuration').textContent=t('unknown'); $('#videoResolution').textContent=t('unknown'); $('#previewWarning').classList.remove('is-visible');
         $('#startInput').value='0:00.000'; $('#endInput').value='0:05.000'; $('#startRange').value='0'; $('#endRange').value='5'; $('#startRange').max='5'; $('#endRange').max='5';
-        setDefaultFilename(); setRunEnabled(true); updateTrimUi(); updateRunSummary(); showToast(t('selected'));
+        setDefaultFilename(); setRunEnabled(true); updateCropAvailability(); updateTrimUi(); updateRunSummary(); showToast(t('selected'));
       }
 
       function removeVideo(){
-        if(state.processing)return;
-        clearFilmstrip(); if(state.inputUrl)URL.revokeObjectURL(state.inputUrl); state.inputUrl=''; state.file=null; $('#videoInput').value=''; state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.rangePlayback=false; state.cropRect={x:0,y:0,width:1,height:1}; const preview=$('#videoPreview');preview.pause(); for(const id of['videoPreview','filmstripProbe']){const v=$('#'+id);v.removeAttribute('src');v.load();} $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); $('#sourceWrap').classList.remove('is-visible'); $('#dropZone').hidden=false; $('#trimBlock').hidden=true; $('#previewWarning').classList.remove('is-visible'); clearOutput(); setRunEnabled(false); updateTrimActions(); updateRunSummary(); showToast(t('cleared'));
+        if(state.processing||state.pendingConfirmation)return;
+        setStatus('');state.trimTouched=false;state.metadataPending=false;clearFilmstrip(); if(state.inputUrl)URL.revokeObjectURL(state.inputUrl); state.inputUrl=''; state.file=null; $('#videoInput').value=''; state.previewDuration=0; state.previewWidth=0; state.previewHeight=0; state.rangePlayback=false; state.cropRect={x:0,y:0,width:1,height:1};renderCropOverlay(); const preview=$('#videoPreview');preview.pause(); for(const id of['videoPreview','filmstripProbe']){const v=$('#'+id);v.removeAttribute('src');v.load();} $('#videoPlayButton').disabled=true; updatePreviewPlayButton(); $('#sourceWrap').classList.remove('is-visible'); $('#dropZone').hidden=false; $('#trimBlock').hidden=true; $('#previewWarning').classList.remove('is-visible'); clearOutput(); setRunEnabled(false); updateCropAvailability(); updateTrimActions(); updateRunSummary(); showToast(t('cleared'));
       }
 
       function updatePlayhead(){
@@ -1549,9 +1739,10 @@
       function updateTrimUi(source=''){
         updateTrimActions();
         if(state.processing)return;
+        if(source==='start'||source==='end')state.trimTouched=true;
         let start=Math.max(0,parseTimeValue($('#startInput').value)); let end=Math.max(0,parseTimeValue($('#endInput').value)); if(!Number.isFinite(start))start=0;if(!Number.isFinite(end))end=state.previewDuration>0?state.previewDuration:5; const max=state.previewDuration>0?state.previewDuration:Math.max(5,end,start+1);
         if(start>max)start=max; if(end>max&&state.previewDuration>0)end=max;
-        if(end<=start){ if(source==='start')start=Math.max(0,end-.01); else end=Math.min(max,start+.01); }
+        if(end<=start){ if(source==='start'||start>=max){end=Math.min(max,Math.max(end,Math.min(max,.01)));start=Math.max(0,end-.01);} else end=Math.min(max,start+.01); }
         $('#startInput').value=formatTimelineTime(start); $('#endInput').value=formatTimelineTime(end); $('#startRange').max=String(max); $('#endRange').max=String(max); $('#startRange').value=String(start); $('#endRange').value=String(end);
         const startPct=max?Math.max(0,Math.min(100,start/max*100)):0,endPct=max?Math.max(0,Math.min(100,end/max*100)):100; $('#timelineSelected').style.left=`${startPct}%`; $('#timelineSelected').style.width=`${Math.max(0,endPct-startPct)}%`; $('#startEdge').style.left=`${startPct}%`; $('#endEdge').style.left=`${endPct}%`; $('#timelineSelection').textContent=`${formatTimelineTime(start)} → ${formatTimelineTime(end)}`; $('#timelineEndLabel').textContent=formatTimelineTime(max,false); $('#trimDuration').textContent=`${Math.max(0,end-start).toFixed(2)} ${t('seconds')}`; updatePlayhead(); updateRunSummary();
       }
@@ -1559,6 +1750,7 @@
         const duration=$('#videoPreview').duration;
         state.previewDuration=Number.isFinite(duration)&&duration>0?duration:0;
         $('#videoDuration').textContent=state.previewDuration?formatTime(state.previewDuration):t('unknown');
+        if(state.processing){state.metadataPending=true;}else if(state.file&&state.previewDuration>0&&getRange().end>state.previewDuration){updateTrimUi();}
         updateTrimActions();
       }
       function updateTrimActions(){
@@ -1567,7 +1759,7 @@
       }
       function useFullVideo(){
         if(state.processing||!state.file||!Number.isFinite(state.previewDuration)||state.previewDuration<=0)return;
-        $('#startInput').value=formatTimelineTime(0); $('#endInput').value=formatTimelineTime(state.previewDuration);
+        state.trimTouched=true;$('#startInput').value=formatTimelineTime(0); $('#endInput').value=formatTimelineTime(state.previewDuration);
         updateTrimUi(); $('#videoPreview').pause(); seekPreview(0); updatePreviewPlayButton();
       }
       function seekPreview(value){ const video=$('#videoPreview'); state.rangePlayback=false; if(!Number.isFinite(value)||!Number.isFinite(video.duration))return; try{video.currentTime=Math.max(0,Math.min(video.duration,value));}catch{} updatePlayhead(); }
@@ -1575,22 +1767,34 @@
 
       function getRange(){ return {start:Math.max(0,parseTimeValue($('#startInput').value)||0),end:Math.max(0,parseTimeValue($('#endInput').value)||0)}; }
       function updateRunSummary(){
-        if(!state.file){ $('#runSummary').textContent=t('selectVideoSummary'); $('#frameSummary').textContent='—'; return; }
+        if(!state.file){ $('#runSummary').textContent=t('selectVideoSummary'); $('#frameSummary').textContent=''; return; }
         const {start,end}=getRange(); const duration=Math.max(0,end-start); const fps=selectedFps(); const width=selectedWidth(); const frames=Math.max(0,Math.ceil(duration*fps)); const widthLabel=width===0?t('original'):`${width}px`;
-        $('#runSummary').textContent=t('currentSettings',{duration:duration.toFixed(2),width:widthLabel,fps,frames}); $('#frameSummary').textContent=state.format==='gif'?'GIF · palette 2-pass':'WebP · libwebp_anim';
+        $('#runSummary').textContent=t('currentSettings',{duration:duration.toFixed(2),width:widthLabel,fps,frames}); $('#frameSummary').textContent='';
       }
 
       function setRunEnabled(enabled){ $('#runButton').disabled=!enabled||state.processing; $('#mobileRunButton').disabled=!enabled||state.processing; }
-      function setProcessing(active){ state.processing=active; setRunEnabled(!!state.file); $$('input,select,#replaceButton,#clearVideoButton').forEach(el=>{if(el.id==='outputFilename')return; el.disabled=active;}); updateTrimActions(); $('#progressWrap').classList.toggle('is-visible',active); if(active){ $('#progressFill').style.width='0%'; $('#progressPercent').textContent='0%'; } }
+      function setProcessing(active){ state.processing=active;state.cropDragging=false;state.cropDragStart=null;$('#cropDragHandle').disabled=active;$('#fileFallbackButton').disabled=active;$('#replaceFallbackButton').disabled=active;$('#cancelRunButton').disabled=!active;$('#cancelRunButton').hidden=!active;setRunEnabled(!!state.file); $$('input,select,#replaceButton,#clearVideoButton').forEach(el=>{if(el.id==='outputFilename')return; el.disabled=active;}); updateTrimActions(); updateCropAvailability(); $('#progressWrap').classList.toggle('is-visible',active); if(active){progressFor('preparing'); $('#progressFill').style.width='0%'; $('#progressPercent').textContent='0%'; } }
 
       function base64Bytes(id){ const raw=atob($(id).textContent.replace(/\s+/g,'')); const bytes=new Uint8Array(raw.length); for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i); return bytes; }
       async function gunzipAsset(id,asText=false){ if(typeof DecompressionStream!=='function')throw new Error(t('noDecompression')); const stream=new Blob([base64Bytes(id)]).stream().pipeThrough(new DecompressionStream('gzip')); const response=new Response(stream); return asText?response.text():response.arrayBuffer(); }
-      async function loadSelectedRunner(){
-        const prefix=state.format==='gif'?'gif':'webp'; $('#progressLabel').textContent=t('loadingCore');
+      async function loadSelectedRunner(signal){
+        const prefix=state.format==='gif'?'gif':'webp'; progressFor('loadingCore');
         const [coreJsText,wasmBytes]=await Promise.all([gunzipAsset(`#${prefix}-js-gzip`,true),gunzipAsset(`#${prefix}-wasm-gzip`,false)]);
+        if(signal?.aborted)throw new Error('cancelled');
         return BrowserFFmpeg.loadEmbedded({coreJsText,wasmBytes});
       }
 
+      function waitForRunner(signal){
+        return new Promise((resolve,reject)=>{
+          let settled=false,timer;
+          const finish=(error,runner)=>{if(settled){runner?.dispose();return;}settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);if(error)reject(error);else resolve(runner);};
+          const abort=()=>finish(new Error('cancelled'));
+          if(signal.aborted){abort();return;}
+          signal.addEventListener('abort',abort,{once:true});
+          timer=setTimeout(()=>finish(new Error('Converter initialization timed out')),60000);
+          loadSelectedRunner(signal).then(runner=>finish(null,runner),error=>finish(error));
+        });
+      }
       function profileArgs({start,end}=getRange()){
         const width=selectedWidth(), fps=selectedFps(), crop=cropForRunner(); const input='/workerfs/input.bin';
         if(state.format==='gif')return BrowserFFmpeg.videoToGifArgs({input,output:'/output.gif',start,end,maxWidth:width,fps,crop,colors:Number($('#gifColors').value),dither:$('#gifDither').value});
@@ -1598,55 +1802,240 @@
       }
 
       function runSignature(r=getRange()){ const s=settingsObject(); return JSON.stringify({name:state.file?.name,size:state.file?.size,lastModified:state.file?.lastModified,start:+r.start.toFixed(3),end:+r.end.toFixed(3),cropRect:cropForRunner()||null,...s}); }
-      function isHeavy({start,end}=getRange()){ const duration=end-start, fps=selectedFps(), width=selectedWidth(), frames=duration*fps; return duration>15||frames>450||(width===0&&state.previewWidth>1280)||(width>=720&&frames>300)||(state.format==='webp'&&$('#webpLossless').checked&&frames>180); }
+      function isHeavy({start,end}=getRange()){
+        const duration=end-start,fps=selectedFps(),width=selectedWidth(),frames=Math.ceil(duration*fps),crop=cropForRunner();
+        const sourceWidth=state.previewWidth*(crop?.width||1),sourceHeight=state.previewHeight*(crop?.height||1);
+        const w=width||sourceWidth,h=sourceWidth&&sourceHeight?w*sourceHeight/sourceWidth:w*16/9;
+        return duration>15||frames>450||w>=1920||h>=1920||w*h*frames>160000000||state.previewWidth*state.previewHeight>=8000000||(!sourceWidth&&(!width||width>=720))||(width>=720&&frames>300)||(state.format==='webp'&&$('#webpLossless').checked&&frames>180);
+      }
 
+      // The structural timing readers are shared with the repository timing tests.
+      const timingApi={};
+/* GIF/WebP structural timing readers adapted from Builder v1.10.1.
+ * Copyright (c) 2026 Tomohisa Takagi. MIT; see LICENSE.
+ * No decoder guesses: actual encoded frame delays remain visible.
+ */
+(function (root) {
+  'use strict';
+
+  function reader(input, format) {
+    const fail = message => { throw new Error(format + ': ' + message); };
+    let bytes;
+    if (ArrayBuffer.isView(input) && input.BYTES_PER_ELEMENT === 1)
+      bytes = new Uint8Array(input.buffer, input.byteOffset, input.byteLength);
+    else if (input instanceof ArrayBuffer) bytes = new Uint8Array(input);
+    else fail('expected a byte array or ArrayBuffer');
+    const view = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    const need = (offset, size, end = bytes.length) => {
+      if (!Number.isSafeInteger(offset) || !Number.isSafeInteger(size) || offset < 0 || size < 0 || offset + size > end)
+        fail('truncated or invalid structure at byte ' + offset);
+    };
+    const safe = value => {
+      if (!Number.isSafeInteger(value)) fail('timing value exceeds safe integer range');
+      return value;
+    };
+    const u8 = offset => { need(offset, 1); return view.getUint8(offset); };
+    const u16 = (offset, little = false) => { need(offset, 2); return view.getUint16(offset, little); };
+    const u32 = (offset, little = false) => { need(offset, 4); return view.getUint32(offset, little); };
+    const ascii = (offset, count) => {
+      need(offset, count);
+      let text = '';
+      for (let i = 0; i < count; i++) text += String.fromCharCode(bytes[offset + i]);
+      return text;
+    };
+    return {bytes, fail, need, safe, u8, u16, u32, ascii};
+  }
+
+  function readGif(input) {
+    const r = reader(input, 'GIF');
+    r.need(0, 13);
+    if (!['GIF87a', 'GIF89a'].includes(r.ascii(0, 6))) r.fail('invalid signature');
+    const width = r.u16(6, true), height = r.u16(8, true);
+    if (!width || !height) r.fail('invalid canvas dimensions');
+    let offset = 13, pendingDelay = null, loopCount = null, trailer = false;
+    const delaysCs = [];
+    const take = size => { r.need(offset, size); const start = offset; offset += size; return start; };
+    const subblocks = () => {
+      const blocks = [];
+      for (;;) {
+        const size = r.u8(take(1));
+        if (!size) return blocks;
+        blocks.push({start: take(size), size});
+      }
+    };
+    if (r.u8(10) & 0x80) take(3 * (1 << ((r.u8(10) & 7) + 1)));
+    while (offset < r.bytes.length) {
+      const kind = r.u8(take(1));
+      if (kind === 0x3b) { trailer = true; break; }
+      if (kind === 0x21) {
+        const label = r.u8(take(1));
+        const blocks = subblocks();
+        if (label === 0xf9) {
+          if (blocks.length !== 1 || blocks[0].size !== 4 || pendingDelay !== null) r.fail('malformed or unpaired GCE');
+          pendingDelay = r.u16(blocks[0].start + 1, true);
+        } else if (label === 0xff) {
+          if (!blocks.length || blocks[0].size !== 11) r.fail('invalid application extension');
+          if (['NETSCAPE2.0', 'ANIMEXTS1.0'].includes(r.ascii(blocks[0].start, 11))) {
+            if (blocks.length !== 2 || blocks[1].size !== 3 || r.u8(blocks[1].start) !== 1 || loopCount !== null)
+              r.fail('invalid or duplicate loop extension');
+            loopCount = r.u16(blocks[1].start + 1, true);
+          }
+        } else if (label === 0x01) {
+          if (!blocks.length || blocks[0].size !== 12) r.fail('invalid plain-text extension');
+          pendingDelay = null; // A GCE also applies to a following text graphic.
+        }
+      } else if (kind === 0x2c) {
+        const descriptor = take(9);
+        if (!r.u16(descriptor + 4, true) || !r.u16(descriptor + 6, true)) r.fail('invalid image dimensions');
+        const packed = r.u8(descriptor + 8);
+        if (packed & 0x80) take(3 * (1 << ((packed & 7) + 1)));
+        const codeSize = r.u8(take(1));
+        if (codeSize < 2 || codeSize > 8) r.fail('invalid LZW code size');
+        if (!subblocks().length) r.fail('empty image data');
+        delaysCs.push(pendingDelay === null ? 0 : pendingDelay);
+        pendingDelay = null;
+      } else r.fail('unexpected block ' + kind);
+    }
+    if (!trailer || offset !== r.bytes.length || !delaysCs.length || pendingDelay !== null)
+      r.fail('missing trailer, trailing data, or unpaired image control');
+    const totalDurationCs = delaysCs.reduce((sum, delay) => r.safe(sum + delay), 0);
+    return {width, height, frameCount: delaysCs.length, delaysCs, totalDurationCs, loopCount};
+  }
+
+  function readWebp(input) {
+    const r = reader(input, 'WebP');
+    r.need(0, 12);
+    if (r.ascii(0, 4) !== 'RIFF' || r.ascii(8, 4) !== 'WEBP' || r.u32(4, true) + 8 !== r.bytes.length)
+      r.fail('invalid RIFF signature or size');
+    function chunks(start, end) {
+      const result = [];
+      while (start < end) {
+        r.need(start, 8, end);
+        const size = r.u32(start + 4, true), paddedSize = size + (size & 1);
+        r.need(start + 8, paddedSize, end);
+        if ((size & 1) && r.u8(start + 8 + size) !== 0) r.fail('invalid RIFF padding');
+        result.push({type: r.ascii(start, 4), start: start + 8, end: start + 8 + size, size});
+        start += 8 + paddedSize;
+      }
+      return result;
+    }
+    let loopCount = null, animated = false, staticFrames = 0;
+    const durationsMs = [];
+    for (const chunk of chunks(12, r.bytes.length)) {
+      if (chunk.type === 'ANIM') {
+        if (chunk.size !== 6 || animated) r.fail('invalid or duplicate ANIM chunk');
+        animated = true; loopCount = r.u16(chunk.start + 4, true);
+      } else if (chunk.type === 'ANMF') {
+        if (!animated || chunk.size < 16) r.fail('ANMF lacks ANIM or frame header');
+        const payload = chunks(chunk.start + 16, chunk.end);
+        if (payload.filter(item => item.type === 'VP8 ' || item.type === 'VP8L').length !== 1)
+          r.fail('ANMF must contain one image bitstream');
+        const offset = chunk.start + 12;
+        durationsMs.push(r.u8(offset) + r.u8(offset + 1) * 256 + r.u8(offset + 2) * 65536);
+      } else if (chunk.type === 'VP8 ' || chunk.type === 'VP8L') {
+        staticFrames++;
+      } else if (chunk.type === 'VP8X' && chunk.size !== 10) r.fail('invalid VP8X chunk');
+    }
+    if (animated ? (!durationsMs.length || staticFrames) : staticFrames !== 1) r.fail('missing or conflicting image frames');
+    return {frameCount: animated ? durationsMs.length : 1, durationsMs,
+      totalDurationMs: animated ? durationsMs.reduce((sum, delay) => r.safe(sum + delay), 0) : null, loopCount};
+  }
+
+  const api = {readGif, readWebp};
+  root.TimingReaders = api;
+
+})(timingApi);
+
+      function inspectOutput(bytes,format){
+        const m=format==='gif'?timingApi.TimingReaders.readGif(bytes):timingApi.TimingReaders.readWebp(bytes);
+        return {duration:format==='gif'?m.totalDurationCs/100:m.totalDurationMs===null?null:m.totalDurationMs/1000,frameCount:m.frameCount};
+      }
+      function verifyPreview(url,signal){
+        return new Promise((resolve,reject)=>{
+          const img=new Image();let timer,settled=false;
+          const finish=(error)=>{if(settled)return;settled=true;clearTimeout(timer);signal.removeEventListener('abort',abort);img.onload=img.onerror=null;if(error){img.src='';reject(error);}else resolve({width:img.naturalWidth,height:img.naturalHeight});};
+          const abort=()=>finish(new Error('cancelled'));
+          if(signal.aborted){abort();return;}
+          img.onload=()=>finish(img.naturalWidth&&img.naturalHeight?null:new Error('Preview has no dimensions'));
+          img.onerror=()=>finish(new Error('Output image could not be decoded'));
+          signal.addEventListener('abort',abort,{once:true});
+          timer=setTimeout(()=>finish(new Error('Output preview timed out')),30000);
+          img.src=url;
+        });
+      }
+      function cancelConversion(){const job=state.job;if(!job)return;$('#cancelRunButton').disabled=true;progressFor('cancelling');job.controller.abort();}
       async function createAnimation(){
-        if(state.processing)return; if(!state.file){setStatus(t('chooseVideoError'),true);return;}
-        if(selectedValue('width')==='custom')normalizeIntegerInput($('#customWidth'),WIDTH_MIN,WIDTH_MAX,480); if(selectedValue('fps')==='custom')normalizeIntegerInput($('#customFps'),FPS_MIN,FPS_MAX,15); updateRunSummary();
-        // Capture the selected range once, at the same millisecond precision as the trim controls.
+        if(state.processing||state.pendingConfirmation)return;
+        if(!state.file){statusFor('chooseVideoError',true);return;}
+        if(selectedValue('width')==='custom')normalizeIntegerInput($('#customWidth'),WIDTH_MIN,WIDTH_MAX,480);
+        if(selectedValue('fps')==='custom')normalizeIntegerInput($('#customFps'),FPS_MIN,FPS_MAX,15);
+        updateRunSummary();
         const currentRange=getRange(),range={start:Math.round(currentRange.start*1000)/1000,end:Math.round(currentRange.end*1000)/1000};
-        const {start,end}=range; if(!Number.isFinite(start)||!Number.isFinite(end)||!(end>start)){setStatus(t('invalidRange'),true);return;}
-        const signature=runSignature(range);
-        if(state.output&&signature===state.lastRunSignature){ const ok=await AppConfirm.ask({title:t('sameTitle'),message:t('sameMessage'),confirmLabel:t('runAgain'),cancelLabel:t('cancel')}); if(!ok)return; }
-        if(isHeavy(range)){ const ok=await AppConfirm.ask({title:t('heavyTitle'),message:t('heavyMessage'),confirmLabel:t('continue'),cancelLabel:t('cancel')}); if(!ok)return; }
-        if(!BrowserFFmpeg?.isSupported?.()){setStatus(t('unsupportedRuntime'),true);return;}
-        if(typeof DecompressionStream!=='function'){setStatus(t('noDecompression'),true);return;}
-        clearOutput(); setStatus(''); setProcessing(true); let runner=null;
-        try {
-          runner=await loadSelectedRunner(); $('#progressLabel').textContent=t('processing'); const output=state.format==='gif'?'/output.gif':'/output.webp';
-          const result=await runner.run({files:[{name:'/workerfs/input.bin',data:state.file,workerfs:true}],outputs:[output],args:profileArgs(range),onProgress:p=>{const percent=Math.max(0,Math.min(100,Math.round(p*100)));$('#progressFill').style.width=`${percent}%`;$('#progressPercent').textContent=`${percent}%`;},onLog:()=>{}});
-          const file=result.files.find(item=>item.name===output); if(!file)throw new Error('Output file was not returned.');
-          state.output=applyLoopPreference(new Uint8Array(file.data),state.format,$('#loopAnimation').checked); state.outputMime=state.format==='gif'?'image/gif':'image/webp'; state.outputExt=state.format==='gif'?'gif':'webp'; state.outputMeta={duration:end-start,fps:selectedFps(),format:state.format,loop:$('#loopAnimation').checked,crop:cropForRunner()||null}; state.lastRunSignature=signature; syncFilenameExtension(state.outputExt); showResult(); setStatus(t('complete')); showToast(t('outputReady',{format:state.outputExt.toUpperCase()}));
-        } catch(error){ console.error(error); setStatus(`${t('conversionFailed')}: ${error?.message||error}`,true); }
-        finally { runner?.dispose(); setProcessing(false); }
+        const {start,end}=range;
+        if(!Number.isFinite(start)||!Number.isFinite(end)||!(end>start)||(state.previewDuration>0&&end>Math.round(state.previewDuration*1000)/1000)){statusFor('invalidRange',true);return;}
+        if(state.cropPreset!=='none'&&(!state.previewWidth||!state.previewHeight)){statusFor('cropUnavailable',true);return;}
+        for(const [id,min,max] of [['webpQuality',0,100],['webpCompression',0,6]]){
+          if(state.format!=='webp')break;const el=$('#'+id),n=Number(el.value);
+          if(!el.value.trim()||!Number.isInteger(n)||n<min||n>max){statusFor('invalidQuality',true);return;}
+        }
+        if(!BrowserFFmpeg?.isSupported?.()){statusFor('unsupportedRuntime',true);return;}
+        if(typeof DecompressionStream!=='function'){statusFor('noDecompression',true);return;}
+        const signature=runSignature(range),format=state.format,settings=settingsObject(),crop=cropForRunner()||null,source=state.file;
+        let args;
+        try{args=profileArgs(range);}catch(error){statusFor('conversionFailed',true,String(error?.message||error));return;}
+        const output=format==='gif'?'/output.gif':'/output.webp';
+        state.pendingConfirmation=true;
+        try{
+          if(state.output&&signature===state.lastRunSignature&&!await AppConfirm.ask({title:t('sameTitle'),message:t('sameMessage'),confirmLabel:t('runAgain'),cancelLabel:t('cancel')}))return;
+          if(isHeavy(range)&&!await AppConfirm.ask({title:t('heavyTitle'),message:t('heavyMessage'),confirmLabel:t('continue'),cancelLabel:t('cancel')}))return;
+        }finally{state.pendingConfirmation=false;}
+        const job={controller:new AbortController(),runner:null};state.job=job;setStatus('');state.rangePlayback=false;$('#videoPreview').pause();const resumeFilmstrip=!!state.filmstripAbort&&state.filmstripKey==='thumbPreparing';if(resumeFilmstrip)clearFilmstrip();setProcessing(true);
+        let candidateUrl='';
+        try{
+          job.runner=await waitForRunner(job.controller.signal);
+          if(job.controller.signal.aborted)return;
+          progressFor('processing');
+          const result=await job.runner.run({files:[{name:'/workerfs/input.bin',data:source,workerfs:true}],outputs:[output],args,signal:job.controller.signal,onProgress:p=>{if(job.controller.signal.aborted||!Number.isFinite(p))return;const percent=Math.max(0,Math.min(100,Math.round(p*100)));$('#progressFill').style.width=percent+'%';$('#progressPercent').textContent=percent+'%';},onLog:()=>{}});
+          if(job.controller.signal.aborted)return;
+          const file=result.files.find(item=>item.name===output);if(!file)throw new Error('Output file was not returned.');
+          const raw=new Uint8Array(file.data);inspectOutput(raw,format);
+          const bytes=applyLoopPreference(raw,format,settings.loop),meta=inspectOutput(bytes,format);
+          const outputName=normalizedFilename(format);
+          candidateUrl=URL.createObjectURL(new Blob([bytes],{type:format==='gif'?'image/gif':'image/webp'}));
+          let dimensions;try{dimensions=await verifyPreview(candidateUrl,job.controller.signal);}catch(error){if(!job.controller.signal.aborted)statusFor('resultPreviewFailed',true,String(error?.message||error));return;}
+          if(job.controller.signal.aborted)return;
+          clearOutput();state.outputUrl=candidateUrl;candidateUrl='';state.outputWidth=dimensions.width;state.outputHeight=dimensions.height;state.output=bytes;state.outputMime=format==='gif'?'image/gif':'image/webp';state.outputExt=format;state.outputName=outputName;state.outputMeta={...meta,requestedDuration:end-start,fps:settings.fps,format,loop:settings.loop,crop};state.lastRunSignature=signature;
+          syncFilenameExtension(format);showResult();statusFor('complete');showToast(t('outputReady',{format:format.toUpperCase()}));
+        }catch(error){if(!job.controller.signal.aborted){console.error(error);statusFor('conversionFailed',true,String(error?.message||error));}}
+        finally{if(candidateUrl)URL.revokeObjectURL(candidateUrl);job.runner?.dispose();if(job.controller.signal.aborted)statusFor('cancelledRun');state.job=null;setProcessing(false);if(state.metadataPending){state.metadataPending=false;if(!state.trimTouched&&state.previewDuration>0){$('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(Math.min(5,state.previewDuration));}updateTrimUi();resetCropRect(selectedValue('crop')||'none');updateCropAvailability();}if((resumeFilmstrip||state.filmstripKey==='thumbPreparing')&&state.previewDuration&&$('#filmstripProbe').readyState>=1)buildFilmstrip();}
       }
 
       function clearOutput(){
-        if(state.outputUrl)URL.revokeObjectURL(state.outputUrl); state.outputUrl=''; state.output=null; state.outputWidth=0; state.outputHeight=0; state.outputMeta=null; $('#resultSection').classList.remove('is-visible'); $('#resultPreview').removeAttribute('src'); $('#mobileSaveButton').disabled=true; $('#shareButton').hidden=true;
+        if(state.outputUrl)URL.revokeObjectURL(state.outputUrl); state.outputUrl=''; state.output=null; state.outputExt='';state.outputMime='';state.outputName='';state.lastRunSignature='';state.outputWidth=0; state.outputHeight=0; state.outputMeta=null; $('#resultSection').classList.remove('is-visible'); $('#resultPreview').removeAttribute('src'); $('#mobileSaveButton').disabled=true; $('#shareButton').hidden=true;
       }
 
       function showResult(){
-        if(!state.output)return; if(state.outputUrl)URL.revokeObjectURL(state.outputUrl); state.outputUrl=URL.createObjectURL(new Blob([state.output],{type:state.outputMime}));
-        const img=$('#resultPreview'); img.onload=()=>{state.outputWidth=img.naturalWidth;state.outputHeight=img.naturalHeight;updateResultLabels();}; img.src=state.outputUrl; img.alt=state.outputExt.toUpperCase();
+        if(!state.output)return; if(!state.outputUrl)state.outputUrl=URL.createObjectURL(new Blob([state.output],{type:state.outputMime}));
+        const img=$('#resultPreview'); img.onload=()=>{state.outputWidth=img.naturalWidth;state.outputHeight=img.naturalHeight;updateResultLabels();}; img.onerror=()=>{statusFor('resultPreviewFailed',true);};img.src=state.outputUrl; img.alt=state.outputExt.toUpperCase();
         $('#resultSection').classList.add('is-visible'); $('#mobileSaveButton').disabled=false; updateResultLabels(); const shareSupported=typeof navigator.share==='function'&&typeof File==='function'; $('#shareButton').hidden=!shareSupported;
         if(!state.filenameTouched)setDefaultFilename();
         requestAnimationFrame(()=>$('#resultSection').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}));
       }
 
       function updateResultLabels(){
-        if(!state.output)return; const meta=state.outputMeta||{duration:0,fps:15}; $('#resultSize').textContent=formatBytes(state.output.length); $('#resultFormat').textContent=`Animated ${state.outputExt.toUpperCase()}`; $('#outputDimensions').textContent=state.outputWidth?`${state.outputWidth} × ${state.outputHeight}`:'—'; $('#outputDuration').textContent=`${Number(meta.duration||0).toFixed(2)} ${t('seconds')}`; $('#outputFps').textContent=String(meta.fps||15); $('#resultFilename').textContent=normalizedFilename();
+        if(!state.output)return; const meta=state.outputMeta||{duration:0,fps:15}; $('#resultSize').textContent=formatBytes(state.output.length); $('#resultFormat').textContent=meta.duration===null?`${state.outputExt.toUpperCase()} · ${t('staticImage')}`:`Animated ${state.outputExt.toUpperCase()}`; $('#outputDimensions').textContent=state.outputWidth?`${state.outputWidth} × ${state.outputHeight}`:'—'; $('#outputDuration').textContent=meta.duration===null?t('staticImage'):`${Number(meta.duration||0).toFixed(2)} ${t('seconds')}`; $('#outputFps').textContent=String(meta.fps||15);$('#outputFrames').textContent=Number.isFinite(meta.frameCount)?String(meta.frameCount):'—'; $('#resultFilename').textContent=state.outputName||normalizedFilename(state.outputExt);
       }
 
-      function normalizedFilename(){ let name=($('#outputFilename').value||'').trim().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim(); if(!name)name='animation'; const ext=state.outputExt||state.format; name=name.replace(/\.(gif|webp)$/i,''); return `${name}.${ext}`; }
-      function saveOutput(){ if(!state.output||!state.outputUrl)return; const a=document.createElement('a'); a.href=state.outputUrl; a.download=normalizedFilename(); document.body.appendChild(a); a.click(); a.remove(); showToast(t('saved')); }
-      async function shareOutput(){ if(!state.output)return; try{const file=new File([state.output],normalizedFilename(),{type:state.outputMime}); if(navigator.canShare&& !navigator.canShare({files:[file]}))throw new Error('File sharing is not supported.'); await navigator.share({files:[file]});}catch(error){if(error?.name!=='AbortError')showToast(t('shareFailed'));} }
+      function normalizedFilename(ext=state.format){ let name=($('#outputFilename').value||'').trim().replace(/[\\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim(); if(state.filenameTouched)name=name.replace(/(?:\.(?:gif|webp))+$/i,'').trim(); if(!name)name='animation'; return `${name}.${ext}`; }
+      function saveOutput(){ if(!state.output||!state.outputUrl)return; const a=document.createElement('a'); a.href=state.outputUrl; a.download=state.outputName||normalizedFilename(state.outputExt); document.body.appendChild(a); a.click(); a.remove(); showToast(t('saved')); }
+      async function shareOutput(){ if(!state.output)return; try{const file=new File([state.output],state.outputName||normalizedFilename(state.outputExt),{type:state.outputMime}); if(navigator.canShare&& !navigator.canShare({files:[file]}))throw new Error('File sharing is not supported.'); await navigator.share({files:[file]});}catch(error){if(error?.name!=='AbortError')showToast(t('shareFailed'));} }
 
       function bindEvents(){
         $('#languageButton').addEventListener('click',()=>{state.language=state.language==='ja'?'en':'ja';writeStorage(languageKey,state.language);applyLanguage();});
         const help=$('#helpDialog'); $('#helpButton').addEventListener('click',()=>help.showModal()); $('#closeHelpButton').addEventListener('click',()=>help.close()); help.addEventListener('click',e=>{const r=help.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)help.close();});
-        $('#videoInput').addEventListener('change',e=>setVideoFile(e.target.files?.[0]));$('#fileFallbackButton').addEventListener('click',()=>$('#fileFallbackInput').click());$('#fileFallbackInput').addEventListener('change',e=>{const file=e.target.files?.[0];e.target.value='';setVideoFile(file)}); $('#replaceButton').addEventListener('click',()=>{$('#videoInput').value='';$('#videoInput').click();}); $('#clearVideoButton').addEventListener('click',removeVideo);
-        const drop=$('#dropZone'); ['dragenter','dragover'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragging');})); ['dragleave','drop'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragging');})); drop.addEventListener('drop',e=>{const file=Array.from(e.dataTransfer?.files||[]).find(item=>item.type.startsWith('video/')||/\.(mp4|mov|m4v|webm|mkv|avi)$/i.test(item.name));if(file)setVideoFile(file);});
-        const video=$('#videoPreview'); $('#videoPlayButton').addEventListener('click',togglePreviewPlayback); video.addEventListener('click',togglePreviewPlayback); video.addEventListener('loadedmetadata',()=>{updatePreviewDuration(); state.previewWidth=video.videoWidth||0; state.previewHeight=video.videoHeight||0; $('#videoResolution').textContent=state.previewWidth?`${state.previewWidth} × ${state.previewHeight}`:t('unknown'); if(!state.processing){const end=state.previewDuration?Math.min(state.previewDuration,5):5; $('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(end);updateTrimUi();}else updateTrimActions();resetCropRect(selectedValue('crop')||'none');buildFilmstrip();}); video.addEventListener('error',()=>{$('#previewWarning').classList.add('is-visible');$('#filmstripStatus').textContent=t('thumbUnavailable');$('#videoPlayButton').disabled=true;updatePreviewPlayButton();}); video.addEventListener('loadeddata',()=>{$('#previewWarning').classList.remove('is-visible');$('#videoPlayButton').disabled=false;updatePreviewPlayButton();}); video.addEventListener('play',updatePreviewPlayButton); video.addEventListener('pause',updatePreviewPlayButton); video.addEventListener('ended',updatePreviewPlayButton); video.addEventListener('timeupdate',()=>{if(state.rangePlayback){const end=getRange().end;if(Number(video.currentTime)>=end-.012){state.rangePlayback=false;video.pause();try{video.currentTime=Math.min(video.duration,end);}catch{}}}updatePlayhead();}); video.addEventListener('seeked',updatePlayhead); video.addEventListener('durationchange',()=>{updatePreviewDuration();updatePlayhead();});
+        $('#videoInput').addEventListener('change',e=>setVideoFile(e.target.files?.[0]));$('#fileFallbackButton').addEventListener('click',()=>$('#fileFallbackInput').click());$('#replaceFallbackButton').addEventListener('click',()=>$('#fileFallbackInput').click());$('#fileFallbackInput').addEventListener('change',e=>{const file=e.target.files?.[0];e.target.value='';setVideoFile(file)}); $('#replaceButton').addEventListener('click',()=>{$('#videoInput').value='';$('#videoInput').click();}); $('#clearVideoButton').addEventListener('click',removeVideo);
+        const drop=$('#dropZone'); ['dragenter','dragover'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.add('is-dragging');})); ['dragleave','drop'].forEach(type=>drop.addEventListener(type,e=>{e.preventDefault();drop.classList.remove('is-dragging');})); drop.addEventListener('drop',e=>{const file=Array.from(e.dataTransfer?.files||[]).find(item=>item.type.startsWith('video/')||/\.(mp4|mov|m4v|webm|mkv|avi)$/i.test(item.name));if(file)setVideoFile(file);else{statusFor('invalidFile',true);showToast(t('invalidFile'));}});
+        const video=$('#videoPreview'); $('#videoPlayButton').addEventListener('click',togglePreviewPlayback); video.addEventListener('click',togglePreviewPlayback); video.addEventListener('loadedmetadata',()=>{if(!state.file)return;updatePreviewDuration(); state.previewWidth=video.videoWidth||0; state.previewHeight=video.videoHeight||0; $('#videoResolution').textContent=state.previewWidth?`${state.previewWidth} × ${state.previewHeight}`:t('unknown'); if(!state.processing){if(!state.trimTouched){const end=state.previewDuration?Math.min(state.previewDuration,5):5; $('#startInput').value=formatTimelineTime(0);$('#endInput').value=formatTimelineTime(end);}updateTrimUi();resetCropRect(selectedValue('crop')||'none');updateCropAvailability();buildFilmstrip();}else{state.metadataPending=true;updateTrimActions();}}); video.addEventListener('error',()=>{if(!state.file)return;clearFilmstrip();$('#previewWarning').classList.add('is-visible');filmstripFor('thumbUnavailable');$('#videoPlayButton').disabled=true;updatePreviewPlayButton();}); video.addEventListener('loadeddata',()=>{if(!state.file)return;$('#previewWarning').classList.remove('is-visible');$('#videoPlayButton').disabled=false;updatePreviewPlayButton();}); video.addEventListener('play',updatePreviewPlayButton); video.addEventListener('pause',updatePreviewPlayButton); video.addEventListener('ended',updatePreviewPlayButton); video.addEventListener('timeupdate',()=>{if(state.rangePlayback){const end=getRange().end;if(Number(video.currentTime)>=end-.012){state.rangePlayback=false;video.pause();try{video.currentTime=Math.min(video.duration,end);}catch{}}}updatePlayhead();}); video.addEventListener('seeked',updatePlayhead); video.addEventListener('durationchange',()=>{updatePreviewDuration();updatePlayhead();});
         $('#startRange').addEventListener('input',e=>{if(state.processing)return;$('#startInput').value=formatTimelineTime(Number(e.target.value));updateTrimUi('start');seekPreview(Number(e.target.value));}); $('#endRange').addEventListener('input',e=>{if(state.processing)return;$('#endInput').value=formatTimelineTime(Number(e.target.value));updateTrimUi('end');seekPreview(Number(e.target.value));}); $('#startInput').addEventListener('change',()=>{if(state.processing)return;updateTrimUi('start');seekPreview(getRange().start);}); $('#endInput').addEventListener('change',()=>{if(state.processing)return;updateTrimUi('end');seekPreview(getRange().end);});
         $('#setStartHere').addEventListener('click',()=>{if(state.processing)return;if(Number.isFinite(video.currentTime)){$('#startInput').value=formatTimelineTime(video.currentTime);updateTrimUi('start');}}); $('#setEndHere').addEventListener('click',()=>{if(state.processing)return;if(Number.isFinite(video.currentTime)){$('#endInput').value=formatTimelineTime(video.currentTime);updateTrimUi('end');}}); $('#useFullVideo').addEventListener('click',useFullVideo); $('#playSelection').addEventListener('click',playSelectedRange); $('#jumpStart').addEventListener('click',()=>seekPreview(getRange().start)); $('#jumpEnd').addEventListener('click',()=>seekPreview(getRange().end));
         $$('.fine-step-button').forEach(button=>button.addEventListener('click',()=>{state.fineTuneStep=button.dataset.fineStep==='tenths'?'tenths':'frame';updateFineTuneUi();}));
@@ -1655,13 +2044,13 @@
         const grab=$('#playheadGrab'); const movePlayhead=e=>{if(!state.playheadDragging)return;e.preventDefault();seekPreview(timelineTimeFromPointer(e));}; grab.addEventListener('pointerdown',e=>{if(!state.previewDuration)return;state.playheadDragging=true;$('#playhead').classList.add('is-dragging');grab.setPointerCapture?.(e.pointerId);movePlayhead(e);}); grab.addEventListener('pointermove',movePlayhead); const finishPlayhead=e=>{if(!state.playheadDragging)return;state.playheadDragging=false;$('#playhead').classList.remove('is-dragging');try{grab.releasePointerCapture?.(e.pointerId);}catch{}}; grab.addEventListener('pointerup',finishPlayhead);grab.addEventListener('pointercancel',finishPlayhead); grab.addEventListener('keydown',e=>{if(!state.previewDuration)return;const step=e.shiftKey?1:.1;if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();seekPreview((Number(video.currentTime)||0)+(e.key==='ArrowRight'?step:-step));}});
         $('#cropSelect').addEventListener('change',e=>{setChoice('crop',e.target.value);resetCropRect(e.target.value);updateCompactVisibility();saveSettings();updateRunSummary();});
         $('#loopAnimation').addEventListener('change',()=>{updateCompactVisibility();saveSettings();updateRunSummary();});
-        const cropHandle=$('#cropDragHandle'); const moveCrop=e=>{if(!state.cropDragging)return;e.preventDefault();const content=videoContentRect();if(!content)return;const start=state.cropDragStart,r=state.cropRect,dx=(e.clientX-start.clientX)/content.width,dy=(e.clientY-start.clientY)/content.height;state.cropRect={...r,x:Math.max(0,Math.min(1-r.width,start.x+dx)),y:Math.max(0,Math.min(1-r.height,start.y+dy))};renderCropOverlay();updateRunSummary();}; cropHandle.addEventListener('pointerdown',e=>{if(state.cropPreset==='none')return;state.cropDragging=true;state.cropDragStart={clientX:e.clientX,clientY:e.clientY,x:state.cropRect.x,y:state.cropRect.y};cropHandle.setPointerCapture?.(e.pointerId);e.stopPropagation();});cropHandle.addEventListener('pointermove',moveCrop);const finishCrop=e=>{if(!state.cropDragging)return;state.cropDragging=false;try{cropHandle.releasePointerCapture?.(e.pointerId);}catch{}state.cropDragStart=null;};cropHandle.addEventListener('pointerup',finishCrop);cropHandle.addEventListener('pointercancel',finishCrop);window.addEventListener('resize',renderCropOverlay);
+        const cropHandle=$('#cropDragHandle'); const moveCrop=e=>{if(state.processing||state.pendingConfirmation||!state.cropDragging)return;e.preventDefault();const content=videoContentRect();if(!content)return;const start=state.cropDragStart,r=state.cropRect,dx=(e.clientX-start.clientX)/content.width,dy=(e.clientY-start.clientY)/content.height;state.cropRect={...r,x:Math.max(0,Math.min(1-r.width,start.x+dx)),y:Math.max(0,Math.min(1-r.height,start.y+dy))};renderCropOverlay();updateRunSummary();}; cropHandle.addEventListener('pointerdown',e=>{if(state.processing||state.pendingConfirmation||state.cropPreset==='none')return;state.cropDragging=true;state.cropDragStart={clientX:e.clientX,clientY:e.clientY,x:state.cropRect.x,y:state.cropRect.y};cropHandle.setPointerCapture?.(e.pointerId);e.stopPropagation();});cropHandle.addEventListener('pointermove',moveCrop);const finishCrop=e=>{if(!state.cropDragging)return;state.cropDragging=false;try{cropHandle.releasePointerCapture?.(e.pointerId);}catch{}state.cropDragStart=null;};cropHandle.addEventListener('pointerup',finishCrop);cropHandle.addEventListener('pointercancel',finishCrop);cropHandle.addEventListener('keydown',e=>{if(state.processing||state.pendingConfirmation||state.cropPreset==='none')return;const delta={ArrowLeft:[-.01,0],ArrowRight:[.01,0],ArrowUp:[0,-.01],ArrowDown:[0,.01]}[e.key];if(!delta)return;e.preventDefault();const r=state.cropRect;state.cropRect={...r,x:Math.max(0,Math.min(1-r.width,r.x+delta[0])),y:Math.max(0,Math.min(1-r.height,r.y+delta[1]))};renderCropOverlay();});window.addEventListener('resize',renderCropOverlay);
         $$('input[name="format"]').forEach(el=>el.addEventListener('change',updateFormatUi));
         $('#widthSelect').addEventListener('change',e=>{setChoice('width',e.target.value);updateCompactVisibility();saveSettings();updateRunSummary();if(e.target.value==='custom')requestAnimationFrame(()=>$('#customWidth').focus());});
         $('#fpsSelect').addEventListener('change',e=>{setChoice('fps',e.target.value);updateCompactVisibility();saveSettings();updateRunSummary();updateFineTuneUi();if(e.target.value==='custom')requestAnimationFrame(()=>$('#customFps').focus());});
         bindCustomIntegerInput('customWidth','width',WIDTH_MIN,WIDTH_MAX,480); bindCustomIntegerInput('customFps','fps',FPS_MIN,FPS_MAX,15); $$('input[name="quality"]').forEach(el=>el.addEventListener('change',()=>{applyPreset();saveSettings();updateRunSummary();})); ['gifColors','gifDither','webpQuality','webpCompression','webpLossless'].forEach(id=>$('#'+id).addEventListener('change',()=>{saveSettings();updateRunSummary();}));
-        $('#runButton').addEventListener('click',createAnimation); $('#saveButton').addEventListener('click',saveOutput); $('#shareButton').addEventListener('click',shareOutput); $('#makeAnotherButton').addEventListener('click',()=>$('#settingsSection').scrollIntoView({behavior:'smooth',block:'start'})); $('#outputFilename').addEventListener('input',()=>{state.filenameTouched=true;if(state.output)$('#resultFilename').textContent=normalizedFilename();}); $('#outputFilename').addEventListener('blur',()=>{syncFilenameExtension(state.format);if(state.output)$('#resultFilename').textContent=normalizedFilename();});
-        $('#mobileBar').addEventListener('click',e=>{const button=e.target.closest('.mobile-item');if(!button||button.disabled)return; if(button.dataset.target){document.getElementById(button.dataset.target)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});$$('.mobile-item').forEach(item=>item.classList.toggle('is-active',item===button));} if(button.dataset.action==='run')createAnimation();if(button.dataset.action==='save')saveOutput();});
+        $('#cancelRunButton').addEventListener('click',cancelConversion);$('#runButton').addEventListener('click',createAnimation); $('#saveButton').addEventListener('click',saveOutput); $('#shareButton').addEventListener('click',shareOutput); $('#makeAnotherButton').addEventListener('click',()=>$('#settingsSection').scrollIntoView({behavior:'smooth',block:'start'})); $('#outputFilename').addEventListener('input',()=>{state.filenameTouched=true;if(state.output&&state.outputExt===state.format){state.outputName=normalizedFilename(state.outputExt);$('#resultFilename').textContent=state.outputName;}}); $('#outputFilename').addEventListener('blur',()=>{syncFilenameExtension(state.format);if(state.output&&state.outputExt===state.format){state.outputName=normalizedFilename(state.outputExt);$('#resultFilename').textContent=state.outputName;}});
+        $('#mobileBar').addEventListener('click',e=>{const button=e.target.closest('.mobile-item');if(!button||button.disabled)return; if(button.dataset.target){document.getElementById(button.dataset.target)?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});$$('.mobile-item').forEach(item=>item.classList.toggle('is-active',item===button));} if(button.dataset.action==='run'){$('#createSection').scrollIntoView({behavior:'auto',block:'start'});createAnimation();}if(button.dataset.action==='save')saveOutput();});
       }
 
       function init(){
@@ -1673,5 +2062,62 @@
       init();
     })();
   </script>
+<!-- Application license and third-party notices
+MIT License
+
+Copyright (c) 2026 ttomohisa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+# Third-party notices
+
+This application source is distributed under the repository license. The generated standalone HTML also embeds profile-specific binary assets built by **FFmpeg WASM Builder v1.10.1**.
+
+## FFmpeg WASM Builder v1.10.1
+
+- Repository: `ttomohisa/htmlapps-ffmpeg-wasm-builder`
+- Profiles embedded by this app: `video-to-gif`, `video-to-webp`
+- The builder's own source is MIT-licensed.
+- The generated GIF/WebP FFmpeg cores are distributed under LGPL-2.1-or-later according to the builder release metadata.
+- The WebP profile also links libwebp and carries its upstream notice/license in the release bundle.
+
+The application build downloads the official v1.10.1 profile ZIPs, verifies them against the release `SHA256SUMS.txt`, and embeds only the runtime files needed by this app. The full upstream notices remain available in the [pinned Builder release](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/tag/v1.10.1), including the corresponding `ffmpeg-wasm-sources-v1.10.1.tar.gz` source archive. See [runtime provenance](docs/RUNTIME_TIMING.md) for exact archive checksums and source versions.
+
+See `ffmpeg.config.json` for the exact pinned release and profile archive names.
+
+
+## Timing regression helpers
+
+`scripts/test-support/timing-readers.js` and its tests are adapted from the GIF/WebP subset of FFmpeg WASM Builder v1.10.1, commit `5f3f2752fd4bc13627ba34604fe7f550fec329fa`, under MIT. Copyright (c) 2026 Tomohisa Takagi. The complete permission notice is retained in `scripts/test-support/LICENSE`. Test videos are tiny synthetic patterns, not user media.
+
+## Big Buck Bunny — earlier documentation screenshots
+
+Earlier repository screenshots used media from **Big Buck Bunny** as sample video content. The current screenshots use synthetic test media; the following attribution is retained for the earlier screenshots in repository history.
+
+- Copyright: © 2008 Blender Foundation / www.bigbuckbunny.org
+- License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+- License URL: https://creativecommons.org/licenses/by/3.0/
+- Project/license information: https://peach.blender.org/about/
+- Usage in this repository: documentation screenshots only; the screenshot-capture sample video is not redistributed in the repository.
+
+The Big Buck Bunny project states that reused parts of the movie should be attributed as: `(c) copyright 2008, Blender Foundation / www.bigbuckbunny.org`.
+
+-->
 </body>
 </html>

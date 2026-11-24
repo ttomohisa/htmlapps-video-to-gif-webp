@@ -12,16 +12,16 @@ This application source is distributed under the repository license. The generat
 
 The application build downloads the official v1.10.1 profile ZIPs, verifies them against the release `SHA256SUMS.txt`, and embeds only the runtime files needed by this app. The full upstream notices remain available in the [pinned Builder release](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/tag/v1.10.1), including the corresponding `ffmpeg-wasm-sources-v1.10.1.tar.gz` source archive. See [runtime provenance](docs/RUNTIME_TIMING.md) for exact archive checksums and source versions.
 
-See `ffmpeg.config.json` for the exact pinned release and profile archive names.
+See `ffmpeg.config.json` for the exact pinned release and profile archive names. Application releases include `third-party-licenses.zip`, assembled from the two hash-verified upstream profile ZIPs, including their complete LICENSES directories, BUILDINFO, notices and a link to the corresponding source archive. The standalone HTML also carries the application MIT text and third-party notice summary.
 
 
 ## Timing regression helpers
 
 `scripts/test-support/timing-readers.js` and its tests are adapted from the GIF/WebP subset of FFmpeg WASM Builder v1.10.1, commit `5f3f2752fd4bc13627ba34604fe7f550fec329fa`, under MIT. Copyright (c) 2026 Tomohisa Takagi. The complete permission notice is retained in `scripts/test-support/LICENSE`. Test videos are tiny synthetic patterns, not user media.
 
-## Big Buck Bunny — documentation screenshots
+## Big Buck Bunny — earlier documentation screenshots
 
-The repository screenshots (`assets/screenshot.png` and `assets/screenshot-en.png`) use media from **Big Buck Bunny** as sample video content.
+Earlier repository screenshots used media from **Big Buck Bunny** as sample video content. The current screenshots use synthetic test media; the following attribution is retained for the earlier screenshots in repository history.
 
 - Copyright: © 2008 Blender Foundation / www.bigbuckbunny.org
 - License: Creative Commons Attribution 3.0 Unported (CC BY 3.0)

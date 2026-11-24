@@ -16,6 +16,10 @@ on:
       - "scripts/build-self-extract.ps1"
       - "scripts/verify-self-extract.ps1"
       - ".github/workflows/build-standalone.yml"
+      - ".github/workflows/deploy-pages.yml"
+      - "LICENSE"
+      - "THIRD_PARTY_NOTICES.md"
+      - "CHANGELOG.md"
 
 permissions:
   contents: read
@@ -44,3 +48,18 @@ jobs:
             dist/.nojekyll
           if-no-files-found: error
           retention-days: 14
+  release-package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Validate release package without publishing
+        shell: bash
+        run: |
+          bash -n scripts/package-release-licenses.sh
+          bash scripts/package-release-licenses.sh
+          version="$(node -p "require('./app.config.json').version")"
+          awk '/^## /{if(found)exit; if($0=="## v" version || $0=="## " version){found=1;next}} found' version="$version" CHANGELOG.md > release-notes.md
+          test -s release-notes.md

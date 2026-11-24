@@ -2,7 +2,7 @@
 
 ## Pinned release
 
-App v1.0.2 uses the GIF and WebP profiles from the published
+Since app v1.0.2, the app uses the GIF and WebP profiles from the published
 [Builder v1.10.1 release](https://github.com/ttomohisa/htmlapps-ffmpeg-wasm-builder/releases/tag/v1.10.1),
 Builder source commit `5f3f2752fd4bc13627ba34604fe7f550fec329fa`.
 
@@ -31,8 +31,8 @@ See also [third-party notices](../THIRD_PARTY_NOTICES.md).
 The old v1.5.0 GIF core emitted a one-centisecond final frame, even when the
 selected rate required a longer interval. v1.10.1 preserves normalized frame
 duration through encoding. This consumer update uses the released core without
-modifying it or patching GIF frame delays. Trim, crop, quality and app loop
-postprocessing are unchanged.
+modifying it or patching GIF frame delays. The v1.0.2 update preserved trim, crop, quality and app loop
+postprocessing. v1.0.5 adds structural result checks and displays encoded timing.
 
 GIF timing uses centiseconds. At 15 or 30 fps, the test compares adjacent rounded
 presentation timestamps and separately rounds the final interval. It does not
@@ -82,7 +82,7 @@ stdout includes arguments, output hashes and structural timing receipts.
 
 Node/MEMFS does not exercise Blob Workers, WORKERFS, browser loading, visual
 playback, save/share, console/network observation, or direct `file://` execution.
-Before treating the app as browser-verified, test the exact PR preview and both
+Chromium PR tests cover local opening, media selection, language, Help and network observations. Selected desktop and self-extract cases additionally exercise actual browser/WORKERFS conversion, square crop, download, cancellation, and retry. This is not a substitute for physical-device testing. Before treating conversion as browser-verified, test the exact PR preview and both
 HTML forms directly: load a synthetic video, trim 2–8 seconds at 10 fps, save GIF
 with loop ON/OFF, and independently inspect 60 × 10-cs frame delays. Also check
 15/30 fps, single-frame GIF, WebP, source replacement/repeated conversions, JA/EN

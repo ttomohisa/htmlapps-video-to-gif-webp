@@ -20,7 +20,7 @@ GitHub Pages delivers the initial HTML. After it loads, video trimming, decoding
 
 ![English screenshot](assets/screenshot-en.png)
 
-The screenshots use **Big Buck Bunny** media as the sample video content. The screenshot-capture sample itself is not included in this repository.
+The screenshots show the current app after converting a synthetic test video. Earlier documentation screenshots used **Big Buck Bunny** media; its attribution is retained below.
 
 **Big Buck Bunny attribution:** © 2008 Blender Foundation / www.bigbuckbunny.org — licensed under [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/).
 
@@ -43,7 +43,8 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
 - Light / Standard / High quality presets
 - GIF advanced settings for color count and dithering
 - WebP advanced settings for quality, compression level, and lossless mode
-- Editable output filename with automatic `.gif` / `.webp` extension handling
+- Output filename defaults to the source name, with an editable stem and a fixed `.gif` / `.webp` suffix
+- Cancel conversion and retain the previous successful result if a repeat conversion fails or is cancelled
 - Output preview, file size, Save, and Web Share when supported
 - Japanese and English UI in the same HTML
 - Mobile-first responsive layout with a fixed bottom action bar
@@ -56,6 +57,10 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for details.
 ### Use the web demo
 
 Just [open the demo](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/). No installation or account is required.
+
+### Download a standalone HTML file
+
+Download `video-to-gif-webp.html` or `video-to-gif-webp.self-extract.html` from [GitHub Releases](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/releases), then open the saved file in a supported browser. Each new version is tagged and released after a successful main-branch build. The release also includes dependency manifests and third-party license files.
 
 ### Build a standalone HTML file
 
@@ -72,7 +77,7 @@ Python, Node.js, and a local web server are not required. The build uses Windows
 ## Usage
 
 1. Choose or drop a video.
-2. Use the thumbnail timeline to set the start (`S`) and end (`E`) of the animation, or choose **Use full video** to select the whole clip and pause at its beginning.
+2. Use the thumbnail timeline to set the start and end of the animation, or choose **Use full video** to select the whole clip and pause at its beginning.
 3. Drag the white playhead to seek, or click/tap the video preview to play and pause.
 4. Use **Play selected range** to review exactly what will be converted.
 5. If needed, fine-tune the start/end by one output frame or 0.1 second.
@@ -158,7 +163,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 .\scripts\check-repository.ps1
 ```
 
-Repository verification requires Node.js 22+ for the dependency-free synthetic trim tests. The standalone builder itself still needs only PowerShell and `tar.exe`. These tests do not replace browser, real encoding, keyboard/touch, or runtime network-panel checks.
+Repository verification requires Node.js 22+ for the dependency-free synthetic trim tests. The standalone builder itself still needs only PowerShell and `tar.exe`. The repository check includes real embedded-WASM encoding in Node.js. PR browser CI additionally exercises local HTML conversion, download, cancellation and network observation in Chromium. These checks do not replace mobile-device, browser-compatibility or touch testing.
 
 Default builds also update the tracked catalog file `video-to-gif-webp.html`. An explicit `-OutputPath` generates only the requested artifacts and leaves that catalog file unchanged.
 
@@ -189,6 +194,10 @@ The generated standalone HTML is designed to run without sending the selected me
 - No analytics, telemetry, login, cloud storage, or server-side conversion is included.
 
 The GitHub Pages version requires the initial HTML request, but the selected video content is not transmitted by the app. For fully disconnected use, open the generated `dist/index.html` locally.
+
+## Conversion reliability
+
+Conversions can be cancelled; a failed or cancelled repeat conversion keeps the last successful result. The output duration is read from the encoded file. Cropping requires known video dimensions. The filename defaults to the source name without its extension; the output suffix is shown separately.
 
 ## Limitations
 
@@ -224,4 +233,3 @@ The application source in this repository is licensed under the [MIT License](LI
 
 The generated standalone HTML also embeds FFmpeg/libwebp-derived binary assets under their respective licenses. The repository MIT License does not relicense those embedded third-party binaries; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
-Dismiss Help and confirmations with Close, Esc, or a click outside the dialog.

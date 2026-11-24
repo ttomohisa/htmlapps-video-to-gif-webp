@@ -95,3 +95,57 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+
+  release:
+    name: Publish version tag and GitHub Release
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/download-artifact@v8
+        with:
+          name: standalone-html-${{ github.sha }}
+          path: dist
+      - name: Publish release if version is new
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./app.config.json').version")"
+          [[ "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          tag="v$version"
+          if gh release view "$tag" --json assets --jq '.assets[].name' > existing-assets.txt 2>/dev/null; then
+            if ! git show-ref --verify --quiet "refs/tags/$tag"; then
+              echo "::error::Existing release has no fetched tag: $tag"; exit 1
+            fi
+            if [[ "$(git rev-parse "$tag^{commit}")" != "$GITHUB_SHA" ]]; then
+              echo "Release $tag belongs to an earlier commit; leaving it unchanged."
+              exit 0
+            fi
+          else
+            rm -f existing-assets.txt
+            if git show-ref --verify --quiet "refs/tags/$tag"; then
+              test "$(git rev-parse "$tag^{commit}")" = "$GITHUB_SHA"
+            fi
+          fi
+          cp dist/index.html video-to-gif-webp.html
+          cp dist/index.self-extract.html video-to-gif-webp.self-extract.html
+          awk '/^## /{if(found)exit; if($0=="## v" version || $0=="## " version){found=1;next}} found' version="$version" CHANGELOG.md > release-notes.md
+          test -s release-notes.md
+          bash scripts/package-release-licenses.sh
+          assets=(video-to-gif-webp.html video-to-gif-webp.self-extract.html dist/dependency-manifest.json dist/self-extract-manifest.json LICENSE THIRD_PARTY_NOTICES.md third-party-licenses.zip)
+          if [[ -f existing-assets.txt ]]; then
+            for asset in "${assets[@]}"; do
+              if ! grep -Fxq "$(basename "$asset")" existing-assets.txt; then
+                gh release upload "$tag" "$asset"
+              fi
+            done
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --title "$tag" --notes-file release-notes.md "${assets[@]}"
+          fi

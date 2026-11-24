@@ -64,24 +64,24 @@ function makeHarness(format = 'webp') {
   const queryAll = selector => nodes.filter(n => selector.split(',').some(s => matches(n, s)));
   const document = {querySelector:s=>queryAll(s)[0] || null, querySelectorAll:queryAll, getElementById:id=>byId.get(id), createElement:t=>new Element(t), documentElement:{}, body:new Element('body')};
   const coreGate = deferred(); const runGate = deferred(); const captured = [];
-  const runner = { run: async opts => { captured.push(opts); await runGate.promise; return {files:[{name:opts.outputs[0],data:new Uint8Array(20)}]}; }, dispose(){} };
-  const errors = [];
-  const sandbox = {console:{...console,error:e=>errors.push(e)}, document, CSS:{escape:String}, navigator:{language:'en'}, HTMLElement:Element, Blob, File, Uint8Array, Response, DecompressionStream, URL:{createObjectURL:()=> 'blob:synthetic',revokeObjectURL(){}}, setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame(){}, localStorage:{getItem(){return null;},setItem(){}}, BrowserFFmpeg:{isSupported:()=>true,videoToGifArgs:o=>o,videoToWebpArgs:o=>o}, __coreGate:coreGate};
+  const runner = { run: async opts => { captured.push(opts); await runGate.promise; return {files:[{name:opts.outputs[0],data:opts.outputs[0].endsWith('.gif')?Uint8Array.from([71,73,70,56,57,97,1,0,1,0,128,0,0,0,0,0,255,255,255,33,249,4,0,10,0,0,0,44,0,0,0,0,1,0,1,0,0,2,2,68,1,0,59]):Uint8Array.from([82,73,70,70,14,0,0,0,87,69,66,80,86,80,56,76,1,0,0,0,47,0])}]}; }, dispose(){} };
+  const errors = []; const preview = {fail:false};
+  const sandbox = {console:{...console,error:e=>errors.push(e)}, document, CSS:{escape:String}, navigator:{language:'en'}, HTMLElement:Element, Image:class {naturalWidth=1;naturalHeight=1;set src(value){if(value)Promise.resolve().then(()=>preview.fail?this.onerror?.():this.onload?.());}}, AbortController, Blob, File, Uint8Array, Response, DecompressionStream, URL:{createObjectURL:()=> 'blob:synthetic',revokeObjectURL(){}}, setTimeout:()=>1, clearTimeout(){}, requestAnimationFrame(){}, localStorage:{getItem(){return null;},setItem(){}}, BrowserFFmpeg:{isSupported:()=>true,videoToGifArgs:o=>o,videoToWebpArgs:o=>o}, __coreGate:coreGate};
   sandbox.window = {addEventListener(){},matchMedia:()=>({matches:true}),innerWidth:1024};
   vm.createContext(sandbox);
   let script = html.slice(html.lastIndexOf('  <script>\n    (() => {') + '  <script>'.length).split('</script>')[0];
   script = script.replace('__APP_CONFIG_JSON__', JSON.stringify({slug:'synthetic',defaultLanguage:'en'})).replace('__BUILD_MANIFEST_JSON__', '{}');
-  script = script.replace('      init();', '      loadSelectedRunner = async () => globalThis.__coreGate.promise; globalThis.app = {state,bindEvents,setProcessing,createAnimation,getRange,profileArgs,updateTrimUi,applyLanguage,setVideoFile,removeVideo,adjustRangePoint,settingsObject};');
+  script = script.replace('      init();', '      loadSelectedRunner = async () => globalThis.__coreGate.promise; globalThis.app = {state,bindEvents,setProcessing,createAnimation,getRange,profileArgs,updateTrimUi,applyLanguage,setVideoFile,removeVideo,adjustRangePoint,settingsObject,cancelConversion,inspectOutput,isHeavy,normalizedFilename};');
   vm.runInContext(script, sandbox, {filename:sourcePath});
   const app = sandbox.app;
   for (const n of nodes.filter(n => n.name === 'format')) n.checked = n.value === format;
-  for (const [id,value] of Object.entries({startInput:'0:00.000',endInput:'0:05.000',gifColors:'128',gifDither:'sierra2_4a',webpQuality:'75',webpCompression:'4',outputFilename:'synthetic.'+format})) byId.get(id).value = value;
+  for (const [id,value] of Object.entries({startInput:'0:00.000',endInput:'0:05.000',gifColors:'128',gifDither:'sierra2_4a',webpQuality:'75',webpCompression:'4',outputFilename:'synthetic'})) byId.get(id).value = value;
   app.state.file = {name:'synthetic.mp4',size:1024,lastModified:0};
   app.state.format = format; app.state.previewDuration = 10; app.state.language = 'en'; app.state.fineTuneStep = 'tenths';
   app.bindEvents();
   app.updateTrimUi();
   app.applyLanguage();
-  return {app,byId,nodes,coreGate,runGate,runner,captured,errors};
+  return {app,byId,nodes,coreGate,runGate,runner,captured,errors,preview};
 }
 
 const tick = () => new Promise(resolve=>setImmediate(resolve));
@@ -93,7 +93,7 @@ async function finish(h,done) { h.coreGate.resolve(h.runner); await tick(); h.ru
 function assertJob(h,start,end) {
   assert.equal(h.captured.length,1);
   assert.equal(h.captured[0].args.start,start); assert.equal(h.captured[0].args.end,end);
-  assert.equal(h.app.state.outputMeta.duration,end-start);
+  assert.equal(h.app.state.outputMeta.requestedDuration,end-start);
   const signature=JSON.parse(h.app.state.lastRunSignature);
   assert.equal(signature.start,start); assert.equal(signature.end,end);
   assert.equal(h.captured[0].files[0].data,h.app.state.file); assert.equal(h.captured[0].files[0].workerfs,true);
@@ -206,7 +206,7 @@ test('durationchange enables the shortcut for a newly known duration without res
 for(const format of ['gif','webp']) test(`${format}: durationchange during processing refreshes availability without mutating the captured range`,async()=>{
   const h=makeHarness(format);metadata(h,Infinity);selectRange(h,1,5);const done=h.app.createAnimation();
   const video=h.byId.get('videoPreview');video.duration=2;video.dispatch('durationchange');assert.equal(h.app.state.previewDuration,2);assert.equal(h.byId.get('useFullVideo').disabled,true);assert.deepEqual(range(h),{start:1,end:5});
-  await finish(h,done);assertJob(h,1,5);assert.equal(h.byId.get('useFullVideo').disabled,false);h.byId.get('useFullVideo').click();assert.deepEqual(range(h),{start:0,end:2});
+  await finish(h,done);assertJob(h,1,5);assert.equal(range(h).end,2);assert.equal(h.byId.get('useFullVideo').disabled,false);h.byId.get('useFullVideo').click();assert.deepEqual(range(h),{start:0,end:2});
 });
 
 // Header regressions use real translations, markup, and the language click handler.
@@ -237,3 +237,75 @@ test('Japanese fallback header exposes its target and exact local-processing bad
   assert.match(button, /title="英語に切り替え"/);
   assert.match(html, /data-i18n="localBadge">完全ローカル処理<\/span>/);
 });
+
+test('cancel during core loading preserves prior output and skips encoder',async()=>{
+  const h=makeHarness();const previous=new Uint8Array([1]);h.app.state.output=previous;
+  const done=h.app.createAnimation();h.app.cancelConversion();h.coreGate.resolve(h.runner);await done;
+  assert.equal(h.captured.length,0);assert.equal(h.app.state.output,previous);assert.equal(h.app.state.processing,false);
+  assert.match(h.byId.get('statusMessage').textContent,/cancel/i);
+});
+test('failed encode retains prior result',async()=>{
+  const h=makeHarness();const previous=new Uint8Array([1]);h.app.state.output=previous;
+  const done=h.app.createAnimation();h.coreGate.resolve(h.runner);await tick();h.runGate.reject(new Error('failed'));await done;
+  assert.equal(h.app.state.output,previous);assert.equal(h.app.state.processing,false);
+});
+test('zero byte source does not replace current source',()=>{
+  const h=makeHarness(),source=h.app.state.file;h.app.setVideoFile({name:'empty.mp4',size:0});assert.equal(h.app.state.file,source);
+});
+test('late metadata preserves manually edited range',()=>{
+  const h=makeHarness();h.app.setVideoFile({name:'new.mp4',size:10});h.byId.get('startInput').value='1';h.byId.get('startInput').dispatch('change');h.byId.get('endInput').value='4';h.byId.get('endInput').dispatch('change');metadata(h,12);assert.deepEqual(range(h),{start:1,end:4});
+});
+test('output extension does not leak into a replacement source',()=>{
+  const h=makeHarness('gif');h.app.state.outputExt='webp';h.app.setVideoFile({name:'new.mp4',size:10});assert.equal(h.byId.get('outputFilename').value,'new');assert.equal(h.byId.get('outputExtension').textContent,'.gif');
+});
+test('invalid output is rejected structurally',()=>{
+  const h=makeHarness();assert.throws(()=>h.app.inspectOutput(new Uint8Array(0),'gif'));assert.throws(()=>h.app.inspectOutput(new Uint8Array(0),'webp'));
+});
+test('large dimensions warn even for a short clip',()=>{
+  const h=makeHarness();for(const n of h.nodes.filter(n=>n.name==='width'))n.checked=n.value==='custom';h.byId.get('customWidth').value='4096';assert.equal(h.app.isHeavy({start:0,end:5}),true);
+});
+test('actual output timing is separate from requested range',async()=>{
+  const h=makeHarness('gif');const done=h.app.createAnimation();await finish(h,done);assert.equal(h.app.state.outputMeta.duration,.1);assert.equal(h.app.state.outputMeta.requestedDuration,5);
+});
+
+test('cancelling an active encode signals abort and never replaces the previous result',async()=>{
+  const h=makeHarness(),previous=new Uint8Array([1]);h.app.state.output=previous;
+  const done=h.app.createAnimation();h.coreGate.resolve(h.runner);await tick();assert.equal(h.captured.length,1);h.app.cancelConversion();assert.equal(h.captured[0].signal.aborted,true);h.runGate.resolve();await done;
+  assert.equal(h.app.state.output,previous);assert.equal(h.app.state.processing,false);
+});
+test('crop position and encoder arguments are captured before asynchronous core loading',async()=>{
+  const h=makeHarness();h.app.state.cropPreset='1:1';h.app.state.previewWidth=1920;h.app.state.previewHeight=1080;h.app.state.cropRect={x:.2,y:0,width:.5,height:1};
+  const done=h.app.createAnimation();assert.equal(h.byId.get('cropDragHandle').disabled,true);
+  h.byId.get('cropDragHandle').dispatch('pointerdown');assert.equal(h.app.state.cropDragging,false);
+  h.app.state.cropRect={x:.4,y:0,width:.5,height:1};await finish(h,done);
+  assert.equal(h.captured[0].args.crop.x,.2);assert.equal(h.app.state.outputMeta.crop.x,.2);assert.equal(h.byId.get('cropDragHandle').disabled,false);
+});
+test('unknown preview dimensions prevent misleading crop conversion',async()=>{
+  const h=makeHarness();h.app.state.cropPreset='1:1';await h.app.createAnimation();assert.equal(h.captured.length,0);assert.equal(h.app.state.processing,false);assert.match(h.byId.get('statusMessage').textContent,/crop/i);
+});
+test('non-video image MIME does not replace a current source',()=>{
+  const h=makeHarness(),source=h.app.state.file;h.app.setVideoFile({name:'image.png',size:20,type:'image/png'});assert.equal(h.app.state.file,source);
+});
+
+
+test('original filename stem and fixed suffix survive format and language changes',()=>{
+  const h=makeHarness('webp');
+  h.app.setVideoFile({name:'holiday.v2.mp4',size:10});
+  assert.equal(h.byId.get('outputFilename').value,'holiday.v2');
+  assert.equal(h.byId.get('outputExtension').textContent,'.webp');
+  const radio=h.nodes.find(n=>n.name==='format'&&n.value==='gif');
+  assert.ok(radio);
+  for(const n of h.nodes.filter(n=>n.name==='format'))n.checked=n===radio;
+  radio.dispatch('change');
+  assert.equal(h.byId.get('outputFilename').value,'holiday.v2');
+  assert.equal(h.byId.get('outputExtension').textContent,'.gif');
+  h.byId.get('outputFilename').value='my.clip';
+  h.byId.get('outputFilename').dispatch('input');
+  h.byId.get('languageButton').click();
+  assert.equal(h.byId.get('outputFilename').value,'my.clip');
+  assert.equal(h.byId.get('outputExtension').textContent,'.gif');
+});
+
+ test('cancel during pending core load restores controls before load settles',async()=>{const h=makeHarness();const done=h.app.createAnimation();h.app.cancelConversion();await done;assert.equal(h.app.state.processing,false);h.coreGate.resolve(h.runner);await tick();assert.equal(h.captured.length,0);});
+ test('preview decode failure preserves previous result',async()=>{const h=makeHarness('gif'),previous=new Uint8Array([1]);h.app.state.output=previous;h.preview.fail=true;const done=h.app.createAnimation();await finish(h,done);assert.equal(h.app.state.output,previous);assert.match(h.byId.get('statusMessage').textContent,/image/i);});
+ test('typed output suffix is not duplicated',()=>{const h=makeHarness('gif');h.byId.get('outputFilename').value='holiday.webp.gif';h.byId.get('outputFilename').dispatch('input');assert.equal(h.app.normalizedFilename('gif'),'holiday.gif');});

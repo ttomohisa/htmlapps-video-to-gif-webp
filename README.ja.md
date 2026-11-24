@@ -20,7 +20,7 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 
 ![日本語スクリーンショット](assets/screenshot.png)
 
-スクリーンショットでは、サンプル動画の内容として **Big Buck Bunny** の素材を使用しています。スクリーンショット取得用のサンプル動画自体は、このリポジトリには同梱していません。
+スクリーンショットは、テスト用の合成動画を変換した現在のアプリ画面です。以前のスクリーンショットでは **Big Buck Bunny** の素材を使用していたため、以下に帰属表示を残します。
 
 **Big Buck Bunny 帰属表示:** © 2008 Blender Foundation / www.bigbuckbunny.org — [Creative Commons Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/) で提供されています。
 
@@ -29,7 +29,7 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 ## 主な機能
 
 - 動画の好きな範囲をAnimated GIF / Animated WebPへ変換
-- サムネイル付きタイムラインで開始位置 `S`・終了位置 `E`・現在位置を操作
+- サムネイル付きタイムラインで開始位置・終了位置・現在位置を操作
 - **選択範囲を再生**して、変換される部分だけを事前確認
 - **動画全体を選択**で、出力設定を変えずに既知の動画全範囲を選択
 - 開始・終了位置を**0.1秒**または**出力1フレーム分**ずつ微調整
@@ -43,7 +43,8 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 - 軽量 / 標準 / 高品質プリセット
 - GIF詳細設定：色数・Dither
 - WebP詳細設定：Quality・Compression level・Lossless
-- 出力ファイル名を編集し、`.gif` / `.webp` 拡張子を形式に合わせて自動調整
+- 元動画の名前を出力ファイル名の初期値にし、名前と固定の `.gif` / `.webp` 拡張子を分けて表示
+- 変換のキャンセル。同じ動画の再変換に失敗した場合や中止した場合は前回の結果を保持
 - 生成結果のプレビュー・ファイルサイズ表示・保存・対応端末で共有
 - 1つのHTML内で日本語 / Englishを切り替え
 - スマートフォン優先のレスポンシブUIと固定アクションバー
@@ -56,6 +57,10 @@ GitHub Pagesから最初のHTMLを読み込んだ後、範囲指定・動画デ�
 ### Webで使う
 
 [デモを開く](https://ttomohisa.github.io/htmlapps-video-to-gif-webp/)だけで利用できます。インストールやアカウント登録は不要です。
+
+### 単一HTMLをダウンロードして使う
+
+[GitHub Releases](https://github.com/ttomohisa/htmlapps-video-to-gif-webp/releases) から `video-to-gif-webp.html` または `video-to-gif-webp.self-extract.html` を取得し、対応ブラウザで開きます。mainのビルド成功後、新しいバージョンのタグとReleaseを自動作成します。依存関係のマニフェストと第三者ライセンスも同梱します。
 
 ### 単一HTMLをビルドして使う
 
@@ -72,7 +77,7 @@ Python、Node.js、ローカルWebサーバーは不要です。Windows標準の
 ## 使い方
 
 1. 動画を選択またはドロップします。
-2. タイムラインで開始位置 `S` と終了位置 `E` を決めるか、**動画全体を選択**で全範囲を選び、先頭で一時停止します。
+2. タイムラインで開始位置と終了位置を決めるか、**動画全体を選択**で全範囲を選び、先頭で一時停止します。
 3. 白い再生位置をドラッグしてシークし、動画プレビューはクリック / タップで再生・一時停止します。
 4. **選択範囲を再生**して、アニメーションになる部分だけを確認します。
 5. 必要に応じて、開始・終了を1フレームまたは0.1秒ずつ微調整します。
@@ -158,7 +163,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 .\scripts\check-repository.ps1
 ```
 
-リポジトリ検証には、追加パッケージ不要の合成テスト用にNode.js 22以上が必要です。単体のビルダーは引き続きPowerShellと `tar.exe` だけで使えます。合成テストは実ブラウザ・実エンコード・キーボード/タッチ・実行時通信の確認を代替しません。
+リポジトリ検証には、追加パッケージ不要の合成テスト用にNode.js 22以上が必要です。単体のビルダーは引き続きPowerShellと `tar.exe` だけで使えます。リポジトリ検証にはNode.js上での実WASM変換も含まれます。PRのブラウザCIではChromium上のローカルHTMLで変換、保存、キャンセル、通信を検証します。スマートフォン実機や他のブラウザ、タッチ操作の確認は別途必要です。
 
 通常ビルドはカタログ用の追跡対象 `video-to-gif-webp.html` も更新します。`-OutputPath` を明示したビルドは指定先だけに出力し、カタログ用ファイルを変更しません。
 
@@ -189,6 +194,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\build-standalone.ps1 -Forc
 - Analytics、Telemetry、ログイン、Cloud storage、Server conversionなし
 
 GitHub Pages版ではページを開くためのHTML配信は発生しますが、選択した動画の内容はアプリから外部へ送信されません。完全にネットワークを切って使う場合は、生成済みの `dist/index.html` をローカルで開いてください。
+
+## 変換結果とキャンセル
+
+変換は中止できます。同じ動画の再変換に失敗した場合や中止した場合は、前回の結果が残ります。結果の再生時間は生成したファイルから取得します。切り抜きには動画のサイズが必要です。出力ファイル名の初期値は元動画の名前（拡張子なし）で、出力形式の拡張子は入力欄の右に表示します。
 
 ## 制限事項
 
@@ -224,4 +233,3 @@ Copyright © 2026 ttomohisa
 
 生成された単一HTMLにはFFmpeg / libwebp由来のバイナリも、それぞれのライセンスに従って内包されます。リポジトリのMIT Licenseで第三者バイナリを再ライセンスするものではありません。詳細は [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) を確認してください。
 
-ヘルプと確認画面は閉じるボタン、Escキー、外側のクリックで閉じられます。

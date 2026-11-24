@@ -27,6 +27,48 @@ async function assertHeaderVersionFits(page, width, height, label) {
 }
 
 async function bounds(locator,width,height,label,vertical=true){const r=await locator.boundingBox();assert.ok(r&&r.x>=-1&&r.x+r.width<=width+1&&(!vertical||(r.y>=-1&&r.y+r.height<=height+1)),label+': bounds '+JSON.stringify(r));}
+// Run actual browser/WORKERFS conversion on small synthetic media. Keep this
+// separate from layout assertions and Node/MEMFS timing tests.
+async function verifyConversion(page,label,language,desktop){
+  const readers=require('./test-support/timing-readers.js');
+  await page.locator('#widthSelect').selectOption('320');
+  await page.locator('#fpsSelect').selectOption('10');
+  await page.locator('#cropSelect').selectOption('1:1');
+  const choose=async format=>page.locator('input[name="format"][value="'+format+'"]').check();
+  const result=page.locator('#resultPreview');
+  const waitIdle=()=>page.waitForFunction(()=>!document.querySelector('#runButton').disabled&&document.querySelector('#cancelRunButton').hidden,{},{timeout:90000});
+  async function convert(format){
+    await choose(format);
+    await page.locator('#runButton').click();
+    await page.waitForFunction(ext=>{const img=document.querySelector('#resultPreview');return !document.querySelector('#runButton').disabled&&document.querySelector('#resultSection').classList.contains('is-visible')&&img.alt===ext.toUpperCase()&&img.complete&&img.naturalWidth>0;},format,{timeout:90000});
+    const dimensions=await result.evaluate(img=>[img.naturalWidth,img.naturalHeight]);
+    assert.equal(dimensions[0],dimensions[1],label+': square crop');
+    const pending=page.waitForEvent('download');
+    await page.locator(desktop?'#saveButton':'#mobileSaveButton').click();
+    const download=await pending;
+    assert.equal(download.suggestedFilename(),'synthetic-green.'+format);
+    const bytes=fs.readFileSync(await download.path());
+    const meta=format==='gif'?readers.readGif(bytes):readers.readWebp(bytes);
+    assert.ok(meta.frameCount>=1,label+': encoded frames');
+    if(format==='gif')assert.ok(meta.totalDurationCs>0,label+': encoded timing');
+    return await result.getAttribute('src');
+  }
+  await convert('gif');
+  const previous=await convert('webp');
+  // Both clicks occur in one browser task, before asynchronous initialization
+  // can finish. No runtime or Worker is mocked.
+  await choose('gif');
+  await page.evaluate(()=>{document.querySelector('#runButton').click();document.querySelector('#cancelRunButton').click();});
+  await waitIdle();
+  assert.equal(await result.getAttribute('src'),previous,label+': previous result retained after cancel');
+  await convert('gif');
+  if(desktop){
+    await page.waitForFunction(()=>!document.querySelector('#toast').classList.contains('show'));
+    await page.evaluate(()=>scrollTo({top:0,behavior:'instant'}));
+    await page.screenshot({path:path.join(evidence,'readme-candidate-'+language+'.png'),fullPage:true});
+  }
+  console.log('CONVERSION_PASS '+label);
+}
 async function main(){fs.mkdirSync(evidence,{recursive:true});const browser=await chromium.launch();try{
 const cases=[];for(const language of ['ja','en'])for(const [width,height]of [[1360,900],[cfg.bp+1,568],[cfg.bp,568],[320,568],[360,640],[390,844],[393,252]])cases.push({file:'dist/index.html',language,width,height});
 if(cfg.selfExtract)cases.push({file:'dist/index.self-extract.html',language:'en',width:360,height:640});cases.push({file:cfg.slug+'.html',language:'ja',width:1360,height:900});
@@ -61,6 +103,7 @@ const box=await page.locator('#helpDialog').boundingBox(),point=[[1,1],[width-1,
 await page.keyboard.press('Escape');assert.equal(await page.locator('#helpDialog').isVisible(),false);await page.locator(cfg.lang).click();await page.locator(cfg.lang).click();
 for(const id of ['footerVersion','builderVersion']){assert.equal(await page.locator('#'+id).count(),1);assert.equal(await page.locator('#helpDialog #'+id).count(),1);assert.match(await page.locator('#'+id).textContent(),/^\d+\.\d+\.\d+$/);}assert.equal(await page.locator('body > footer #footerVersion,body > footer #builderVersion').count(),0);
 await page.locator(cfg.help).click();await page.locator(cfg.close).click();assert.equal(await page.locator('#helpDialog').isVisible(),false);
+if((file==='dist/index.html'&&width===1360)||file==='dist/index.self-extract.html')await verifyConversion(page,label,language,width>cfg.bp);
 assert.deepEqual(errors,[],label+': console errors');assert.deepEqual(requests,[],label+': runtime requests');console.log('PASS '+label);
 }catch(e){await page.screenshot({path:path.join(evidence,'failure.png')}).catch(()=>{});throw new Error(label+': '+e.message,{cause:e});}finally{await context.close();}}
 }finally{await browser.close();}}
