@@ -43,7 +43,7 @@ function contextFor(html, format, fps) {
   vm.runInContext(runtime, context);
   context.BrowserFFmpeg = context.window.BrowserFFmpeg;
   vm.runInContext(app.replace('      init();',
-    '      globalThis.app = {state, profileArgs, applyLoopPreference};'), context);
+    '      globalThis.app = {state, profileArgs, applyLoopPreference, inspectOutput};'), context);
   context.app.state.format = format;
   const embedded = kind => {
     const match = new RegExp(`<script id="${format}-${kind}-gzip" type="application/octet-stream">([^<]+)</script>`).exec(html);
@@ -74,7 +74,7 @@ async function encode(html, format, fps, fixture, range) {
   catch (error) { if (typeof error.status !== 'number') throw error; exitCode = error.status; }
   assert.equal(exitCode, 0, `Real core exited successfully: ${logs.slice(-4).join(' | ')}`);
   const raw = Uint8Array.from(core.FS.readFile(`/output.${format}`));
-  return {raw, applyLoop: loop => context.app.applyLoopPreference(raw, format, loop), args: recordedArgs};
+  return {raw, applyLoop: loop => context.app.applyLoopPreference(raw, format, loop), appInspect: bytes => context.app.inspectOutput(bytes, format), args: recordedArgs};
 }
 
 async function main() {
@@ -93,7 +93,7 @@ async function main() {
     for (const item of cases) {
       const {name, format, fps, fixture, start, end} = item;
       try {
-        const {raw, applyLoop, args} = await encode(html, format, fps, fixture, {start, end});
+        const {raw, applyLoop, appInspect, args} = await encode(html, format, fps, fixture, {start, end});
         const inspect = format === 'gif' ? readers.readGif : readers.readWebp;
         const original = inspect(raw);
         const count = Math.round((end - start) * fps);
@@ -112,6 +112,7 @@ async function main() {
         assert.equal(original.loopCount, 0, 'Core looping remains enabled');
         for (const loop of [true, false]) {
           const output = applyLoop(loop), timing = inspect(output);
+          const appMeta=appInspect(output);assert.equal(appMeta.frameCount,timing.frameCount);assert.equal(appMeta.duration,format==='gif'?timing.totalDurationCs/100:timing.totalDurationMs/1000,'App displays encoded duration');
           assert.equal(timing.loopCount, loop ? 0 : format === 'gif' ? null : 1, 'App loop preference');
           assert.deepEqual({...timing, loopCount: 0}, original, 'Loop handling preserves frames and timing');
           const receipt = {artifact, name, loop, args, bytes: output.length, sha256: sha256(output), timing};
