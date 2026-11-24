@@ -1,6 +1,7 @@
 # Changelog
 
 ## v1.0.5
+- Replace format and quality cards with compact radio controls, align settings and filename fields, and move conversion tips into Help.
 - Simplify introductory copy and panel styling, stack the mobile file chooser, explain WebP settings, and separate the output extension from the editable source filename.
 - Publish a version tag and GitHub Release with both verified standalone HTML variants after a successful main build.
 
