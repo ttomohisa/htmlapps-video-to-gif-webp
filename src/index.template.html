@@ -554,6 +554,77 @@
       #sourceSection .video-play-button { width:44px; height:44px; }
       #settingsSection .loop-row .compact-setting-copy { min-width:0; }
     }
+
+    /* Align option names independently of the description's line count. */
+    #settingsSection .format-choice { align-items:stretch; }
+    #settingsSection .format-choice label { display:grid; grid-template-columns:18px minmax(0,1fr); align-items:start; align-content:start; gap:7px; min-height:44px; }
+    #settingsSection .format-choice .choice-copy { grid-template-rows:auto auto; align-content:start; }
+    #settingsSection .format-choice .plain-choice { line-height:20px; }
+    #settingsSection .format-choice input { margin:1px 0 0; }
+
+    /* The same start/end labels on the timeline and in the time fields. */
+    #sourceSection .timeline-edge span, #sourceSection .trim-point-badge {
+      display:inline-flex; align-items:center; justify-content:center; width:max-content;
+      min-width:0; min-height:22px; height:auto; padding:3px 7px; border-radius:4px;
+      font-size:11px; line-height:16px; font-weight:650; white-space:nowrap; box-shadow:none;
+    }
+    #sourceSection .timeline-edge.start span, #sourceSection .trim-point-badge.start { background:var(--accent); color:#fff; }
+    #sourceSection .timeline-edge.end span, #sourceSection .trim-point-badge.end { background:#30332f; color:#fff; }
+    #sourceSection .trim-time-head { justify-content:flex-start; }
+    #sourceSection .timeline-selected { border-color:#b7d9cb; }
+
+    @media (max-width:760px) {
+      #sourceSection .timeline { height:122px; margin-inline:22px; }
+      #sourceSection .timeline-base { top:33px; height:56px; border-radius:6px; }
+      #sourceSection .timeline-selected { border:2px solid #b7d9cb; border-radius:4px; }
+      #sourceSection .range-input { left:-22px; width:calc(100% + 44px); height:44px; }
+      #sourceSection #startRange { top:15px; --trim-handle-color:var(--accent); }
+      #sourceSection #endRange { top:64px; --trim-handle-color:#30332f; }
+      #sourceSection .range-input::-webkit-slider-thumb {
+        box-sizing:border-box; width:44px; height:44px; margin:0;
+        border:7px solid transparent; border-inline-width:14px; border-radius:18px;
+        background:linear-gradient(#fff,#fff) center / 2px 12px no-repeat,var(--trim-handle-color);
+        background-clip:padding-box; box-shadow:none; touch-action:none;
+      }
+      #sourceSection .range-input::-moz-range-thumb {
+        box-sizing:border-box; width:44px; height:44px;
+        border:7px solid transparent; border-inline-width:14px; border-radius:18px;
+        background:linear-gradient(#fff,#fff) center / 2px 12px no-repeat,var(--trim-handle-color);
+        background-clip:padding-box; box-shadow:none; touch-action:none;
+      }
+      #sourceSection .range-input:disabled::-webkit-slider-thumb { opacity:.5; }
+      #sourceSection .range-input:disabled::-moz-range-thumb { opacity:.5; }
+      #sourceSection .playhead { top:33px; height:56px; }
+      #sourceSection .playhead-grab { width:44px; height:56px; }
+      #sourceSection .playhead-grab::before { width:10px; height:10px; border-radius:50%; transform:translate(-50%,-35%); box-shadow:0 0 0 1px #30332f; }
+      #sourceSection .playhead-line { width:2px; box-shadow:0 0 0 1px #30332f; }
+      #sourceSection .playhead-time { top:56px; }
+      #sourceSection .timeline-labels { margin-inline:22px; }
+      #sourceSection .trim-fields { gap:12px; }
+      #sourceSection .trim-time-card { gap:4px; }
+      #sourceSection .trim-time-head { min-height:24px; }
+      #sourceSection .time-row { gap:2px; }
+      #sourceSection .time-row .input { min-height:44px; border-radius:7px; }
+      #sourceSection .time-row .tiny-button {
+        display:flex; align-items:center; justify-content:center; gap:5px; min-height:44px;
+        padding:5px 2px; border:0; border-radius:6px; background:transparent;
+        color:var(--accent); font-size:12px; font-weight:550; line-height:1.25;
+      }
+      #sourceSection .time-row .tiny-button:hover:not(:disabled) { background:var(--accent-soft); }
+      #sourceSection .time-row .tiny-button svg { flex:none; width:14px; height:14px; }
+      #sourceSection .nudge-row { gap:0; border:1px solid var(--line); border-radius:7px; background:var(--surface-muted); overflow:hidden; }
+      #sourceSection .nudge-button {
+        display:grid; place-items:center; min-height:44px; min-width:0;
+        border:0; border-radius:0; background:transparent; color:var(--text);
+      }
+      #sourceSection .nudge-button + .nudge-caption + .nudge-button { border-left:1px solid var(--line); }
+      #sourceSection .nudge-button svg { width:17px; height:17px; }
+      #sourceSection .nudge-button:focus-visible { outline-offset:-3px; }
+      #sourceSection .nudge-button:hover:not(:disabled) { background:var(--accent-soft); }
+      #sourceSection .time-actions .selection-play-button, #sourceSection .time-actions .tiny-button { border-radius:7px; }
+    }
+    #sourceSection .nudge-button svg { width:16px; height:16px; vertical-align:middle; }
+    #sourceSection .time-row .tiny-button svg { width:13px; height:13px; vertical-align:middle; margin-right:3px; }
   </style>
 </head>
 <body>
@@ -657,14 +728,14 @@
               </div>
               <div class="trim-fields">
                 <div class="trim-time-card">
-                  <div class="trim-time-head"><label class="field-label" for="startInput" data-i18n="start">開始</label><span class="trim-point-badge start">S</span></div>
-                  <div class="time-row"><input class="input" id="startInput" type="text" inputmode="decimal" value="0:00.000" placeholder="0:00.000"><button class="tiny-button" id="setStartHere" type="button" data-i18n="setHere">現在位置</button></div>
-                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier">−</button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="1" data-i18n-aria-label="nudgeLater">＋</button></div>
+                  <div class="trim-time-head"><label class="trim-point-badge start" for="startInput" data-i18n="start">開始</label></div>
+                  <div class="time-row"><input class="input" id="startInput" type="text" inputmode="decimal" value="0:00.000" placeholder="0:00.000"><button class="tiny-button" id="setStartHere" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg><span data-i18n="setHere">現在位置</span></button></div>
+                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="start" data-nudge-direction="1" data-i18n-aria-label="nudgeLater"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div>
                 </div>
                 <div class="trim-time-card">
-                  <div class="trim-time-head"><label class="field-label" for="endInput" data-i18n="end">終了</label><span class="trim-point-badge end">E</span></div>
-                  <div class="time-row"><input class="input" id="endInput" type="text" inputmode="decimal" value="0:05.000" placeholder="0:05.000"><button class="tiny-button" id="setEndHere" type="button" data-i18n="setHere">現在位置</button></div>
-                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier">−</button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="1" data-i18n-aria-label="nudgeLater">＋</button></div>
+                  <div class="trim-time-head"><label class="trim-point-badge end" for="endInput" data-i18n="end">終了</label></div>
+                  <div class="time-row"><input class="input" id="endInput" type="text" inputmode="decimal" value="0:05.000" placeholder="0:05.000"><button class="tiny-button" id="setEndHere" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg><span data-i18n="setHere">現在位置</span></button></div>
+                  <div class="nudge-row"><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="-1" data-i18n-aria-label="nudgeEarlier"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg></button><span class="nudge-caption" data-i18n="fineTune">微調整</span><button class="nudge-button" type="button" data-nudge-target="end" data-nudge-direction="1" data-i18n-aria-label="nudgeLater"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div>
                 </div>
               </div>
               <div class="time-actions"><button class="selection-play-button" id="playSelection" type="button"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><span data-i18n="playSelection">選択範囲を再生</span></button><button class="tiny-button" id="useFullVideo" type="button" data-i18n="useFullVideo" disabled>動画全体を選択</button><span class="time-action-divider" aria-hidden="true"></span><button class="time-link" id="jumpStart" type="button" data-i18n="jumpStartShort">開始へ移動</button><button class="time-link" id="jumpEnd" type="button" data-i18n="jumpEndShort">終了へ移動</button></div>
